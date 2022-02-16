@@ -1,0 +1,10 @@
+{
+  "realm": "forms-flow-ai",
+  "auth-server-url": "http://localhost:8080/auth/",
+  "ssl-required": "external",
+  "resource": "forms-flow-web",
+  "bearer-only": true,
+  "verify-token-audience": true,
+  "use-resource-role-mappings": true,
+  "confidential-port": 0
+}

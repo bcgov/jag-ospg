@@ -1,0 +1,32 @@
+{
+  "name": "serve-bc-api",
+  "version": "1.0.0",
+  "description": "Api to provide additional functionality on top of formsflow.ai",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js",
+    "setup-example-db": "node src/sqlite-example-database/setup.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bcgov/jag-ospg.git"
+  },
+  "author": "Andre Pestana <andre.pestana@aot-technologies.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bcgov/jag-ospg/issues"
+  },
+  "homepage": "https://github.com/bcgov/jag-ospg#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "keycloak-connect": "^16.1.0",
+    "sequelize": "^6.15.0",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
