@@ -1,5 +1,14 @@
 # Line of business API
 
+
+## Run API
+
+```
+npm install
+npm run setup-example-db
+npm run start
+```
+
 ## Docker Build
 docker build -t jag-ospg-api .
 
