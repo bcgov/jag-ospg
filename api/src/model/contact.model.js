@@ -8,33 +8,49 @@ module.exports = (sequelize) => {
             autoIncrement: true,
             primaryKey: true
         },
-        dateAdded: {
-            type: DataTypes.DATE,
-            field: 'date_added'
-        },
         contactType: {
             type: DataTypes.INTEGER,
-            field: 'contact_type'
         },
-        name: {
-            type: DataTypes.STRING,
-            field: 'name'
+        firstName: {
+            type: DataTypes.STRING
+        },
+        middleName: {
+            type: DataTypes.STRING
+        },
+        lastName: {
+            type: DataTypes.STRING
         },
         phone: {
             type: DataTypes.STRING,
-            field: 'phone'
+        },
+        email:{
+            type: DataTypes.STRING,
         },
         address: {
             type: DataTypes.STRING,
-            field: 'address'
+        },
+        city: {
+            type: DataTypes.STRING,
+        },
+        province: {
+            type: DataTypes.STRING,
+        },
+        postalCode: {
+            type: DataTypes.STRING,
         },
         notes: {
             type: DataTypes.STRING,
-            field: 'notes'
+
+        },
+        isBusiness: {
+            type: DataTypes.BOOLEAN
         }
+
 	},
     {
         underscored: true,
-        timestamps: false,
+        timestamps: true,
+        updatedAt: false,
+        createdAt: 'dateAdded' 
     });
 };

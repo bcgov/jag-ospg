@@ -15,6 +15,7 @@ const {
 	regulatoryBody,
 	responseType,
 	role,
+	topic,
 	user
 } = sequelize.models;
 
@@ -54,21 +55,64 @@ async function reset() {
 		},
 	]);
 
-	await sequelize.models.communicationLog.bulkCreate([
+	await sequelize.models.topic.bulkCreate([
 		{ 
-			issueId: 1,
-			date: new Date(),
-			body: 'test...'
-		}
+			topicName: 'topic1',
+			isActive: true
+		},
+		{ 
+			topicName: 'topic2',
+			isActive: true
+		},
+		{ 
+			topicName: 'topic3',
+			isActive: true
+		},
+	]);
+
+	await sequelize.models.issueStatus.bulkCreate([
+		{ 
+			issueStatus: 'issueStatus1',
+			isActive: true
+		},
+		{ 
+			issueStatus: 'issueStatus2',
+			isActive: true
+		},
+		{ 
+			issueStatus: 'issueStatus3',
+			isActive: true
+		},
+	]);
+
+	await sequelize.models.initialSource.bulkCreate([
+		{ 
+			initialSource: 'initialSource1',
+			isActive: true
+		},
+		{ 
+			initialSource: 'initialSource2',
+			isActive: true
+		},
+		{ 
+			initialSource: 'initialSource3',
+			isActive: true
+		},
 	]);
 	
 	await sequelize.models.contact.bulkCreate([
 		{ 
-			dateAdded: new Date(),
-			contactType: 1,
-			name: 'Mickey Mouse',
+
+			firstName: 'Mickey',
+			middleName: '',
+			lastname: 'Mouse',
 			phone: '778 123 4567',
+			email: 'mmouse@disney.com',
 			address: '123 Disney St.',
+			city: 'Orlando',
+			province: 'Florida',
+			postalCode: '123456',
+			isBusiness: false,
 			notes: 'Notes...'
 		}
 	]);
@@ -142,31 +186,61 @@ async function reset() {
 
 	await sequelize.models.issue.bulkCreate([
 		{ 
-			issueNumber: 1,
-			issueName: 'test1',
+			issueNumber: "ISSUE-1",
+			applicationId: 3,
+			applicationStatus: "Created",
+			issueName: "test1",
+			issueDescription: "test1",
 			dateOpened: new Date(),
+			issueDetails: null,
+			assignedTo: null,
 			statusId: 1,
-			dispositionStatusId: 1
+			closureDate: null,
+			dispositionStatusId: 1,
+			topicId: 1,
+			issueStatusId: 1,
+			initialSourceId: 2,
 		},
 		{ 
-			issueNumber: 2,
-			issueName: 'test2',
+			issueNumber: "ISSUE-2",
+			applicationId: 5,
+			applicationStatus: "Created",
+			issueName: "test2",
+			issueDescription: "test2",
 			dateOpened: new Date(),
-			statusId: 4,
-			dispositionStatusId: 1
+			issueDetails: null,
+			assignedTo: null,
+			statusId: 1,
+			closureDate: null,
+			dispositionStatusId: 1,
+			topicId: 1,
+			issueStatusId: 1,
+			initialSourceId: 2,
 		},
 		{ 
-			issueNumber: 3,
-			issueName: 'test3',
+			issueNumber: "ISSUE-3",
+			applicationId: 7,
+			applicationStatus: "Created",
+			issueName: "test3",
+			issueDescription: "test3",
 			dateOpened: new Date(),
-			statusId: 3,
-			dispositionStatusId: 1
+			issueDetails: null,
+			assignedTo: null,
+			statusId: 1,
+			closureDate: null,
+			dispositionStatusId: 1,
+			topicId: 1,
+			issueStatusId: 1,
+			initialSourceId: 2,
 		},
 	]);
 
 	await sequelize.models.intake.bulkCreate([
 		{ 
 			issueId: 1,
+			intakeNumber: "INTAKE-1",
+			applicationId: 100,
+			applicationStatus: "Received",
 			intakeTypeId: 1,
 			dateReceived: new Date(),
 			contactId: 1,
@@ -184,9 +258,10 @@ async function reset() {
 	await sequelize.models.attachment.bulkCreate([
 		{ 
 			intakeId: 1,
-			dateAdded: new Date(),
-			fileName: 'document.doc',
-			fileType: 'Contract'
+			url: "https://bc.gov.ca/api/v1/files/test-567888-9876987-987688-876876.pdf?originalName=test.pdf",
+			name: "test-567888-9876987-987688-876876.pdf",
+			originalName: "test.pdf",
+			size: 1024
 		}
 	]);
 
@@ -212,7 +287,23 @@ async function reset() {
 			regulatoryBodyId: 1
 		}
 	]);
+	await sequelize.models.note.bulkCreate([
+		{ 
+			intakeId: 1,
+			body: 'Body... ',
+			username: 'user1',
+			id: "567888-9876987-987688-876876"
+		}
+	]);
 
+	await sequelize.models.communicationLog.bulkCreate([
+		{ 
+			intakeId: 1,
+			body: 'Body... ',
+			username: 'user1',
+			id: "567888-9876987-987688-876876"
+		}
+	]);
 	
 
 	console.log('Done!');

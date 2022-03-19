@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 
 
 module.exports = (sequelize) => {
-	sequelize.define('communicationLog', {
+	sequelize.define('note', {
         id: {
             type: DataTypes.STRING,
             primaryKey: true
@@ -17,7 +17,6 @@ module.exports = (sequelize) => {
         }
 	},
     {
-        tableName: 'communication_logs',
         underscored: true,
         timestamps: true,
         updatedAt: false,

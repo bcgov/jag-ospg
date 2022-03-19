@@ -8,25 +8,25 @@ module.exports = (sequelize) => {
             autoIncrement: true,
             primaryKey: true
         },
-        // intakeId: {
-        //     type: DataTypes.INTEGER,
-        //     field: 'intake_id'
-        // },
-        dateAdded: {
-            type: DataTypes.DATE,
-            field: 'date_added'
+        url: {
+            type: DataTypes.STRING
         },
-        fileName: {
+        name: {
             type: DataTypes.STRING,
             field: 'file_name'
         },
-        fileType: {
+        originalName: {
             type: DataTypes.STRING,
-            field: 'file_type'
+            field: 'original_name'
+        },
+        size: {
+            type: DataTypes.INTEGER
         }
 	},
     {
         underscored: true,
-        timestamps: false,
+        timestamps: true,
+        updatedAt: false,
+        createdAt: 'dateAdded' 
     });
 };
