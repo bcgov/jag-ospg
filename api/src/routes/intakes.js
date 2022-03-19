@@ -122,18 +122,28 @@ async function updateByApplicationId(req, res) {
 }
 
 async function update(req, res) {
-	const id = getIdParam(req);
+	try {
+		const id = getIdParam(req);
 
-	// We only accept an UPDATE request if the `:id` param matches the body `id`
-	if (req.body.id === id) {
-		await models.intake.update(req.body, {
-			where: {
-				id: id
-			}
-		});
-		res.status(200).end();
-	} else {
-		res.status(400).send(`Bad request: param ID (${id}) does not match body ID (${req.body.id}).`);
+		// We only accept an UPDATE request if the `:id` param matches the body `id`
+		if (req.body.id === id) {
+			await models.intake.update(req.body, {
+				where: {
+					id: id
+				}
+			});
+			res.status(200).end();
+		} else {
+			res.status(400).send(`Bad request: param ID (${id}) does not match body ID (${req.body.id}).`);
+		}
+	} catch (e) {
+		if (e instanceof Sequelize.ValidationError) {
+			return res.status(422).send(e.errors);
+		} else {
+			return res.status(400).send({
+				message: e.message
+			});
+		}
 	}
 };
 

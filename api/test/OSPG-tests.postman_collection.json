@@ -196,7 +196,59 @@
 			"response": []
 		},
 		{
-			"name": "Update Intake",
+			"name": "Update Intake by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"applicationStatus\": \"Analysed\",\r\n    \"dateReceived\": \"2022-03-19T04:17:53.745Z\",\r\n    \"details\": \"Test details\",\r\n    \"dueDate\": \"1970-01-01T00:00:00.001Z\",\r\n    \"resolution\": \"Test resolution\",\r\n    \"responseCompleteDate\": \"2022-03-19T04:17:53.745Z\",\r\n    \"contactId\": 1,\r\n    \"issueId\": 1,\r\n    \"intakeTypeId\": 1,\r\n    \"responseTypeId\": 1,\r\n    \"intakeStatusId\": 1,\r\n    \"attachments\": [\r\n        {\r\n            \"id\": 3,\r\n            \"url\": \"https://bc.gov.ca/api/v1/files/test-567888-9876987-987688-876876.pdf?originalName=test.pdf\",\r\n            \"name\": \"test-567888-9876987-987688-876876.pdf\",\r\n            \"originalName\": \"test.pdf\",\r\n            \"size\": 1024,\r\n            \"dateAdded\": \"2022-03-19T04:17:53.754Z\",\r\n            \"intakeId\": 2\r\n        }\r\n    ],\r\n    \"notes\": [\r\n        {\r\n            \"id\": \"567888-9876987-987777-775555\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\",\r\n            \"intakeId\": 2\r\n        },\r\n        {\r\n            \"id\": \"567888-9876987-987777-99999\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user3\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\",\r\n            \"intakeId\": 2\r\n        }\r\n    ],\r\n    \"communicationLogs\": [\r\n        {\r\n            \"id\": \"567888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\",\r\n            \"intakeId\": 2\r\n        },\r\n        {\r\n            \"id\": \"345888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user2\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\",\r\n            \"intakeId\": 2\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3003/api/v1/intakes/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"intakes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Intake by applicationId",
 			"event": [
 				{
 					"listen": "test",
@@ -248,6 +300,58 @@
 							"key": "applicationId",
 							"value": "107"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update attachments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"url\": \"https://bc.gov.ca/api/v1/files/test-567888-9876987-987688-876876.pdf?originalName=test.pdf\",\r\n    \"name\": \"test-567888-9876987-987688-876876.pdf\",\r\n    \"originalName\": \"test.pdf\",\r\n    \"size\": 1024,\r\n    \"dateAdded\": \"2022-03-19T04:17:53.754Z\",\r\n    \"intakeId\": 2\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3003/api/v1/attachments/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"attachments",
+						"3"
 					]
 				}
 			},
