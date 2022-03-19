@@ -582,6 +582,90 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get contacts by partial name",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "x-jwt-token",
+						"value": "{{access_token}}",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3003/api/v1/contacts/?name=MOU",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "MOU"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get intakes by issueId",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "x-jwt-token",
+						"value": "{{access_token}}",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3003/api/v1/intakes/?issueId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"intakes",
+						""
+					],
+					"query": [
+						{
+							"key": "issueId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -28,14 +28,30 @@ async function reset() {
 
 	await sequelize.models.intakeStatus.bulkCreate([
 		{ 
-			intakeStatus: 1,
+			intakeStatus: 'intakeStatus1',
+			isActive: true
+		},
+		{ 
+			intakeStatus: 'intakeStatus2',
+			isActive: true
+		},
+		{ 
+			intakeStatus: 'intakeStatus3',
 			isActive: true
 		}
 	]);
 	
 	await sequelize.models.intakeType.bulkCreate([
 		{ 
-			intakeType: 1,
+			intakeType: 'intakeType1',
+			isActive: true
+		},
+		{ 
+			intakeType: 'intakeType2',
+			isActive: true
+		},
+		{ 
+			intakeType: 'intakeType3',
 			isActive: true
 		}
 	]);
@@ -105,7 +121,7 @@ async function reset() {
 
 			firstName: 'Mickey',
 			middleName: '',
-			lastname: 'Mouse',
+			lastName: 'Mouse',
 			phone: '778 123 4567',
 			email: 'mmouse@disney.com',
 			address: '123 Disney St.',
@@ -114,7 +130,21 @@ async function reset() {
 			postalCode: '123456',
 			isBusiness: false,
 			notes: 'Notes...'
-		}
+		},
+		{ 
+
+			firstName: 'Minnie',
+			middleName: '',
+			lastName: 'Mouse',
+			phone: '778 123 4568',
+			email: 'minnie.mouse@disney.com',
+			address: '123 Disney St.',
+			city: 'Orlando',
+			province: 'Florida',
+			postalCode: '123456',
+			isBusiness: false,
+			notes: 'Notes...'
+		},
 	]);
 	
 	
@@ -242,6 +272,36 @@ async function reset() {
 			applicationId: 100,
 			applicationStatus: "Received",
 			intakeTypeId: 1,
+			dateReceived: new Date(),
+			contactId: 1,
+			details: 'Test details',
+			responseTypeId: 1,
+			dueDate: 1,
+			resolution: 'Test resolution',
+			intakeStatusId: 1,
+			responseCompleteDate: new Date()
+		},
+		{ 
+			issueId: 1,
+			intakeNumber: "INTAKE-2",
+			applicationId: 150,
+			applicationStatus: "Received",
+			intakeTypeId: 1,
+			dateReceived: new Date(),
+			contactId: 1,
+			details: 'Test details',
+			responseTypeId: 1,
+			dueDate: 1,
+			resolution: 'Test resolution',
+			intakeStatusId: 1,
+			responseCompleteDate: new Date()
+		},
+		{ 
+			issueId: 1,
+			intakeNumber: "INTAKE-3",
+			applicationId: 200,
+			applicationStatus: "Received",
+			intakeTypeId: 2,
 			dateReceived: new Date(),
 			contactId: 1,
 			details: 'Test details',

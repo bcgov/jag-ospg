@@ -1,3 +1,5 @@
+const sequelize = require('../model');
+const { Op } = require('sequelize');
 const { models } = require('../model');
 const { getIdParam } = require('../helpers');
 
@@ -14,6 +16,33 @@ async function getById(req, res) {
 	} else {
 		res.status(404).send('404 - Not found');
 	}
+};
+
+async function getByQuery(req, res) {
+	if (req.query.name && req.query.name.length >= 3) {
+		const query = req.query.name;
+		const contacts = await models.contact.findAll(
+			{ 
+				where: {
+					[Op.or]:[
+						{
+							firstName: sequelize.where(sequelize.fn('LOWER', sequelize.col('firstName')), 'LIKE', '%' + query + '%')
+						}, 
+						{
+							middleName: sequelize.where(sequelize.fn('LOWER', sequelize.col('middleName')), 'LIKE', '%' + query + '%')
+						}, 
+						{
+							lastName: sequelize.where(sequelize.fn('LOWER', sequelize.col('lastName')), 'LIKE', '%' + query + '%')
+						}
+					]
+				}
+			});
+		if (contacts?.length) {
+			res.status(200).json(contacts);
+		} else {
+			res.status(404).send('404 - Not found');
+		}
+	} else getAll(req, res)
 };
 
 async function create(req, res) {
@@ -54,6 +83,7 @@ async function remove(req, res) {
 module.exports = {
 	getAll,
 	getById,
+	getByQuery,
 	create,
 	update,
 	remove,

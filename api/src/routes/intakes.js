@@ -26,7 +26,15 @@ async function getByQuery(req, res) {
 		} else {
 			res.status(404).send('404 - Not found');
 		}
+	} else if (req.query.issueId) {
+		const intakes = await models.intake.findAll({ where: { issueId: req.query.issueId } , include: { all: true }});
+		if (intakes.length) {
+			res.status(200).json(intakes);
+		} else {
+			res.status(404).send('404 - Not found');
+		}
 	} else getAll(req, res)
+	
 };
 
 async function create(req, res) {
