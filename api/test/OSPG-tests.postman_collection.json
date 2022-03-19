@@ -109,6 +109,42 @@
 			"response": []
 		},
 		{
+			"name": "Get all intakes by id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "x-jwt-token",
+						"value": "{{access_token}}",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3003/api/v1/intakes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"intakes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get intake by applicationId",
 			"request": {
 				"auth": {
@@ -228,10 +264,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 2,\r\n    \"applicationStatus\": \"Analysed\",\r\n    \"dateReceived\": \"2022-03-19T04:17:53.745Z\",\r\n    \"details\": \"Test details\",\r\n    \"dueDate\": \"1970-01-01T00:00:00.001Z\",\r\n    \"resolution\": \"Test resolution\",\r\n    \"responseCompleteDate\": \"2022-03-19T04:17:53.745Z\",\r\n    \"contactId\": 1,\r\n    \"issueId\": 1,\r\n    \"intakeTypeId\": 1,\r\n    \"responseTypeId\": 1,\r\n    \"intakeStatusId\": 1,\r\n    \"attachments\": [\r\n        {\r\n            \"id\": 3,\r\n            \"url\": \"https://bc.gov.ca/api/v1/files/test-567888-9876987-987688-876876.pdf?originalName=test.pdf\",\r\n            \"name\": \"test-567888-9876987-987688-876876.pdf\",\r\n            \"originalName\": \"test.pdf\",\r\n            \"size\": 1024,\r\n            \"dateAdded\": \"2022-03-19T04:17:53.754Z\",\r\n            \"intakeId\": 2\r\n        }\r\n    ],\r\n    \"notes\": [\r\n        {\r\n            \"id\": \"567888-9876987-987777-775555\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\",\r\n            \"intakeId\": 2\r\n        },\r\n        {\r\n            \"id\": \"567888-9876987-987777-99999\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user3\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\",\r\n            \"intakeId\": 2\r\n        }\r\n    ],\r\n    \"communicationLogs\": [\r\n        {\r\n            \"id\": \"567888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\",\r\n            \"intakeId\": 2\r\n        },\r\n        {\r\n            \"id\": \"345888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user2\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\",\r\n            \"intakeId\": 2\r\n        }\r\n    ]\r\n}"
+					"raw": "{\r\n    \"id\": 1,\r\n    \"applicationStatus\": \"Analysed\",\r\n    \"dateReceived\": \"2022-03-19T04:17:53.745Z\",\r\n    \"details\": \"Test details\",\r\n    \"dueDate\": \"1970-01-01T00:00:00.001Z\",\r\n    \"resolution\": \"Test resolution\",\r\n    \"responseCompleteDate\": \"2022-03-19T04:17:53.745Z\",\r\n    \"contactId\": 1,\r\n    \"issueId\": 1,\r\n    \"intakeTypeId\": 1,\r\n    \"responseTypeId\": 1,\r\n    \"intakeStatusId\": 1,\r\n    \"attachments\": [\r\n        {\r\n            \"id\": 3,\r\n            \"url\": \"https://bc.gov.ca/api/v1/files/test-567888-9876987-987688-876876.pdf?originalName=test.pdf\",\r\n            \"name\": \"test-567888-9876987-987688-876876.pdf\",\r\n            \"originalName\": \"test.pdf\",\r\n            \"size\": 1024,\r\n            \"dateAdded\": \"2022-03-19T04:17:53.754Z\"\r\n\r\n        }\r\n    ],\r\n    \"notes\": [\r\n        {\r\n            \"id\": \"567888-9876987-987777-775555\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\"\r\n  \r\n        },\r\n        {\r\n            \"id\": \"567888-9876987-987777-99999\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user3\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\"\r\n\r\n        }\r\n    ],\r\n    \"communicationLogs\": [\r\n        {\r\n            \"id\": \"567888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\"\r\n\r\n        },\r\n        {\r\n            \"id\": \"345888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user2\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\"\r\n\r\n        }\r\n    ]\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:3003/api/v1/intakes/2",
+					"raw": "http://localhost:3003/api/v1/intakes/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -241,7 +277,7 @@
 						"api",
 						"v1",
 						"intakes",
-						"2"
+						"1"
 					]
 				}
 			},
@@ -280,10 +316,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"applicationStatus\": \"Analysed\",\r\n    \"dateReceived\": \"2022-03-19T04:17:53.745Z\",\r\n    \"details\": \"Test details\",\r\n    \"dueDate\": \"1970-01-01T00:00:00.001Z\",\r\n    \"resolution\": \"Test resolution\",\r\n    \"responseCompleteDate\": \"2022-03-19T04:17:53.745Z\",\r\n    \"contactId\": 1,\r\n    \"issueId\": 1,\r\n    \"intakeTypeId\": 1,\r\n    \"responseTypeId\": 1,\r\n    \"intakeStatusId\": 1,\r\n    \"attachments\": [\r\n        {\r\n            \"id\": 3,\r\n            \"url\": \"https://bc.gov.ca/api/v1/files/test-567888-9876987-987688-876876.pdf?originalName=test.pdf\",\r\n            \"name\": \"test-567888-9876987-987688-876876.pdf\",\r\n            \"originalName\": \"test.pdf\",\r\n            \"size\": 1024,\r\n            \"dateAdded\": \"2022-03-19T04:17:53.754Z\",\r\n            \"intakeId\": 2\r\n        }\r\n    ],\r\n    \"notes\": [\r\n        {\r\n            \"id\": \"567888-9876987-987777-775555\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\",\r\n            \"intakeId\": 2\r\n        },\r\n        {\r\n            \"id\": \"567888-9876987-987777-99999\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user3\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\",\r\n            \"intakeId\": 2\r\n        }\r\n    ],\r\n    \"communicationLogs\": [\r\n        {\r\n            \"id\": \"567888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\",\r\n            \"intakeId\": 2\r\n        },\r\n        {\r\n            \"id\": \"345888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user2\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\",\r\n            \"intakeId\": 2\r\n        }\r\n    ]\r\n}"
+					"raw": "{\r\n    \"applicationStatus\": \"Analysed\",\r\n    \"dateReceived\": \"2022-03-19T04:17:53.745Z\",\r\n    \"details\": \"Test details\",\r\n    \"dueDate\": \"1970-01-01T00:00:00.001Z\",\r\n    \"resolution\": \"Test resolution\",\r\n    \"responseCompleteDate\": \"2022-03-19T04:17:53.745Z\",\r\n    \"contactId\": 1,\r\n    \"issueId\": 1,\r\n    \"intakeTypeId\": 1,\r\n    \"responseTypeId\": 1,\r\n    \"intakeStatusId\": 1,\r\n    \"attachments\": [\r\n        {\r\n            \"id\": 3,\r\n            \"url\": \"https://bc.gov.ca/api/v1/files/test-567888-9876987-987688-876876.pdf?originalName=test.pdf\",\r\n            \"name\": \"test-567888-9876987-987688-876876.pdf\",\r\n            \"originalName\": \"test.pdf\",\r\n            \"size\": 1024,\r\n            \"dateAdded\": \"2022-03-19T04:17:53.754Z\"\r\n        }\r\n    ],\r\n    \"notes\": [\r\n        {\r\n            \"id\": \"567888-9876987-987777-775555\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\"\r\n        },\r\n        {\r\n            \"id\": \"567888-9876987-987777-99999\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user3\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\"\r\n        }\r\n    ],\r\n    \"communicationLogs\": [\r\n        {\r\n            \"id\": \"567888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\"\r\n        },\r\n        {\r\n            \"id\": \"345888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user2\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\"\r\n        }\r\n    ]\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:3003/api/v1/intakes/?applicationId=107",
+					"raw": "http://localhost:3003/api/v1/intakes/?applicationId=101",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -298,7 +334,197 @@
 					"query": [
 						{
 							"key": "applicationId",
-							"value": "107"
+							"value": "101"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get issue by id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "x-jwt-token",
+						"value": "{{access_token}}",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3003/api/v1/issues/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"issues",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post issue",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "x-jwt-token",
+						"value": "{{access_token}}",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"issueNumber\": \"ISSUE-12\",\r\n    \"applicationId\": 12,\r\n    \"applicationStatus\": \"Created\",\r\n    \"issueName\": \"test1\",\r\n    \"issueDescription\": \"test1\",\r\n    \"dateOpened\": \"2022-03-19T18:54:59.489Z\",\r\n    \"issueDetails\": null,\r\n    \"assignedTo\": null,\r\n    \"closureDate\": null,\r\n    \"dispositionStatusId\": 1,\r\n    \"topicId\": 1,\r\n    \"issueStatusId\": 1,\r\n    \"initialSourceId\": 2,\r\n    \"issueCategories\": [\r\n        {\r\n            \"issueId\": 1,\r\n            \"categoryId\": 1\r\n        }\r\n    ],\r\n    \"issueRegulatoryBodies\": [\r\n        {\r\n            \"issueId\": 1,\r\n            \"regulatoryBodyId\": 1\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/api/v1/issues",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"issues"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 5,\r\n    \"issueNumber\": \"ISSUE-5\",\r\n    \"applicationId\": 11,\r\n    \"applicationStatus\": \"Created\",\r\n    \"issueName\": \"test1\",\r\n    \"issueDescription\": \"test1\",\r\n    \"dateOpened\": \"2022-03-19T18:54:59.489Z\",\r\n    \"issueDetails\": null,\r\n    \"assignedTo\": null,\r\n    \"closureDate\": null,\r\n    \"dispositionStatusId\": 1,\r\n    \"topicId\": 1,\r\n    \"issueStatusId\": 1,\r\n    \"initialSourceId\": 2,\r\n    \"intake\": null,\r\n    \"issueCategories\": [\r\n        {\r\n            \"issueId\": 5,\r\n            \"categoryId\": 3\r\n        }\r\n    ],\r\n    \"issueRegulatoryBodies\": [\r\n        {\r\n            \"issueId\": 5,\r\n            \"regulatoryBodyId\": 2\r\n        },\r\n        {\r\n            \"issueId\": 5,\r\n            \"regulatoryBodyId\": 4\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3003/api/v1/issues/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"issues",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update issue by applicationId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"issueNumber\": \"ISSUE-5\",\r\n    \"applicationId\": 5,\r\n    \"applicationStatus\": \"Created\",\r\n    \"issueName\": \"test1\",\r\n    \"issueDescription\": \"test1\",\r\n    \"dateOpened\": \"2022-03-19T18:54:59.489Z\",\r\n    \"issueDetails\": null,\r\n    \"assignedTo\": null,\r\n    \"closureDate\": null,\r\n    \"dispositionStatusId\": 1,\r\n    \"topicId\": 1,\r\n    \"issueStatusId\": 1,\r\n    \"initialSourceId\": 2,\r\n    \"intake\": null,\r\n    \"issueCategories\": [\r\n        {\r\n            \"issueId\": 5,\r\n            \"categoryId\": 2\r\n        }\r\n    ],\r\n    \"issueRegulatoryBodies\": [\r\n        {\r\n            \"issueId\": 5,\r\n            \"regulatoryBodyId\": 1\r\n        },\r\n        {\r\n            \"issueId\": 5,\r\n            \"regulatoryBodyId\": 2\r\n        },\r\n        {\r\n            \"issueId\": 5,\r\n            \"regulatoryBodyId\": 3\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3003/api/v1/issues/?applicationId=11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"issues",
+						""
+					],
+					"query": [
+						{
+							"key": "applicationId",
+							"value": "11"
 						}
 					]
 				}

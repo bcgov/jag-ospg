@@ -9,6 +9,8 @@ function applyExtraSetup(sequelize) {
 		intakeStatus,
 		intakeType,
 		intake,
+		issueCategory,
+		issueRegulatoryBody,
 		issueStatus,
 		issue,
 		note,
@@ -50,12 +52,42 @@ function applyExtraSetup(sequelize) {
 	user.belongsTo(role)
 
 	// issue x category
-	issue.belongsToMany(category, { through: 'issueCategory' });
-	category.belongsToMany(issue, { through: 'issueCategory' });
+	issue.hasMany(issueCategory);
+	issueCategory.belongsTo(issue);
 
-	// issue x regulatoryBody
-	issue.belongsToMany(regulatoryBody, { through: 'issueRegulatoryBody' });
-	regulatoryBody.belongsToMany(issue, { through: 'issueRegulatoryBody' });
+	category.hasMany(issueCategory);
+	issueCategory.belongsTo(category);
+
+	issue.hasMany(issueRegulatoryBody);
+	issueRegulatoryBody.belongsTo(issue);
+
+	regulatoryBody.hasMany(issueRegulatoryBody);
+	issueRegulatoryBody.belongsTo(regulatoryBody);
+
+	// issue.belongsToMany(category, 
+	// 	{ 
+	// 		through: 'issueCategory',
+	// 		as: 'issueCategoryAssociation'
+	// 	});
+	// category.belongsToMany(issue, 
+	// 	{ 
+	// 		through: 'issueCategory',
+	// 		as: 'categoryIssueAssociation' 
+	// 	});
+
+	// // issue x regulatoryBody
+	// issue.belongsToMany(regulatoryBody, 
+	// 	{ 
+	// 		through: 'issueRegulatoryBody',
+	// 		as: 'issueRegulatoryBodyAssociation' 
+	// 	});
+	// regulatoryBody.belongsToMany(issue, 
+	// 	{ 
+	// 		through: 'issueRegulatoryBody',
+	// 		as: 'regulatoryBodyIssueAssociation'
+	// 	});
+
+
 
 	dispositionStatus.hasOne(issue)
 	issue.belongsTo(dispositionStatus)
