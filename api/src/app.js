@@ -11,6 +11,7 @@ const apiVersion = 'v1';
 const app = express();
 
 const routes = {
+	assignments: require('./routes/assignments'),
 	attachments: require('./routes/attachments'),
 	categories: require('./routes/categories'),
 	communicationLogs: require('./routes/communication-logs'),

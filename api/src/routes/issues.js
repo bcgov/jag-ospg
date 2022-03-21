@@ -18,6 +18,25 @@ async function getById(req, res) {
 	}
 };
 
+async function getByQuery(req, res) {
+	if (req.query.applicationId) {
+		const issue = await models.issue.findOne({ where: { applicationId: req.query.applicationId } , include: { all: true }});
+		if (issue) {
+			res.status(200).json(issue);
+		} else {
+			res.status(404).send('404 - Not found');
+		}
+	} else if (req.query.issueNumber) {
+		const issue = await models.issue.findAll({ where: { issueNumber: req.query.issueNumber } , include: { all: true }});
+		if (issue) {
+			res.status(200).json(issue);
+		} else {
+			res.status(404).send('404 - Not found');
+		}
+	} else getAll(req, res)
+	
+};
+
 async function create(req, res) {
 	if (req.body.id) {
 		res.status(400).send(`Bad request: ID should not be provided, since it is determined automatically by the database.`)
@@ -27,10 +46,6 @@ async function create(req, res) {
 				const persistedObj = await models.issue.create(req.body,
 					{	
 						transaction: t,
-						include: [
-							{ model: models.issueCategory }, 
-							{ model: models.issueRegulatoryBody }
-						] 
 					} );
 				await models.issue.update({ issueNumber: 'ISSUE-'+persistedObj.id }, {
 					where: {
@@ -38,6 +53,13 @@ async function create(req, res) {
 					}, 
 					transaction: t,
 				});
+
+				const issueCategories = getIssueCategories(req.body.issueCategoryIds, persistedObj.id);
+				await models.issueCategory.bulkCreate(issueCategories, {transaction: t});
+
+				const issueRegulatoryBodies = getIssueRegulatoryBodies(req.body.issueRegulatoryBodyIds, persistedObj.id);
+				await models.issueRegulatoryBody.bulkCreate(issueRegulatoryBodies, {transaction: t});
+
 				const issue = await models.issue.findByPk(persistedObj.id, 
 					{ 
 						include: { all: true }, 
@@ -57,14 +79,54 @@ async function create(req, res) {
 	}
 };
 
+function getIssueCategories(ids, issueId) {
+	const issueCategories = [];
+	if (ids && ids.length) {
+		ids.forEach(categoryId => {
+			issueCategories.push({
+				issueId: issueId,
+				categoryId: categoryId
+			})
+		});
+	}
+	return issueCategories;
+}
+
+function getIssueRegulatoryBodies(ids, issueId) {
+	const issueRegulatoryBodies = [];
+	if (ids && ids.length) {
+		ids.forEach(regulatoryBodyId => {
+			issueRegulatoryBodies.push({
+				issueId: issueId,
+				regulatoryBodyId: regulatoryBodyId
+			})
+		});
+	}
+	return issueRegulatoryBodies;
+}
+ 
 function getUpdatableFields(fullObj) {
 	const fieldsToExclude = ['id', 'applicationId', 'issueNumber']; 
 	return Object.keys(fullObj).filter( s => !fieldsToExclude.includes(s))
 }
 
 async function update(req, res) {
+	const id = getIdParam(req);
+	if (req.body.issueCategoryIds && req.body.issueCategories) {
+		res.status(400).send(`Bad request: cannot send 'issueCategoryIds' and 'issueCategories' in the same request.`);
+		return;
+	} else if (req.body.issueCategoryIds) {
+		req.body.issueCategories = getIssueCategories(req.body.issueCategoryIds, id)
+	}
+	
+	if (req.body.issueRegulatoryBodyIds && req.body.issueRegulatoryBodies) {
+		res.status(400).send(`Bad request: cannot send 'issueRegulatoryBodyIds' and 'issueRegulatoryBodies' in the same request.`);
+		return;
+	} else if (req.body.issueRegulatoryBodyIds) {
+		req.body.issueRegulatoryBodies = getIssueRegulatoryBodies(req.body.issueRegulatoryBodyIds, id)
+	}
 	try {
-		const id = getIdParam(req);
+		
 		await sequelize.transaction(async (t) => {
 			// We only accept an UPDATE request if the `:id` param matches the body `id`
 			if (req.body.id === id) {
@@ -159,9 +221,13 @@ async function updateByApplicationId(req, res) {
 }
 
 async function updateIssueCategories(req, t) {
-	const issueId = req.body.id;
-	const newIssueCategories = req.body.issueCategories || [];
-		
+	let newIssueCategories = []
+	if (req.body.issueCategoryIds) {
+		newIssueCategories = getIssueCategories(req.body.issueCategoryIds, req.body.id) || [];
+	} else {
+		newIssueCategories = req.body.issueCategories || [];
+	}
+	const issueId = req.body.id;		
 	const newIssueCategoriesIds = newIssueCategories.map(issueCategory => issueCategory.categoryId);
 	const oldIssueCategories = await models.issueCategory.findAll({
 		where: {
@@ -192,9 +258,14 @@ async function updateIssueCategories(req, t) {
 }
 
 async function updateIssueRegulatoryBodies(req, t) {
+	let newIssueRegulatoryBodies = []
+	if (req.body.issueRegulatoryBodyIds) {
+		newIssueRegulatoryBodies = getIssueRegulatoryBodies(req.body.issueRegulatoryBodyIds, req.body.id) || [];
+	} else {
+		newIssueRegulatoryBodies = req.body.issueRegulatoryBodies || [];
+	}
+
 	const issueId = req.body.id;
-	const newIssueRegulatoryBodies = req.body.issueRegulatoryBodies || [];
-		
 	const newIssueRegulatoryBodiesIds = newIssueRegulatoryBodies.map(issueRegulatoryBody => issueRegulatoryBody.regulatoryBodyId);
 	const oldIssueRegulatoryBodies = await models.issueRegulatoryBody.findAll({
 		where: {
@@ -238,6 +309,7 @@ async function remove(req, res) {
 module.exports = {
 	getAll,
 	getById,
+	getByQuery,
 	create,
 	update,
 	updateByApplicationId,

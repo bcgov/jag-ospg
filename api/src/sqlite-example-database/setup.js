@@ -2,6 +2,7 @@ const sequelize = require('../model');
 const { pickRandom, randomDate } = require('./helpers/random');
 
 const { 
+	assignment,
 	attachment, 
 	category,
 	communicationLog,
@@ -25,6 +26,16 @@ async function reset() {
 	
 	await sequelize.sync({ force: true });
 	
+	await sequelize.models.assignment.bulkCreate([
+		{ 
+			assignment: 'Staff',
+			isActive: true
+		},
+		{ 
+			intakeStatus: 'Management',
+			isActive: true
+		}
+	]);
 
 	await sequelize.models.intakeStatus.bulkCreate([
 		{ 
@@ -297,7 +308,7 @@ async function reset() {
 			responseCompleteDate: new Date()
 		},
 		{ 
-			issueId: 1,
+			issueId: 2,
 			intakeNumber: "INTAKE-3",
 			applicationId: 200,
 			applicationStatus: "Received",

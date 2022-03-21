@@ -11,6 +11,7 @@ const sequelize = new Sequelize({
 });
 
 const modelDefiners = [
+	require('./assignment.model'),
 	require('./attachment.model'),
 	require('./communication-log.model'),
 	require('./contact.model'),
@@ -20,6 +21,8 @@ const modelDefiners = [
 	require('./intake-status.model'),
 	require('./intake-type.model'),
 	require('./intake.model'),
+	require('./issue-category.model'),
+	require('./issue-regulatory-body.model'),
 	require('./issue-status.model'),
 	require('./issue.model'),
 	require('./note.model'),
@@ -28,9 +31,6 @@ const modelDefiners = [
 	require('./role.model'),
 	require('./topic.model'),
 	require('./user.model'),
-
-	require('./issue-category.model'),
-	require('./issue-regulatory-body.model'),
 
 	// Add more models here...
 	// require('./models/item'),

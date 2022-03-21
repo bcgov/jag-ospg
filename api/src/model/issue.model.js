@@ -58,6 +58,12 @@ module.exports = (sequelize) => {
             type: DataTypes.DATE,
             field: 'closure_date'
         },
+        isCompliant: {
+            type: DataTypes.BOOLEAN
+        },
+        isWithinOspgJurisdiction: {
+            type: DataTypes.BOOLEAN
+        },
 	},
     {
         underscored: true,

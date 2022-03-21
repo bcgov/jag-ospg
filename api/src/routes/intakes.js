@@ -33,6 +33,30 @@ async function getByQuery(req, res) {
 		} else {
 			res.status(404).send('404 - Not found');
 		}
+	} else if (req.query.issueNumber) {
+		const intakes = await models.intake.findAll(
+			{ where: 
+				{ 
+					'$issue.issue_number$': req.query.issueNumber 
+				}, 
+				include: {
+					model: models.issue,
+					as: 'issue',
+					required: false
+				}
+			});
+		if (intakes.length) {
+			res.status(200).json(intakes);
+		} else {
+			res.status(404).send('404 - Not found');
+		}
+	} else if (req.query.intakeNumber) {
+		const intake = await models.intake.findOne({ where: { intakeNumber: req.query.intakeNumber } , include: { all: true }});
+		if (intake) {
+			res.status(200).json(intake);
+		} else {
+			res.status(404).send('404 - Not found');
+		}
 	} else getAll(req, res)
 	
 };
