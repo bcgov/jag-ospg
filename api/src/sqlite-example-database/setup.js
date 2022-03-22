@@ -11,7 +11,6 @@ const {
 	intakeStatus,
 	intakeType,
 	intake,
-	issueCategory,
 	issue,
 	regulatoryBody,
 	responseType,
@@ -161,15 +160,15 @@ async function reset() {
 	
 	await sequelize.models.dispositionStatus.bulkCreate([
 		{ 
-			dispositionStatusName: 'dispositionStatus1',
+			dispositionStatus: 'dispositionStatus1',
 			isActive: true
 		},
 		{ 
-			dispositionStatusName: 'dispositionStatus2',
+			dispositionStatus: 'dispositionStatus2',
 			isActive: true
 		},
 		{ 
-			dispositionStatusName: 'dispositionStatus3',
+			dispositionStatus: 'dispositionStatus3',
 			isActive: true
 		},
 	]);
@@ -241,6 +240,7 @@ async function reset() {
 			topicId: 1,
 			issueStatusId: 1,
 			initialSourceId: 2,
+			categoryId: 1
 		},
 		{ 
 			issueNumber: "ISSUE-2",
@@ -257,6 +257,7 @@ async function reset() {
 			topicId: 1,
 			issueStatusId: 1,
 			initialSourceId: 2,
+			categoryId: 2
 		},
 		{ 
 			issueNumber: "ISSUE-3",
@@ -273,6 +274,7 @@ async function reset() {
 			topicId: 1,
 			issueStatusId: 1,
 			initialSourceId: 2,
+			categoryId: 3
 		},
 	]);
 
@@ -345,12 +347,6 @@ async function reset() {
 		}
 	]);
 
-	await sequelize.models.issueCategory.bulkCreate([
-		{ 
-			issueId: 1,
-			categoryId: 1
-		}
-	]);
 
 	await sequelize.models.issueRegulatoryBody.bulkCreate([
 		{ 

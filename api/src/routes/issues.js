@@ -54,9 +54,6 @@ async function create(req, res) {
 					transaction: t,
 				});
 
-				const issueCategories = getIssueCategories(req.body.issueCategoryIds, persistedObj.id);
-				await models.issueCategory.bulkCreate(issueCategories, {transaction: t});
-
 				const issueRegulatoryBodies = getIssueRegulatoryBodies(req.body.issueRegulatoryBodyIds, persistedObj.id);
 				await models.issueRegulatoryBody.bulkCreate(issueRegulatoryBodies, {transaction: t});
 
@@ -79,19 +76,6 @@ async function create(req, res) {
 	}
 };
 
-function getIssueCategories(ids, issueId) {
-	const issueCategories = [];
-	if (ids && ids.length) {
-		ids.forEach(categoryId => {
-			issueCategories.push({
-				issueId: issueId,
-				categoryId: categoryId
-			})
-		});
-	}
-	return issueCategories;
-}
-
 function getIssueRegulatoryBodies(ids, issueId) {
 	const issueRegulatoryBodies = [];
 	if (ids && ids.length) {
@@ -112,12 +96,6 @@ function getUpdatableFields(fullObj) {
 
 async function update(req, res) {
 	const id = getIdParam(req);
-	if (req.body.issueCategoryIds && req.body.issueCategories) {
-		res.status(400).send(`Bad request: cannot send 'issueCategoryIds' and 'issueCategories' in the same request.`);
-		return;
-	} else if (req.body.issueCategoryIds) {
-		req.body.issueCategories = getIssueCategories(req.body.issueCategoryIds, id)
-	}
 	
 	if (req.body.issueRegulatoryBodyIds && req.body.issueRegulatoryBodies) {
 		res.status(400).send(`Bad request: cannot send 'issueRegulatoryBodyIds' and 'issueRegulatoryBodies' in the same request.`);
@@ -137,7 +115,6 @@ async function update(req, res) {
 					transaction: t
 				});
 				if (updatedRows[0] > 0) {
-					await updateIssueCategories(req, t);
 					await updateIssueRegulatoryBodies(req, t);
 					const updatedObj = await models.issue.findOne({ 
 						where: { 
@@ -191,7 +168,6 @@ async function updateByApplicationId(req, res) {
 					transaction: t,
 				});
 				if (updatedRows[0] > 0) {
-					await updateIssueCategories(req, t);
 					await updateIssueRegulatoryBodies(req, t);
 					const updatedObj = await models.issue.findOne(
 						{ 
@@ -218,43 +194,6 @@ async function updateByApplicationId(req, res) {
 	} else {
 		res.status(400).send(`Bad request: applicationId query required.`);
 	}
-}
-
-async function updateIssueCategories(req, t) {
-	let newIssueCategories = []
-	if (req.body.issueCategoryIds) {
-		newIssueCategories = getIssueCategories(req.body.issueCategoryIds, req.body.id) || [];
-	} else {
-		newIssueCategories = req.body.issueCategories || [];
-	}
-	const issueId = req.body.id;		
-	const newIssueCategoriesIds = newIssueCategories.map(issueCategory => issueCategory.categoryId);
-	const oldIssueCategories = await models.issueCategory.findAll({
-		where: {
-			issueId: issueId 
-		},
-		transaction: t,
-	});
-	const oldIssueCategoriesIds = oldIssueCategories.map(issueCategory => issueCategory.categoryId)
-	const deletedIssueCategories = oldIssueCategoriesIds.filter(x => !newIssueCategoriesIds.includes(x));
-	const addedIssueCategories = newIssueCategoriesIds.filter(x => !oldIssueCategoriesIds.includes(x));
-	
-	oldIssueCategories.forEach(async n => {
-		if (deletedIssueCategories.includes(n.categoryId)) {
-			await models.issueCategory.destroy({
-				where: {
-					categoryId: n.categoryId
-				},
-				transaction: t,
-			});
-		}
-	});
-	newIssueCategories.forEach(async n => {
-		if (addedIssueCategories.includes(n.categoryId)) {
-			n.issueId = issueId;
-			await models.issueCategory.create(n, {transaction: t});
-		}
-	});
 }
 
 async function updateIssueRegulatoryBodies(req, t) {

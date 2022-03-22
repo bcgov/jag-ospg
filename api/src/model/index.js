@@ -21,7 +21,6 @@ const modelDefiners = [
 	require('./intake-status.model'),
 	require('./intake-type.model'),
 	require('./intake.model'),
-	require('./issue-category.model'),
 	require('./issue-regulatory-body.model'),
 	require('./issue-status.model'),
 	require('./issue.model'),
