@@ -174,6 +174,20 @@ for (const [routeName, routeController] of Object.entries(routes)) {
 			);
 		}
 	}
+	if (routeController.updateBulk) {
+		if (routeController.allAuth || routeController.updateBulk_auth) {
+			app.put(
+				`/api/${apiVersion}/${routeName}/`,
+				keycloak.protect(),
+				makeHandlerAwareOfAsyncErrors(routeController.updateBulk)
+			);
+		} else {
+			app.put(
+				`/api/${apiVersion}/${routeName}/`,
+				makeHandlerAwareOfAsyncErrors(routeController.updateBulk)
+			);
+		}
+	}
 	if (routeController.remove) {
 		if (routeController.allAuth || routeController.remove_auth) {
 			app.delete(
@@ -185,6 +199,20 @@ for (const [routeName, routeController] of Object.entries(routes)) {
 			app.delete(
 				`/api/${apiVersion}/${routeName}/:id`,
 				makeHandlerAwareOfAsyncErrors(routeController.remove)
+			);
+		}
+	}
+	if (routeController.removeBulk) {
+		if (routeController.allAuth || routeController.removeBulk_auth) {
+			app.delete(
+				`/api/${apiVersion}/${routeName}/`,
+				keycloak.protect(),
+				makeHandlerAwareOfAsyncErrors(routeController.removeBulk)
+			);
+		} else {
+			app.delete(
+				`/api/${apiVersion}/${routeName}/`,
+				makeHandlerAwareOfAsyncErrors(routeController.removeBulk)
 			);
 		}
 	}

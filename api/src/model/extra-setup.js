@@ -1,5 +1,8 @@
+const assignmentModel = require("./assignment.model");
+
 function applyExtraSetup(sequelize) {
 	const { 
+		assignment,
 		attachment, 
 		category,
 		communicationLog,
@@ -69,9 +72,11 @@ function applyExtraSetup(sequelize) {
 	issueStatus.hasOne(issue);
 	issue.belongsTo(issueStatus);
 
-
 	initialSource.hasMany(issue);
 	issue.belongsTo(initialSource);
+
+	assignment.hasMany(issue);
+	issue.belongsTo(assignment);
 }
 
 module.exports = { applyExtraSetup };

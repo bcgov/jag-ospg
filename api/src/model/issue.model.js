@@ -50,10 +50,6 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             field: 'issue_details'
         },
-        assignedTo: {
-            type: DataTypes.INTEGER,
-            field: 'assigned_to'
-        },
         closureDate: {
             type: DataTypes.DATE,
             field: 'closure_date'
