@@ -296,7 +296,7 @@ async function reset() {
 			issueDescription: "test1",
 			dateOpened: new Date(),
 			issueDetails: null,
-			assignedTo: null,
+			assignmentId: 1,
 			statusId: 1,
 			closureDate: null,
 			dispositionStatusId: 1,
@@ -313,7 +313,7 @@ async function reset() {
 			issueDescription: "test2",
 			dateOpened: new Date(),
 			issueDetails: null,
-			assignedTo: null,
+			assignmentId: 1,
 			statusId: 1,
 			closureDate: null,
 			dispositionStatusId: 1,
@@ -330,7 +330,7 @@ async function reset() {
 			issueDescription: "test3",
 			dateOpened: new Date(),
 			issueDetails: null,
-			assignedTo: null,
+			assignmentId: 1,
 			statusId: 1,
 			closureDate: null,
 			dispositionStatusId: 1,
@@ -355,7 +355,8 @@ async function reset() {
 			dueDate: 1,
 			resolution: 'Test resolution',
 			intakeStatusId: 1,
-			responseCompleteDate: new Date()
+			responseCompleteDate: new Date(),
+			assignmentId: 1,
 		},
 		{ 
 			issueId: 1,
@@ -370,7 +371,8 @@ async function reset() {
 			dueDate: 1,
 			resolution: 'Test resolution',
 			intakeStatusId: 1,
-			responseCompleteDate: new Date()
+			responseCompleteDate: new Date(),
+			assignmentId: 1,
 		},
 		{ 
 			issueId: 2,
@@ -385,7 +387,8 @@ async function reset() {
 			dueDate: 1,
 			resolution: 'Test resolution',
 			intakeStatusId: 1,
-			responseCompleteDate: new Date()
+			responseCompleteDate: new Date(),
+			assignmentId: 1,
 		}
 	], {
 		include: [ contact, responseType, intakeStatus, intakeType ]
