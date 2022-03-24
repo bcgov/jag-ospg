@@ -1,35 +1,15 @@
 # base image
-FROM docker-remote.artifacts.developer.gov.bc.ca/node:12.4.0-alpine as build-stage
-
-# set working directory
-WORKDIR /web
-
-# add `/web/node_modules/.bin` to $PATH
-ENV PATH /web/node_modules/.bin:$PATH
-
-RUN apk update && apk upgrade && \
-  apk add --no-cache bash git openssh
-
-# Clone code
-RUN git clone -b ${FORMIO_SOURCE_REPO_BRANCH} ${FORMIO_SOURCE_REPO_URL} /tmp/forms-flow-ai/
-RUN cp -r /tmp/forms-flow-ai/forms-flow-web/. /web/
-
-# Customizations
-ARG CUSTOM_SRC_DIR=src
-COPY ./  /tmp/${CUSTOM_SRC_DIR}/
-RUN cp -R /tmp/${CUSTOM_SRC_DIR}/* /web/ && rm -Rf /tmp/${CUSTOM_SRC_DIR}/
-
-ARG CUSTOM_PUBLIC_DIR=public
-COPY ./  /tmp/${CUSTOM_PUBLIC_DIR}/
-RUN cp -R /tmp/${CUSTOM_PUBLIC_DIR}/* /web/ && rm -Rf /tmp/${CUSTOM_PUBLIC_DIR}/
-
-# Build app
+#FROM docker-remote.artifacts.developer.gov.bc.ca/node:12.4.0-alpine as build-stage
+FROM node:14.17.0-alpine as build-stage
+WORKDIR /app
+COPY package*.json ./
 RUN npm install
+COPY ./ .
 RUN npm run build
 
-FROM docker-remote.artifacts.developer.gov.bc.ca/nginx:1.17 as production-stage
-RUN mkdir /nginx
-COPY --from=build-stage /web/build /usr/share/nginx/html
-COPY --from=build-stage /web/nginx.conf /etc/nginx/nginx.conf
-EXPOSE 8080:8080
+FROM nginx as production-stage
+RUN mkdir /app
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY --from=build-stage /app/nginx.conf /etc/nginx/nginx.conf
+EXPOSE 4000:8080
 CMD ["nginx", "-g", "daemon off;"]
