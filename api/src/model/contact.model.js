@@ -44,8 +44,10 @@ module.exports = (sequelize) => {
         },
         isBusiness: {
             type: DataTypes.BOOLEAN
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN
         }
-
 	},
     {
         underscored: true,

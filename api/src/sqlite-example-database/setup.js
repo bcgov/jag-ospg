@@ -11,6 +11,7 @@ const {
 	intakeStatus,
 	intakeType,
 	intake,
+	issueStatus,
 	issue,
 	regulatoryBody,
 	responseType,
@@ -31,8 +32,12 @@ async function reset() {
 			isActive: true
 		},
 		{ 
-			intakeStatus: 'Management',
+			assignment: 'Management',
 			isActive: true
+		},
+		{ 
+			assignment: 'Inactive',
+			isActive: false
 		}
 	]);
 
@@ -48,6 +53,10 @@ async function reset() {
 		{ 
 			intakeStatus: 'intakeStatus3',
 			isActive: true
+		},
+		{ 
+			intakeStatus: 'Inactive',
+			isActive: false
 		}
 	]);
 	
@@ -63,6 +72,10 @@ async function reset() {
 		{ 
 			intakeType: 'intakeType3',
 			isActive: true
+		},
+		{ 
+			intakeType: 'Inactive',
+			isActive: false
 		}
 	]);
 
@@ -79,6 +92,10 @@ async function reset() {
 			categoryName: 'category3',
 			isActive: true
 		},
+		{ 
+			categoryName: 'Inactive',
+			isActive: false
+		}
 	]);
 
 	await sequelize.models.topic.bulkCreate([
@@ -94,6 +111,10 @@ async function reset() {
 			topicName: 'topic3',
 			isActive: true
 		},
+		{ 
+			topicName: 'Inactive',
+			isActive: false
+		}
 	]);
 
 	await sequelize.models.issueStatus.bulkCreate([
@@ -109,13 +130,18 @@ async function reset() {
 			issueStatus: 'issueStatus3',
 			isActive: true
 		},
+		{ 
+			issueStatus: 'Inactive',
+			isActive: false
+		}
 	]);
 
 	await sequelize.models.initialSource.bulkCreate([
 		{ 
 			initialSource: 'initialSource1',
 			isActive: true
-		},
+		}
+		,
 		{ 
 			initialSource: 'initialSource2',
 			isActive: true
@@ -124,11 +150,14 @@ async function reset() {
 			initialSource: 'initialSource3',
 			isActive: true
 		},
+		{ 
+			initialSource: 'Inactive',
+			isActive: false
+		}
 	]);
 	
 	await sequelize.models.contact.bulkCreate([
 		{ 
-
 			firstName: 'Mickey',
 			middleName: '',
 			lastName: 'Mouse',
@@ -139,10 +168,10 @@ async function reset() {
 			province: 'Florida',
 			postalCode: '123456',
 			isBusiness: false,
-			notes: 'Notes...'
+			notes: 'Notes...',
+			isActive: true
 		},
 		{ 
-
 			firstName: 'Minnie',
 			middleName: '',
 			lastName: 'Mouse',
@@ -153,10 +182,24 @@ async function reset() {
 			province: 'Florida',
 			postalCode: '123456',
 			isBusiness: false,
-			notes: 'Notes...'
+			notes: 'Notes...',
+			isActive: true
+		},
+		{ 
+			firstName: 'Inactive',
+			middleName: '',
+			lastName: 'Inactive',
+			phone: '778 123 4568',
+			email: 'Inactive@Inactive.com',
+			address: '123 Disney St.',
+			city: 'Inactive',
+			province: 'Inactive',
+			postalCode: '123456',
+			isBusiness: false,
+			notes: 'Notes...Inactive',
+			isActive: false
 		},
 	]);
-	
 	
 	await sequelize.models.dispositionStatus.bulkCreate([
 		{ 
@@ -171,6 +214,10 @@ async function reset() {
 			dispositionStatus: 'dispositionStatus3',
 			isActive: true
 		},
+		{ 
+			dispositionStatus: 'Inactive',
+			isActive: false
+		}
 	]);
 
 	await sequelize.models.regulatoryBody.bulkCreate([
@@ -186,12 +233,28 @@ async function reset() {
 			regulatoryBodyName: 'regulatoryBody3',
 			isActive: true
 		},
+		{ 
+			regulatoryBodyName: 'Inactive',
+			isActive: false
+		}
 	]);
 
 	await sequelize.models.responseType.bulkCreate([
 		{ 
-			responseType: 1,
+			responseType: 'responseType1',
 			isActive: true
+		},
+		{ 
+			responseType: 'responseType1',
+			isActive: true
+		},
+		{ 
+			responseType: 'responseType1',
+			isActive: true
+		},
+		{ 
+			responseType: 'Inactive',
+			isActive: false
 		}
 	]);
 	

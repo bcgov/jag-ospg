@@ -6,6 +6,1452 @@
 	},
 	"item": [
 		{
+			"name": "Selects",
+			"item": [
+				{
+					"name": "Get active assignments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/assignments?active=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"assignments"
+							],
+							"query": [
+								{
+									"key": "active",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get active categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/categories?active=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "active",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get active dispositionStatuses",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/dispositionStatuses?active=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"dispositionStatuses"
+							],
+							"query": [
+								{
+									"key": "active",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get active intakeStatuses",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/intakeStatuses?active=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"intakeStatuses"
+							],
+							"query": [
+								{
+									"key": "active",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get active issueStatuses",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/issueStatuses?active=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"issueStatuses"
+							],
+							"query": [
+								{
+									"key": "active",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get active regulatoryBodies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/regulatoryBodies?active=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"regulatoryBodies"
+							],
+							"query": [
+								{
+									"key": "active",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get active responseTypes Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/responseTypes?active=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"responseTypes"
+							],
+							"query": [
+								{
+									"key": "active",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get active topics",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/topics?active=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"topics"
+							],
+							"query": [
+								{
+									"key": "active",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Intake",
+			"item": [
+				{
+					"name": "Get all intakes",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "x-jwt-token",
+								"value": "{{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/v1/intakes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"intakes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all intakes by id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "x-jwt-token",
+								"value": "{{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/v1/intakes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"intakes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get intakes by issueId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "x-jwt-token",
+								"value": "{{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/v1/intakes/?issueNumber=ISSUE-2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"intakes",
+								""
+							],
+							"query": [
+								{
+									"key": "issueNumber",
+									"value": "ISSUE-2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get intakes by intakeNumber",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "x-jwt-token",
+								"value": "{{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/v1/intakes/?intakeNumber=INTAKE-1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"intakes",
+								""
+							],
+							"query": [
+								{
+									"key": "intakeNumber",
+									"value": "INTAKE-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get intakes by issueNumber",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "x-jwt-token",
+								"value": "{{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/v1/intakes/?issueNumber=ISSUE-2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"intakes",
+								""
+							],
+							"query": [
+								{
+									"key": "issueNumber",
+									"value": "ISSUE-2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get intake by applicationId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "x-jwt-token",
+								"value": "{{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/v1/intakes?applicationId=100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"intakes"
+							],
+							"query": [
+								{
+									"key": "applicationId",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post intake",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"intakeNumber\": \"INTAKE-7\",\r\n  \"applicationId\": 107,\r\n  \"applicationStatus\": \"Received\",\r\n  \"dateReceived\": \"2022-03-19T04:17:53.745Z\",\r\n  \"details\": \"Test details\",\r\n  \"dueDate\": \"1970-01-01T00:00:00.001Z\",\r\n  \"resolution\": \"Test resolution\",\r\n  \"responseCompleteDate\": \"2022-03-19T04:17:53.745Z\",\r\n  \"contactId\": 1,\r\n  \"issueId\": 1,\r\n  \"intakeTypeId\": 1,\r\n  \"responseTypeId\": 1,\r\n  \"intakeStatusId\": 1,\r\n  \"attachments\": [\r\n    {\r\n      \"url\": \"https://bc.gov.ca/api/v1/files/test-567888-9876987-987688-876876.pdf?originalName=test.pdf\",\r\n      \"name\": \"test-567888-9876987-987688-876876.pdf\",\r\n      \"originalName\": \"test.pdf\",\r\n      \"size\": 1024,\r\n      \"dateAdded\": \"2022-03-19T04:17:53.754Z\"\r\n\r\n    },\r\n    {\r\n      \"url\": \"https://bc.gov.ca/api/v1/files/test2-567888-9876987-987688-134333.pdf?originalName=test2.pdf\",\r\n      \"name\": \"test-567888-9876987-987688-134333.pdf\",\r\n      \"originalName\": \"test2.pdf\",\r\n      \"size\": 1024,\r\n      \"dateAdded\": \"2022-03-19T04:17:53.754Z\"\r\n    }\r\n  ],\r\n  \"notes\": [\r\n    {\r\n      \"id\": \"567888-9876987-987777-775555\",\r\n      \"body\": \"Body notes... \",\r\n      \"username\": \"user1\"\r\n    }\r\n  ],\r\n  \"communicationLogs\": [\r\n    {\r\n      \"id\": \"567888-9876987-98775-777777\",\r\n      \"body\": \"Body communication log... \",\r\n      \"username\": \"user1\"\r\n\r\n    }\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/intakes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"intakes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Intake by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"applicationStatus\": \"Analysed\",\r\n    \"dateReceived\": \"2022-03-19T04:17:53.745Z\",\r\n    \"details\": \"Test details\",\r\n    \"dueDate\": \"1970-01-01T00:00:00.001Z\",\r\n    \"resolution\": \"Test resolution\",\r\n    \"responseCompleteDate\": \"2022-03-19T04:17:53.745Z\",\r\n    \"contactId\": 1,\r\n    \"issueId\": 1,\r\n    \"intakeTypeId\": 1,\r\n    \"responseTypeId\": 1,\r\n    \"intakeStatusId\": 1,\r\n    \"attachments\": [\r\n        {\r\n            \"id\": 3,\r\n            \"url\": \"https://bc.gov.ca/api/v1/files/test-567888-9876987-987688-876876.pdf?originalName=test.pdf\",\r\n            \"name\": \"test-567888-9876987-987688-876876.pdf\",\r\n            \"originalName\": \"test.pdf\",\r\n            \"size\": 1024,\r\n            \"dateAdded\": \"2022-03-19T04:17:53.754Z\"\r\n\r\n        }\r\n    ],\r\n    \"notes\": [\r\n        {\r\n            \"id\": \"567888-9876987-987777-775555\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\"\r\n  \r\n        },\r\n        {\r\n            \"id\": \"567888-9876987-987777-99999\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user3\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\"\r\n\r\n        }\r\n    ],\r\n    \"communicationLogs\": [\r\n        {\r\n            \"id\": \"567888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\"\r\n\r\n        },\r\n        {\r\n            \"id\": \"345888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user2\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\"\r\n\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/intakes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"intakes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Intake by applicationId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"applicationStatus\": \"Analysed\",\r\n    \"dateReceived\": \"2022-03-19T04:17:53.745Z\",\r\n    \"details\": \"Test details\",\r\n    \"dueDate\": \"1970-01-01T00:00:00.001Z\",\r\n    \"resolution\": \"Test resolution\",\r\n    \"responseCompleteDate\": \"2022-03-19T04:17:53.745Z\",\r\n    \"contactId\": 1,\r\n    \"issueId\": 1,\r\n    \"intakeTypeId\": 1,\r\n    \"responseTypeId\": 1,\r\n    \"intakeStatusId\": 1,\r\n    \"attachments\": [\r\n        {\r\n            \"id\": 3,\r\n            \"url\": \"https://bc.gov.ca/api/v1/files/test-567888-9876987-987688-876876.pdf?originalName=test.pdf\",\r\n            \"name\": \"test-567888-9876987-987688-876876.pdf\",\r\n            \"originalName\": \"test.pdf\",\r\n            \"size\": 1024,\r\n            \"dateAdded\": \"2022-03-19T04:17:53.754Z\"\r\n        }\r\n    ],\r\n    \"notes\": [\r\n        {\r\n            \"id\": \"567888-9876987-987777-775555\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\"\r\n        },\r\n        {\r\n            \"id\": \"567888-9876987-987777-99999\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user3\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\"\r\n        }\r\n    ],\r\n    \"communicationLogs\": [\r\n        {\r\n            \"id\": \"567888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\"\r\n        },\r\n        {\r\n            \"id\": \"345888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user2\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\"\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/intakes/?applicationId=101",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"intakes",
+								""
+							],
+							"query": [
+								{
+									"key": "applicationId",
+									"value": "101"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Issue",
+			"item": [
+				{
+					"name": "Get issue by id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "x-jwt-token",
+								"value": "{{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/v1/issues/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"issues",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get issues by issueNumber",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "x-jwt-token",
+								"value": "{{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/v1/issues/?issueNumber=ISSUE-1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"issues",
+								""
+							],
+							"query": [
+								{
+									"key": "issueNumber",
+									"value": "ISSUE-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get issues by applicationId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "x-jwt-token",
+								"value": "{{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/v1/issues/?applicationId=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"issues",
+								""
+							],
+							"query": [
+								{
+									"key": "applicationId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post issue",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "x-jwt-token",
+								"value": "{{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"issueNumber\": \"ISSUE-15\",\r\n    \"applicationId\": 15,\r\n    \"applicationStatus\": \"Created\",\r\n    \"issueName\": \"test1\",\r\n    \"issueDescription\": \"test1\",\r\n    \"dateOpened\": \"2022-03-19T18:54:59.489Z\",\r\n    \"issueDetails\": null,\r\n    \"assignedTo\": null,\r\n    \"closureDate\": null,\r\n    \"dispositionStatusId\": 1,\r\n    \"topicId\": 1,\r\n    \"issueStatusId\": 1,\r\n    \"initialSourceId\": 2,\r\n    \"categoryId\": 1,\r\n    \"issueRegulatoryBodyIds\": [\r\n        2,\r\n        3\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/issues",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"issueNumber\": \"ISSUE-3\",\r\n    \"applicationId\": 7,\r\n    \"applicationStatus\": \"Created\",\r\n    \"issueName\": \"test1\",\r\n    \"issueDescription\": \"test1\",\r\n    \"dateOpened\": \"2022-03-19T18:54:59.489Z\",\r\n    \"issueDetails\": null,\r\n    \"assignedTo\": null,\r\n    \"closureDate\": null,\r\n    \"dispositionStatusId\": 1,\r\n    \"topicId\": 1,\r\n    \"issueStatusId\": 1,\r\n    \"initialSourceId\": 2,\r\n    \"intake\": null,\r\n    \"categoryId\": 2,\r\n    \"issueRegulatoryBodyIds\": [1]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/issues/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"issues",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update issue by applicationId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"issueNumber\": \"ISSUE-3\",\r\n    \"applicationId\": 3,\r\n    \"applicationStatus\": \"Created\",\r\n    \"issueName\": \"test1\",\r\n    \"issueDescription\": \"test1\",\r\n    \"dateOpened\": \"2022-03-19T18:54:59.489Z\",\r\n    \"issueDetails\": null,\r\n    \"assignedTo\": null,\r\n    \"closureDate\": null,\r\n    \"dispositionStatusId\": 1,\r\n    \"topicId\": 1,\r\n    \"issueStatusId\": 1,\r\n    \"initialSourceId\": 2,\r\n    \"intake\": null,\r\n    \"categoryId\": 3,\r\n    \"issueRegulatoryBodyIds\": [1, 3]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/issues/?applicationId=7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"issues",
+								""
+							],
+							"query": [
+								{
+									"key": "applicationId",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contact",
+			"item": [
+				{
+					"name": "Get active contacts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/contacts?active=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"contacts"
+							],
+							"query": [
+								{
+									"key": "active",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get active contacts by partial name",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "x-jwt-token",
+								"value": "{{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/v1/contacts/?name=in&active=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"contacts",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "in"
+								},
+								{
+									"key": "active",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post contacts (bulk)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "x-jwt-token",
+								"value": "{{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"contactType\": null,\r\n        \"firstName\": \"Albert\",\r\n        \"middleName\": \"\",\r\n        \"lastName\": \"Einstein\",\r\n        \"phone\": \"778 123 1111\",\r\n        \"email\": \"albert@physics.com\",\r\n        \"address\": \"123 5th St.\",\r\n        \"city\": \"New York\",\r\n        \"province\": \"NY\",\r\n        \"postalCode\": \"123456\",\r\n        \"notes\": \"Notes...\",\r\n        \"isBusiness\": false,\r\n        \"dateAdded\": \"2022-03-22T16:30:06.479Z\"\r\n    },\r\n    {\r\n        \"contactType\": null,\r\n        \"firstName\": \"John\",\r\n        \"middleName\": \"\",\r\n        \"lastName\": \"Lennon\",\r\n        \"phone\": \"778 123 2222\",\r\n        \"email\": \"john@lennon.com\",\r\n        \"address\": \"234 5th St.\",\r\n        \"city\": \"New York\",\r\n        \"province\": \"NY\",\r\n        \"postalCode\": \"123456\",\r\n        \"notes\": \"Notes...\",\r\n        \"isBusiness\": false,\r\n        \"dateAdded\": \"2022-03-22T16:30:06.479Z\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post contacts",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "x-jwt-token",
+								"value": "{{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n    {\r\n        \"contactType\": null,\r\n        \"firstName\": \"John\",\r\n        \"middleName\": \"\",\r\n        \"lastName\": \"Doe\",\r\n        \"phone\": \"778 123 1111\",\r\n        \"email\": \"john@doe.com\",\r\n        \"address\": \"323 5th St.\",\r\n        \"city\": \"New York\",\r\n        \"province\": \"NY\",\r\n        \"postalCode\": \"123456\",\r\n        \"notes\": \"Notes...\",\r\n        \"isBusiness\": false,\r\n        \"dateAdded\": \"2022-03-22T16:30:06.479Z\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update contacts (bulk)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\": 3,\r\n        \"contactType\": null,\r\n        \"firstName\": \"Albert\",\r\n        \"middleName\": \"\",\r\n        \"lastName\": \"Einstein\",\r\n        \"phone\": \"778 123 1111\",\r\n        \"email\": \"albert@physics.com\",\r\n        \"address\": \"123 5th St.\",\r\n        \"city\": \"Los Angeles\",\r\n        \"province\": \"CA\",\r\n        \"postalCode\": \"123456\",\r\n        \"notes\": \"Notes...\",\r\n        \"isBusiness\": false,\r\n        \"dateAdded\": \"2022-03-22T16:30:06.479Z\"\r\n    },\r\n    {\r\n        \"id\": 4,\r\n        \"contactType\": null,\r\n        \"firstName\": \"John\",\r\n        \"middleName\": \"test\",\r\n        \"lastName\": \"Lennon\",\r\n        \"phone\": \"778 123 2222\",\r\n        \"email\": \"john@lennon.com\",\r\n        \"address\": \"234 5th St.\",\r\n        \"city\": \"New York\",\r\n        \"province\": \"NY\",\r\n        \"postalCode\": \"123456\",\r\n        \"notes\": \"Notes...\",\r\n        \"isBusiness\": false,\r\n        \"dateAdded\": \"2022-03-22T16:30:06.479Z\"\r\n    }\r\n]"
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete contacts (bulk)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\": 8\r\n    },\r\n    {\r\n        \"id\": 9\r\n    }\r\n]"
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Logon",
 			"event": [
 				{
@@ -74,674 +1520,6 @@
 			"response": []
 		},
 		{
-			"name": "Get all intakes",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					},
-					{
-						"key": "x-jwt-token",
-						"value": "{{access_token}}",
-						"type": "default",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "http://localhost:3003/api/v1/intakes",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"intakes"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get all intakes by id",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					},
-					{
-						"key": "x-jwt-token",
-						"value": "{{access_token}}",
-						"type": "default",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "http://localhost:3003/api/v1/intakes/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"intakes",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get intakes by issueId",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					},
-					{
-						"key": "x-jwt-token",
-						"value": "{{access_token}}",
-						"type": "default",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "http://localhost:3003/api/v1/intakes/?issueNumber=ISSUE-2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"intakes",
-						""
-					],
-					"query": [
-						{
-							"key": "issueNumber",
-							"value": "ISSUE-2"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get intakes by intakeNumber",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					},
-					{
-						"key": "x-jwt-token",
-						"value": "{{access_token}}",
-						"type": "default",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "http://localhost:3003/api/v1/intakes/?intakeNumber=INTAKE-1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"intakes",
-						""
-					],
-					"query": [
-						{
-							"key": "intakeNumber",
-							"value": "INTAKE-1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get intakes by issueNumber",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					},
-					{
-						"key": "x-jwt-token",
-						"value": "{{access_token}}",
-						"type": "default",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "http://localhost:3003/api/v1/intakes/?issueNumber=ISSUE-2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"intakes",
-						""
-					],
-					"query": [
-						{
-							"key": "issueNumber",
-							"value": "ISSUE-2"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get intake by applicationId",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					},
-					{
-						"key": "x-jwt-token",
-						"value": "{{access_token}}",
-						"type": "default",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "http://localhost:3003/api/v1/intakes?applicationId=100",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"intakes"
-					],
-					"query": [
-						{
-							"key": "applicationId",
-							"value": "100"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Post intake",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"content-type": true
-				}
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"intakeNumber\": \"INTAKE-7\",\r\n  \"applicationId\": 107,\r\n  \"applicationStatus\": \"Received\",\r\n  \"dateReceived\": \"2022-03-19T04:17:53.745Z\",\r\n  \"details\": \"Test details\",\r\n  \"dueDate\": \"1970-01-01T00:00:00.001Z\",\r\n  \"resolution\": \"Test resolution\",\r\n  \"responseCompleteDate\": \"2022-03-19T04:17:53.745Z\",\r\n  \"contactId\": 1,\r\n  \"issueId\": 1,\r\n  \"intakeTypeId\": 1,\r\n  \"responseTypeId\": 1,\r\n  \"intakeStatusId\": 1,\r\n  \"attachments\": [\r\n    {\r\n      \"url\": \"https://bc.gov.ca/api/v1/files/test-567888-9876987-987688-876876.pdf?originalName=test.pdf\",\r\n      \"name\": \"test-567888-9876987-987688-876876.pdf\",\r\n      \"originalName\": \"test.pdf\",\r\n      \"size\": 1024,\r\n      \"dateAdded\": \"2022-03-19T04:17:53.754Z\"\r\n\r\n    },\r\n    {\r\n      \"url\": \"https://bc.gov.ca/api/v1/files/test2-567888-9876987-987688-134333.pdf?originalName=test2.pdf\",\r\n      \"name\": \"test-567888-9876987-987688-134333.pdf\",\r\n      \"originalName\": \"test2.pdf\",\r\n      \"size\": 1024,\r\n      \"dateAdded\": \"2022-03-19T04:17:53.754Z\"\r\n    }\r\n  ],\r\n  \"notes\": [\r\n    {\r\n      \"id\": \"567888-9876987-987777-775555\",\r\n      \"body\": \"Body notes... \",\r\n      \"username\": \"user1\"\r\n    }\r\n  ],\r\n  \"communicationLogs\": [\r\n    {\r\n      \"id\": \"567888-9876987-98775-777777\",\r\n      \"body\": \"Body communication log... \",\r\n      \"username\": \"user1\"\r\n\r\n    }\r\n  ]\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3003/api/v1/intakes",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"intakes"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update Intake by id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"content-type": true
-				}
-			},
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}",
-						"type": "default"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"applicationStatus\": \"Analysed\",\r\n    \"dateReceived\": \"2022-03-19T04:17:53.745Z\",\r\n    \"details\": \"Test details\",\r\n    \"dueDate\": \"1970-01-01T00:00:00.001Z\",\r\n    \"resolution\": \"Test resolution\",\r\n    \"responseCompleteDate\": \"2022-03-19T04:17:53.745Z\",\r\n    \"contactId\": 1,\r\n    \"issueId\": 1,\r\n    \"intakeTypeId\": 1,\r\n    \"responseTypeId\": 1,\r\n    \"intakeStatusId\": 1,\r\n    \"attachments\": [\r\n        {\r\n            \"id\": 3,\r\n            \"url\": \"https://bc.gov.ca/api/v1/files/test-567888-9876987-987688-876876.pdf?originalName=test.pdf\",\r\n            \"name\": \"test-567888-9876987-987688-876876.pdf\",\r\n            \"originalName\": \"test.pdf\",\r\n            \"size\": 1024,\r\n            \"dateAdded\": \"2022-03-19T04:17:53.754Z\"\r\n\r\n        }\r\n    ],\r\n    \"notes\": [\r\n        {\r\n            \"id\": \"567888-9876987-987777-775555\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\"\r\n  \r\n        },\r\n        {\r\n            \"id\": \"567888-9876987-987777-99999\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user3\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\"\r\n\r\n        }\r\n    ],\r\n    \"communicationLogs\": [\r\n        {\r\n            \"id\": \"567888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\"\r\n\r\n        },\r\n        {\r\n            \"id\": \"345888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user2\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\"\r\n\r\n        }\r\n    ]\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3003/api/v1/intakes/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"intakes",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update Intake by applicationId",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"content-type": true
-				}
-			},
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}",
-						"type": "default"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"applicationStatus\": \"Analysed\",\r\n    \"dateReceived\": \"2022-03-19T04:17:53.745Z\",\r\n    \"details\": \"Test details\",\r\n    \"dueDate\": \"1970-01-01T00:00:00.001Z\",\r\n    \"resolution\": \"Test resolution\",\r\n    \"responseCompleteDate\": \"2022-03-19T04:17:53.745Z\",\r\n    \"contactId\": 1,\r\n    \"issueId\": 1,\r\n    \"intakeTypeId\": 1,\r\n    \"responseTypeId\": 1,\r\n    \"intakeStatusId\": 1,\r\n    \"attachments\": [\r\n        {\r\n            \"id\": 3,\r\n            \"url\": \"https://bc.gov.ca/api/v1/files/test-567888-9876987-987688-876876.pdf?originalName=test.pdf\",\r\n            \"name\": \"test-567888-9876987-987688-876876.pdf\",\r\n            \"originalName\": \"test.pdf\",\r\n            \"size\": 1024,\r\n            \"dateAdded\": \"2022-03-19T04:17:53.754Z\"\r\n        }\r\n    ],\r\n    \"notes\": [\r\n        {\r\n            \"id\": \"567888-9876987-987777-775555\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\"\r\n        },\r\n        {\r\n            \"id\": \"567888-9876987-987777-99999\",\r\n            \"body\": \"Body notes... \",\r\n            \"username\": \"user3\",\r\n            \"date\": \"2022-03-19T05:12:38.932Z\"\r\n        }\r\n    ],\r\n    \"communicationLogs\": [\r\n        {\r\n            \"id\": \"567888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user1\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\"\r\n        },\r\n        {\r\n            \"id\": \"345888-9876987-98775-777777\",\r\n            \"body\": \"Body communication log... \",\r\n            \"username\": \"user2\",\r\n            \"date\": \"2022-03-19T05:12:38.931Z\"\r\n        }\r\n    ]\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3003/api/v1/intakes/?applicationId=101",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"intakes",
-						""
-					],
-					"query": [
-						{
-							"key": "applicationId",
-							"value": "101"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get issue by id",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					},
-					{
-						"key": "x-jwt-token",
-						"value": "{{access_token}}",
-						"type": "default",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "http://localhost:3003/api/v1/issues/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"issues",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get issues by issueNumber",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					},
-					{
-						"key": "x-jwt-token",
-						"value": "{{access_token}}",
-						"type": "default",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "http://localhost:3003/api/v1/issues/?issueNumber=ISSUE-1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"issues",
-						""
-					],
-					"query": [
-						{
-							"key": "issueNumber",
-							"value": "ISSUE-1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get issues by applicationId",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					},
-					{
-						"key": "x-jwt-token",
-						"value": "{{access_token}}",
-						"type": "default",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "http://localhost:3003/api/v1/issues/?applicationId=3",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"issues",
-						""
-					],
-					"query": [
-						{
-							"key": "applicationId",
-							"value": "3"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Post issue",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					},
-					{
-						"key": "x-jwt-token",
-						"value": "{{access_token}}",
-						"type": "default",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"issueNumber\": \"ISSUE-15\",\r\n    \"applicationId\": 15,\r\n    \"applicationStatus\": \"Created\",\r\n    \"issueName\": \"test1\",\r\n    \"issueDescription\": \"test1\",\r\n    \"dateOpened\": \"2022-03-19T18:54:59.489Z\",\r\n    \"issueDetails\": null,\r\n    \"assignedTo\": null,\r\n    \"closureDate\": null,\r\n    \"dispositionStatusId\": 1,\r\n    \"topicId\": 1,\r\n    \"issueStatusId\": 1,\r\n    \"initialSourceId\": 2,\r\n    \"categoryId\": 1,\r\n    \"issueRegulatoryBodyIds\": [\r\n        2,\r\n        3\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3003/api/v1/issues",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"issues"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update issue",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"content-type": true
-				}
-			},
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}",
-						"type": "default"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 3,\r\n    \"issueNumber\": \"ISSUE-3\",\r\n    \"applicationId\": 7,\r\n    \"applicationStatus\": \"Created\",\r\n    \"issueName\": \"test1\",\r\n    \"issueDescription\": \"test1\",\r\n    \"dateOpened\": \"2022-03-19T18:54:59.489Z\",\r\n    \"issueDetails\": null,\r\n    \"assignedTo\": null,\r\n    \"closureDate\": null,\r\n    \"dispositionStatusId\": 1,\r\n    \"topicId\": 1,\r\n    \"issueStatusId\": 1,\r\n    \"initialSourceId\": 2,\r\n    \"intake\": null,\r\n    \"categoryId\": 2,\r\n    \"issueRegulatoryBodyIds\": [1]\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3003/api/v1/issues/3",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"issues",
-						"3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update issue by applicationId",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"content-type": true
-				}
-			},
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}",
-						"type": "default"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"issueNumber\": \"ISSUE-3\",\r\n    \"applicationId\": 3,\r\n    \"applicationStatus\": \"Created\",\r\n    \"issueName\": \"test1\",\r\n    \"issueDescription\": \"test1\",\r\n    \"dateOpened\": \"2022-03-19T18:54:59.489Z\",\r\n    \"issueDetails\": null,\r\n    \"assignedTo\": null,\r\n    \"closureDate\": null,\r\n    \"dispositionStatusId\": 1,\r\n    \"topicId\": 1,\r\n    \"issueStatusId\": 1,\r\n    \"initialSourceId\": 2,\r\n    \"intake\": null,\r\n    \"categoryId\": 3,\r\n    \"issueRegulatoryBodyIds\": [1, 3]\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3003/api/v1/issues/?applicationId=7",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"issues",
-						""
-					],
-					"query": [
-						{
-							"key": "applicationId",
-							"value": "7"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Update attachments",
 			"event": [
 				{
@@ -788,152 +1566,6 @@
 						"v1",
 						"attachments",
 						"3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get assignments",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true,
-				"disabledSystemHeaders": {
-					"content-type": true
-				}
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}",
-						"type": "default"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:3003/api/v1/assignments",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"assignments"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get assignments Copy",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true,
-				"disabledSystemHeaders": {
-					"content-type": true
-				}
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}",
-						"type": "default"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:3003/api/v1/assignments",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"assignments"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get contacts by partial name",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					},
-					{
-						"key": "x-jwt-token",
-						"value": "{{access_token}}",
-						"type": "default",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "http://localhost:3003/api/v1/contacts/?name=MOU",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"contacts",
-						""
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "MOU"
-						}
 					]
 				}
 			},

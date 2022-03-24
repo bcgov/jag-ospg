@@ -17,6 +17,7 @@ module.exports = (sequelize) => {
         }
 	},
     {
+        tableName: 'initial_source',
         underscored: true,
         timestamps: false,
     });

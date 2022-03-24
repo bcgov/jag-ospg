@@ -34,16 +34,12 @@ async function getByQuery(req, res) {
 			res.status(404).send('404 - Not found');
 		}
 	} else if (req.query.issueNumber) {
-		const intakes = await models.intake.findAll(
-			{ where: 
+		const intakes = await models.intake.findAll({ 
+			where: 
 				{ 
 					'$issue.issue_number$': req.query.issueNumber 
 				}, 
-				include: {
-					model: models.issue,
-					as: 'issue',
-					required: false
-				}
+				include: { all: true, nested: true }
 			});
 		if (intakes.length) {
 			res.status(200).json(intakes);

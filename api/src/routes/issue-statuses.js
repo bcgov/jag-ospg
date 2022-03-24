@@ -2,8 +2,22 @@ const { models } = require('../model');
 const { getIdParam } = require('../helpers');
 
 async function getAll(req, res) {
-	const issueStatuses = await models.issueStatus.findAll();
-	res.status(200).json(issueStatuses);
+	if (req.query.active) {
+		if (req.query.active === 'true' || req.query.active === 'false') {
+			const issueStatuses = await models.issueStatus.findAll({
+				where: 
+				{ 
+					isActive: req.query.active === 'true' ? 1 : 0
+				}
+			});
+			res.status(200).json(issueStatuses);
+		} else {
+			res.status(400).send(`Bad request: request query active param should be true or false.`)
+		}
+	} else {
+		const issueStatuses = await models.issueStatus.findAll();
+		res.status(200).json(issueStatuses);
+	}
 };
 
 async function getById(req, res) {

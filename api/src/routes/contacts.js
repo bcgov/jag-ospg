@@ -4,8 +4,22 @@ const { models } = require('../model');
 const { getIdParam } = require('../helpers');
 
 async function getAll(req, res) {
-	const contacts = await models.contact.findAll();
-	res.status(200).json(contacts);
+	if (req.query.active) {
+		if (req.query.active === 'true' || req.query.active === 'false') {
+			const contacts = await models.contact.findAll({
+				where: 
+				{ 
+					isActive: req.query.active === 'true' ? 1 : 0
+				}
+			});
+			res.status(200).json(contacts);
+		} else {
+			res.status(400).send(`Bad request: request query active param should be true or false.`)
+		}
+	} else {
+		const contacts = await models.contact.findAll();
+		res.status(200).json(contacts);
+	}
 };
 
 async function getById(req, res) {
@@ -19,30 +33,41 @@ async function getById(req, res) {
 };
 
 async function getByQuery(req, res) {
+
+	const where = {};
+	if (req.query.active && req.query.active !== 'true' && req.query.active !== 'false') {
+		res.status(400).send(`Bad request: request query active param should be true or false.`)
+		return
+	} else if (req.query.active) {
+		where.isActive = req.query.active === 'true' ? 1 : 0
+	}
+
 	if (req.query.name) {
 		const query = req.query.name;
-		const contacts = await models.contact.findAll(
-			{ 
-				where: {
-					[Op.or]:[
-						{
-							firstName: sequelize.where(sequelize.fn('LOWER', sequelize.col('firstName')), 'LIKE', '%' + query + '%')
-						}, 
-						{
-							middleName: sequelize.where(sequelize.fn('LOWER', sequelize.col('middleName')), 'LIKE', '%' + query + '%')
-						}, 
-						{
-							lastName: sequelize.where(sequelize.fn('LOWER', sequelize.col('lastName')), 'LIKE', '%' + query + '%')
-						}
-					]
-				}
-			});
-		if (contacts?.length) {
-			res.status(200).json(contacts);
-		} else {
-			res.status(200).json([]);;
-		}
-	} else getAll(req, res)
+
+		where[Op.or] = [
+			{
+				firstName: sequelize.where(sequelize.fn('LOWER', sequelize.col('firstName')), 'LIKE', '%' + query + '%')
+			}, 
+			{
+				middleName: sequelize.where(sequelize.fn('LOWER', sequelize.col('middleName')), 'LIKE', '%' + query + '%')
+			}, 
+			{
+				lastName: sequelize.where(sequelize.fn('LOWER', sequelize.col('lastName')), 'LIKE', '%' + query + '%')
+			}
+		];
+
+	}
+	const contacts = await models.contact.findAll(
+		{ 
+			where
+		});
+	if (contacts?.length) {
+		res.status(200).json(contacts);
+	} else {
+		res.status(200).json([]);;
+	}
+
 };
 
 async function create(req, res) {
