@@ -49,6 +49,9 @@ function applyExtraSetup(sequelize) {
 	intake.hasMany(communicationLog);
 	communicationLog.belongsTo(intake);
 
+	assignment.hasMany(intake);
+	intake.belongsTo(assignment);
+
 	// user relationships
 	role.hasOne(user);
 	user.belongsTo(role);
