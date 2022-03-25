@@ -7,11 +7,13 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             primaryKey: true
         },
-        body: {
-            type: DataTypes.STRING,
-            field: 'body'
+        subject: {
+            type: DataTypes.STRING
         },
-        username: {
+        body: {
+            type: DataTypes.STRING
+        },
+        from: {
             type: DataTypes.STRING,
             field: 'username'
         }
@@ -21,6 +23,6 @@ module.exports = (sequelize) => {
         underscored: true,
         timestamps: true,
         updatedAt: false,
-        createdAt: 'date'
+        createdAt: 'receivedAt'
     });
 };

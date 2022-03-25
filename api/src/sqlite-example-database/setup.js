@@ -426,15 +426,29 @@ async function reset() {
 			body: 'Body... ',
 			username: 'user1',
 			id: "567888-9876987-987688-876876"
+		},
+		{ 
+			intakeId: 2,
+			body: 'Body2... ',
+			username: 'user2',
+			id: "567888-9876987-987688-87333"
 		}
 	]);
 
 	await sequelize.models.communicationLog.bulkCreate([
 		{ 
 			intakeId: 1,
+			subject: 'Subject',
 			body: 'Body... ',
-			username: 'user1',
-			id: "567888-9876987-987688-876876"
+			from: 'User Test',
+			id: "567888-9876987-987688-99999"
+		},
+		{ 
+			intakeId: 2,
+			subject: 'Subject2',
+			body: 'Body2... ',
+			from: 'User Test',
+			id: "567888-9876987-987688-93339"
 		}
 	]);
 	

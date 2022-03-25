@@ -31,5 +31,5 @@ docker run -p 3003:3003 \
 -e S3_ACCESS_KEY_ID="<ACCESS_KEY>" \
 -e S3_SECRET_ACCESS_KEY="<SECRET_ACCESS_KEY>" \
 -e S3_HOST="<HOST>" \
-jag-ospg-api 
+--name OSPG-lob-api jag-ospg-api 
 ```

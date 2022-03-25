@@ -16,6 +16,21 @@ async function getById(req, res) {
 	}
 };
 
+async function getByQuery(req, res) {
+	if (req.query.intakeId) {
+		const communicationLogs = await models.communicationLog.findAll({ 
+			where: { 
+				intakeId: req.query.intakeId 
+			}
+		});
+		if (communicationLogs) {
+			res.status(200).json(communicationLogs);
+		} else {
+			res.status(404).send('404 - Not found');
+		}
+	} else getAll(req, res); 
+};
+
 async function create(req, res) {
 	if (req.body.id) {
 		res.status(400).send(`Bad request: ID should not be provided, since it is determined automatically by the database.`)
@@ -54,6 +69,7 @@ async function remove(req, res) {
 module.exports = {
 	getAll,
 	getById,
+	getByQuery,
 	create,
 	update,
 	remove,
