@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  ospg-web:
+    container_name: OSPG-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      VUE_APP_KEYCLOAK_URL: ${VUE_APP_KEYCLOAK_URL}
+      VUE_APP_KEYCLOAK_URL_REALM: ${VUE_APP_KEYCLOAK_URL_REALM}
+      VUE_APP_KEYCLOAK_CLIENT_ID: ${VUE_APP_KEYCLOAK_CLIENT_ID}
+      VUE_APP_BPM_URL: ${VUE_APP_BPM_URL}
+      VUE_APP_FORM_IO_API_URL: ${VUE_APP_FORM_IO_API_URL}
+      VUE_APP_FORM_IO_PROJECT_URL: ${VUE_APP_FORM_IO_PROJECT_URL}
+      VUE_APP_FORM_IO_RESOURCE_ID: ${VUE_APP_FORM_IO_RESOURCE_ID}
+      VUE_APP_FORM_IO_REVIEWER_ID: ${VUE_APP_FORM_IO_REVIEWER_ID}
+      VUE_APP_FORM_IO_REVIEWER: ${VUE_APP_FORM_IO_REVIEWER}
+      VUE_APP_FORM_FLOW_API_URL: ${VUE_APP_FORM_FLOW_API_URL}
+      VUE_APP_FORM_FLOW_URL: ${VUE_APP_FORM_FLOW_URL}
+      VUE_APP_FORMIO_ROLES: ${VUE_APP_FORMIO_ROLES}
+    volumes:
+      - ".:/app"
+      - "/app/node_modules"
+    ports:
+      - "4000:8080"
+    tty: true
