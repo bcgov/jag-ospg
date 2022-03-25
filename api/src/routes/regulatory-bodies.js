@@ -66,6 +66,7 @@ async function remove(req, res) {
 };
 
 module.exports = {
+	
 	getAll,
 	getById,
 	create,

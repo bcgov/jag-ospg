@@ -1,8 +1,8 @@
 {
-  "realm": "forms-flow-ai",
-  "auth-server-url": "http://localhost:8080/auth/",
+  "realm": "${env.KEYCLOAK_REALM}",
+  "auth-server-url": "${env.KEYCLOAK_AUTH_SERVER_URL}",
   "ssl-required": "external",
-  "resource": "forms-flow-web",
+  "resource": "${env.KEYCLOAK_CLIENT_ID}",
   "bearer-only": true,
   "verify-token-audience": true,
   "use-resource-role-mappings": true,

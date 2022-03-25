@@ -67,7 +67,7 @@ async function remove(req, res) {
 };
 
 module.exports = {
-	//"allAuth": true,
+
 	getAll,
 	getById,
 	getByQuery,
