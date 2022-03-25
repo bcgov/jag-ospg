@@ -1520,6 +1520,62 @@
 			"response": []
 		},
 		{
+			"name": "Post BPMN Workflow",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "deployment-name",
+							"value": "One Step Approval",
+							"type": "text"
+						},
+						{
+							"key": "enable-duplicate-filtering",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "deploy-changed-only",
+							"value": "falses",
+							"type": "text"
+						},
+						{
+							"key": "workflow.bpmn",
+							"type": "file",
+							"src": "/C:/dev/aot/forms-flow-ai/Serve Legal/BPM/Save request data.bpmn"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/camunda/engine-rest/deployment/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"camunda",
+						"engine-rest",
+						"deployment",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Update attachments",
 			"event": [
 				{
@@ -1566,6 +1622,96 @@
 						"v1",
 						"attachments",
 						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET communicationLogs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api/v1/communicationLogs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"communicationLogs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET communicationLogs by intakeId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api/v1/communicationLogs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"communicationLogs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET notes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api/v1/notes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"notes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET notes by intakeId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api/v1/notes?intakeId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"notes"
+					],
+					"query": [
+						{
+							"key": "intakeId",
+							"value": "2"
+						}
 					]
 				}
 			},
