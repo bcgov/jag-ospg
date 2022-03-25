@@ -32,7 +32,7 @@ services:
         - REACT_APP_WEB_BASE_CUSTOM_URL=${REACT_APP_WEB_BASE_CUSTOM_URL}
         - REACT_APP_FORMIO_JWT_SECRET=${REACT_APP_FORMIO_JWT_SECRET}
     env_file:
-      - .env
+      - ./.env
     volumes:
       - ".:/app"
       - "/app/node_modules"

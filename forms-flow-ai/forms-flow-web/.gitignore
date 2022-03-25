@@ -13,4 +13,4 @@ pid.txt
 .idea/
 tmp/
 .vscode/
-/sqlite-example-database/
+sqlite-example-database/
