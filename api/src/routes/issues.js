@@ -37,10 +37,22 @@ async function getByQuery(req, res) {
 	
 };
 
+function clearEmptyStringsForIds(req) {
+	if (!req.body.categoryId) req.body.categoryId = null;
+	if (!req.body.issueRegulatoryBodyId) req.body.issueRegulatoryBodyId = null;
+	if (!req.body.dispositionStatusId) req.body.dispositionStatusId = null;
+	if (!req.body.topicId) req.body.topicId = null;
+	if (!req.body.issueStatusId) req.body.issueStatusId = null;
+	if (!req.body.initialSourceId) req.body.initialSourceId = null;
+	if (!req.body.assignmentId) req.body.assignmentId = null;
+	if (!req.body.intakeId) req.body.intakeId = null;
+}
+
 async function create(req, res) {
 	if (req.body.id) {
 		res.status(400).send(`Bad request: ID should not be provided, since it is determined automatically by the database.`)
 	} else {
+		clearEmptyStringsForIds(req);
 		try {
 			await sequelize.transaction(async (t) => {
 				const persistedObj = await models.issue.create(req.body,
@@ -103,6 +115,7 @@ async function update(req, res) {
 	} else if (req.body.issueRegulatoryBodyIds) {
 		req.body.issueRegulatoryBodies = getIssueRegulatoryBodies(req.body.issueRegulatoryBodyIds, id)
 	}
+	clearEmptyStringsForIds(req);
 	try {
 		
 		await sequelize.transaction(async (t) => {
@@ -146,6 +159,7 @@ async function update(req, res) {
 
 async function updateByApplicationId(req, res) {
 	if (req.query.applicationId) { 
+		clearEmptyStringsForIds(req);
 		await sequelize.transaction(async (t) => {
 			const updatableFields = getUpdatableFields(req.body)
 			try {

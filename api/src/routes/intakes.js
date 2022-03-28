@@ -56,11 +56,18 @@ async function getByQuery(req, res) {
 	} else getAll(req, res)
 	
 };
-
+function clearEmptyStringsForIds(req) {
+	if (!req.body.contactId) req.body.contactId = null;
+	if (!req.body.intakeTypeId) req.body.intakeTypeId = null;
+	if (!req.body.responseTypeId) req.body.responseTypeId = null;
+	if (!req.body.intakeStatusId) req.body.intakeStatusId = null;
+	if (!req.body.assignmentId) req.body.assignmentId = null;
+}
 async function create(req, res) {
 	if (req.body.id) {
 		res.status(400).send(`Bad request: ID should not be provided, since it is determined automatically by the database.`)
 	} else {
+		clearEmptyStringsForIds(req);
 		try {
 			await sequelize.transaction(async (t) => {
 
@@ -105,6 +112,7 @@ function getUpdatableFields(fullObj) {
 
 async function updateByApplicationId(req, res) {
 	if (req.query.applicationId) { 
+		clearEmptyStringsForIds(req);
 		await sequelize.transaction(async (t) => {
 			const updatableFields = getUpdatableFields(req.body)
 			try {
@@ -165,6 +173,7 @@ async function updateByApplicationId(req, res) {
 async function update(req, res) {
 	try {
 		const id = getIdParam(req);
+		clearEmptyStringsForIds(req)
 		await sequelize.transaction(async (t) => {
 			// We only accept an UPDATE request if the `:id` param matches the body `id`
 			if (req.body.id === id) {
