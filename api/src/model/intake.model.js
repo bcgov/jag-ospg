@@ -33,6 +33,15 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        intakeTitle: {
+            type: DataTypes.STRING
+        },
+        staffAssignedTo: {
+            type: DataTypes.STRING
+        },
+        mgmtAssignedTo: {
+            type: DataTypes.STRING
+        },
         dateReceived: {
             type: DataTypes.DATE,
             field: 'date_received'

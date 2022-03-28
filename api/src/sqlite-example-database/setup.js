@@ -426,6 +426,7 @@ async function reset() {
 			applicationId: 100,
 			applicationStatus: "Received",
 			intakeTypeId: 1,
+			intakeTitle: "Intake Title",
 			dateReceived: new Date(),
 			contactId: 1,
 			details: 'Test details',
@@ -434,7 +435,8 @@ async function reset() {
 			resolution: 'Test resolution',
 			intakeStatusId: 1,
 			responseCompleteDate: new Date(),
-			assignmentId: 1,
+			staffAssignedTo: "John Doe",
+			mgmtAssignedTo: "Mary Manager"
 		},
 		{ 
 			issueId: 1,
@@ -450,7 +452,8 @@ async function reset() {
 			resolution: 'Test resolution',
 			intakeStatusId: 1,
 			responseCompleteDate: new Date(),
-			assignmentId: 1,
+			staffAssignedTo: "John Doe",
+			mgmtAssignedTo: "Mary Manager"
 		},
 		{ 
 			issueId: 2,
@@ -466,7 +469,8 @@ async function reset() {
 			resolution: 'Test resolution',
 			intakeStatusId: 1,
 			responseCompleteDate: new Date(),
-			assignmentId: 1,
+			staffAssignedTo: "John Doe",
+			mgmtAssignedTo: "Mary Manager"
 		}
 	], {
 		include: [ contact, responseType, intakeStatus, intakeType ]

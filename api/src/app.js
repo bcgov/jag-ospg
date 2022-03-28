@@ -84,9 +84,9 @@ app.get(`/api/${apiVersion}/protected`, keycloak.protect('formsflow-client'), fu
 });
 
 // Files endpoint
-app.post(`/api/${apiVersion}/files`, keycloak.protect(), uploadFile)
-app.get(`/api/${apiVersion}/files/:fileId`, keycloak.protect(), getFile)
-app.delete(`/api/${apiVersion}/files/:fileId`, keycloak.protect(), removeFile)
+app.post(`/api/${apiVersion}/files`, uploadFile)
+app.get(`/api/${apiVersion}/files/:fileId`, getFile)
+app.delete(`/api/${apiVersion}/files/:fileId`, removeFile)
 
 // Define REST APIs for each route (if they exist).
 for (const [routeName, routeController] of Object.entries(routes)) {
