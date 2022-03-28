@@ -4,11 +4,11 @@
       <router-view />
     </div>
     <div v-else>
-      <FullLayout>
+      <full-layout>
         <template>
           <router-view />
         </template>
-      </FullLayout>
+      </full-layout>
     </div>
   </div>
 </template>

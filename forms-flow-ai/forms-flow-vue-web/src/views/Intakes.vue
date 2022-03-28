@@ -26,8 +26,8 @@
           sort: true,
           form: false,
         }"
-        :taskDefaultFilterListNames="['OSPG Intake']"
         :listItemCardStyle="false"
+        :taskDefaultFilterListNames="['OSPG Intake']"
         v-if="isServiceFLowEnabled"
       />
     </div>
@@ -37,7 +37,6 @@
     </div>
   </div>
 </template>
-
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import CamundaTasklist from "camunda-formio-tasklist-vue/src/components/TaskList.vue";
@@ -77,29 +76,29 @@ export default class Intakes extends Vue {
     this.jwttoken = Vue.prototype.$keycloak.token;
     this.isServiceFLowEnabled = true;
   }
-  // beforeCreate() {
-  //   this.$router.go(0);
-
-  // },
 }
 </script>
 <style>
 .ospg-intake-list {
   height: 90vh;
 }
-/* todo: remove below 2 styles, when new npm pacakge is realeased */
+/* todo: remove below 2 styles, when new npm package is released */
 .cft-list-group {
   height: 79vh !important;
 }
 .ctf-task-details-container .task-details {
   height: 79vh !important;
 }
+.cft-list-group {
+  border-right: inset #eee;
+}
 :root {
   --bs-primary: #2699fb;
+  --bs-body-color: #003366;
   scrollbar-color: auto;
 }
 body {
-  scrollbar-width: auto; /* "auto" or "thin" */
-  scrollbar-color: #2699fb aliceblue; /* scroll thumb and track */
+  scrollbar-width: auto;
+  scrollbar-color: #2699fb aliceblue;
 }
 </style>
