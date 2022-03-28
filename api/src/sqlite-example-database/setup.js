@@ -43,15 +43,15 @@ async function reset() {
 
 	await sequelize.models.intakeStatus.bulkCreate([
 		{ 
-			intakeStatus: 'intakeStatus1',
+			intakeStatus: 'New',
 			isActive: true
 		},
 		{ 
-			intakeStatus: 'intakeStatus2',
+			intakeStatus: 'In Progress',
 			isActive: true
 		},
 		{ 
-			intakeStatus: 'intakeStatus3',
+			intakeStatus: 'Closed',
 			isActive: true
 		},
 		{ 
@@ -81,15 +81,23 @@ async function reset() {
 
 	await sequelize.models.category.bulkCreate([
 		{ 
-			categoryName: 'category1',
+			categoryName: 'Reg Body Operations',
 			isActive: true
 		},
 		{ 
-			categoryName: 'category2',
+			categoryName: 'Reg Body Designation',
 			isActive: true
 		},
 		{ 
-			categoryName: 'category3',
+			categoryName: 'State of Profession',
+			isActive: true
+		},
+		{ 
+			categoryName: 'Engagement',
+			isActive: true
+		},
+		{ 
+			categoryName: 'Prof Gov Best Practices',
 			isActive: true
 		},
 		{ 
@@ -100,15 +108,59 @@ async function reset() {
 
 	await sequelize.models.topic.bulkCreate([
 		{ 
-			topicName: 'topic1',
+			topicName: 'Transparency and Accountability',
 			isActive: true
 		},
 		{ 
-			topicName: 'topic2',
+			topicName: 'Standards of Conduct and Competence',
 			isActive: true
 		},
 		{ 
-			topicName: 'topic3',
+			topicName: 'Continuing competence and CEP',
+			isActive: true
+		},
+		{ 
+			topicName: 'Registration',
+			isActive: true
+		},
+		{ 
+			topicName: 'Audit and Practice Reviews',
+			isActive: true
+		},
+		{ 
+			topicName: 'Complaints and Discipline',
+			isActive: true
+		},
+		{ 
+			topicName: 'Duty to Report and Reprisals',
+			isActive: true
+		},
+		{ 
+			topicName: 'Firm Regulation',
+			isActive: true
+		},
+		{ 
+			topicName: 'Advocacy',
+			isActive: true
+		},
+		{ 
+			topicName: 'OSPG Audits and Investigations',
+			isActive: true
+		},
+		{ 
+			topicName: 'Register/Info Publicly Available',
+			isActive: true
+		},
+		{ 
+			topicName: 'Practice Rights',
+			isActive: true
+		},
+		{ 
+			topicName: 'Declarations',
+			isActive: true
+		},
+		{ 
+			topicName: 'Sewerage Systems',
 			isActive: true
 		},
 		{ 
@@ -119,15 +171,15 @@ async function reset() {
 
 	await sequelize.models.issueStatus.bulkCreate([
 		{ 
-			issueStatus: 'issueStatus1',
+			issueStatus: 'New',
 			isActive: true
 		},
 		{ 
-			issueStatus: 'issueStatus2',
+			issueStatus: 'In Progress',
 			isActive: true
 		},
 		{ 
-			issueStatus: 'issueStatus3',
+			issueStatus: 'Closed',
 			isActive: true
 		},
 		{ 
@@ -138,16 +190,23 @@ async function reset() {
 
 	await sequelize.models.initialSource.bulkCreate([
 		{ 
-			initialSource: 'initialSource1',
-			isActive: true
-		}
-		,
-		{ 
-			initialSource: 'initialSource2',
+			initialSource: 'OSPG Inbox',
 			isActive: true
 		},
 		{ 
-			initialSource: 'initialSource3',
+			initialSource: 'OSPG Phone',
+			isActive: true
+		},
+		{ 
+			initialSource: 'Ministers Office - CCU',
+			isActive: true
+		},
+		{ 
+			initialSource: 'Superintendent Direct',
+			isActive: true
+		},
+		{ 
+			initialSource: 'Staff Direct',
 			isActive: true
 		},
 		{ 
@@ -203,15 +262,23 @@ async function reset() {
 	
 	await sequelize.models.dispositionStatus.bulkCreate([
 		{ 
-			dispositionStatus: 'dispositionStatus1',
+			dispositionStatus: 'Refer to another body',
 			isActive: true
 		},
 		{ 
-			dispositionStatus: 'dispositionStatus2',
+			dispositionStatus: 'Refer to OSPG Audit',
 			isActive: true
 		},
 		{ 
-			dispositionStatus: 'dispositionStatus3',
+			dispositionStatus: 'Information Response',
+			isActive: true
+		},
+		{ 
+			dispositionStatus: 'Early Resolution Response',
+			isActive: true
+		},
+		{ 
+			dispositionStatus: 'Refer to OSPG Investigation',
 			isActive: true
 		},
 		{ 
@@ -222,15 +289,26 @@ async function reset() {
 
 	await sequelize.models.regulatoryBody.bulkCreate([
 		{ 
-			regulatoryBodyName: 'regulatoryBody1',
+			regulatoryBodyName: 'ABCFP',
 			isActive: true
 		},
 		{ 
-			regulatoryBodyName: 'regulatoryBody2',
+			regulatoryBodyName: 'AIBC',
 			isActive: true
 		},
 		{ 
-			regulatoryBodyName: 'regulatoryBody3',
+			regulatoryBodyName: 'ASTTBC',
+			isActive: true
+		},
+		{ 
+			regulatoryBodyName: 'BCIA',
+			isActive: true
+		},{ 
+			regulatoryBodyName: 'CAB',
+			isActive: true
+		},
+		{ 
+			regulatoryBodyName: 'EGBC',
 			isActive: true
 		},
 		{ 
