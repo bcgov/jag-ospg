@@ -7,7 +7,7 @@ async function getAll(req, res) {
 			const initialSources = await models.initialSource.findAll({
 				where: 
 				{ 
-					isActive: req.query.active === 'true' ? 1 : 0
+					isActive: req.query.active === 'true' ? true : false
 				}
 			});
 			res.status(200).json(initialSources);
