@@ -67,7 +67,7 @@ export default class Intakes extends Vue {
       userRoles: process.env.VUE_APP_FORMIO_ROLES,
     },
     FORMIO_JWT_SECRET: "--- change me now ---",
-    WEB_SOCKET_ENCRYPT_KEY: process.env.VUE_WEB_SOCKET_ENCRYPT_KEY,
+    WEB_SOCKET_ENCRYPT_KEY: process.env.VUE_APP_WEBSOCKET_ENCRYPT_KEY,
   };
 
   public isServiceFLowEnabled: boolean = true;
