@@ -38,6 +38,7 @@ export default class Header extends Vue {
 
   logout() {
     Vue.prototype.$keycloak.logout({ redirectUri: window.location.origin });
+    localStorage.removeItem("ospgLastActivity");
   }
 
   mounted() {
@@ -49,12 +50,10 @@ export default class Header extends Vue {
 
   goToIntakes() {
     router.push({ name: "Intakes" });
-    this.$router.go(0);
   }
 
   goToIssues() {
     router.push({ name: "Issues" });
-    this.$router.go(0);
   }
 }
 </script>
@@ -76,8 +75,7 @@ export default class Header extends Vue {
   background-color: #003366;
 }
 .ospg-brand {
-  /* todo: use BC Sans */
-  font: normal normal bold 20px/8px sans-serif;
+  font: normal normal bold 20px/8px "BC Sans normal";
   color: #f1f9ff;
   opacity: 1;
 }
@@ -93,23 +91,20 @@ export default class Header extends Vue {
 }
 .ospg-header-menu {
   /* UI Properties */
-  /* todo: use BC Sans */
-  font: normal normal normal 16px/8px sans-serif;
+  font: normal normal normal 16px/8px "BC Sans normal";
   letter-spacing: 0px;
   color: #f1f9ff;
   opacity: 1;
   cursor: pointer;
 }
 .ospg-header-dropdown {
-  /* todo: use BC Sans */
-  font: normal normal normal 14px/9px sans-serif;
+  font: normal normal normal 14px/9px "BC Sans normal";
   letter-spacing: 0px;
   color: #ffffff;
   opacity: 1;
 }
 .ospg-initial-logo {
-  /* todo: use BC Sans */
-  font: normal normal bold 12px/24px sans-serif;
+  font: normal normal bold 12px/24px "BC Sans normal";
   letter-spacing: 0px;
   color: #0056ff;
   opacity: 1;
