@@ -50,10 +50,12 @@ export default class Header extends Vue {
 
   goToIntakes() {
     router.push({ name: "Intakes" });
+    this.$router.go(0);
   }
 
   goToIssues() {
     router.push({ name: "Issues" });
+    this.$router.go(0);
   }
 }
 </script>

@@ -80,9 +80,7 @@ export default class TaskList extends Vue {
       reviewer: process.env.VUE_APP_FORM_IO_REVIEWER,
       userRoles: process.env.VUE_APP_FORMIO_ROLES,
     },
-    FILTER_LIST: this.splitAndTrim(
-      process.env.VUE_APP_INTAKE_FILTER_LIST ?? ""
-    ),
+    FILTER_LIST: this.splitAndTrim(process.env.VUE_APP_ISSUE_FILTER_LIST ?? ""),
     FORMIO_JWT_SECRET: process.env.VUE_APP_FORMIO_JWT_SECRET,
     WEB_SOCKET_ENCRYPT_KEY: process.env.VUE_APP_WEBSOCKET_ENCRYPT_KEY,
   };
@@ -107,6 +105,7 @@ export default class TaskList extends Vue {
       const [taskDetails] = customEvent?.customEvent?.taskDetails;
       if (taskDetails?.id) {
         router.push({ name: "Intakes", params: { taskId: taskDetails.id } });
+        this.$router.go(0);
       }
     });
     this.$root.$on("tokenRefreshed", () => {
