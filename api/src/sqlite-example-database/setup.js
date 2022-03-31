@@ -23,7 +23,7 @@ const {
 
 
 async function reset() {
-	console.log('Will rewrite the SQLite example database, adding some dummy data.');
+	console.log('Will rewrite the example database, adding some dummy data.');
 	
 	try{ 
 
@@ -65,15 +65,11 @@ async function reset() {
 		
 		await sequelize.models.intakeType.bulkCreate([
 			{ 
-				intakeType: 'intakeType1',
+				intakeType: 'Phone',
 				isActive: true
 			},
 			{ 
-				intakeType: 'intakeType2',
-				isActive: true
-			},
-			{ 
-				intakeType: 'intakeType3',
+				intakeType: 'Email',
 				isActive: true
 			},
 			{ 
@@ -322,15 +318,11 @@ async function reset() {
 
 		await sequelize.models.responseType.bulkCreate([
 			{ 
-				responseType: 'responseType1',
+				responseType: 'Phone',
 				isActive: true
 			},
 			{ 
-				responseType: 'responseType1',
-				isActive: true
-			},
-			{ 
-				responseType: 'responseType1',
+				responseType: 'Email',
 				isActive: true
 			},
 			{ 
