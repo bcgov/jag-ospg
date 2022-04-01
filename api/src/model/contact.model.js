@@ -45,6 +45,9 @@ module.exports = (sequelize) => {
         isBusiness: {
             type: DataTypes.BOOLEAN
         },
+        isConfidential: {
+            type: DataTypes.BOOLEAN
+        },
         isActive: {
             type: DataTypes.BOOLEAN
         }

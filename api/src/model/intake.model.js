@@ -63,6 +63,9 @@ module.exports = (sequelize) => {
             type: DataTypes.DATE,
             field: 'response_complete_date'
         },
+        isWithinOspgJurisdiction: {
+            type: DataTypes.BOOLEAN
+        },
 	},
     {
         underscored: true,
