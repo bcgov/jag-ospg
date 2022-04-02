@@ -66,6 +66,9 @@ module.exports = (sequelize) => {
         isWithinOspgJurisdiction: {
             type: DataTypes.BOOLEAN
         },
+        isCompliant: {
+            type: DataTypes.BOOLEAN
+        },
 	},
     {
         underscored: true,
