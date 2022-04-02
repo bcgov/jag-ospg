@@ -1,10 +1,10 @@
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchServiceTaskList } from "../../../apiManager/services/bpmTaskServices";
 import {
   setBPMTaskListActivePage,
-  setBPMTaskLoader,
+  setBPMTaskLoader
 } from "../../../actions/bpmTaskActions";
 import Loading from "../../../containers/Loading";
 import moment from "moment";
@@ -14,7 +14,7 @@ import Pagination from "react-js-pagination";
 import {push} from "connected-react-router";
 import {MAX_RESULTS} from "../constants/taskConstants";
 import {getFirstResultIndex} from "../../../apiManager/services/taskSearchParamsFormatterService";
-import TaskVariable from "./TaskVariable";
+
 const ServiceFlowTaskList = React.memo(() => {
   const taskList = useSelector((state) => state.bpmTasks.tasksList);
   const tasksCount = useSelector(state=> state.bpmTasks.tasksCount);
@@ -75,8 +75,8 @@ const ServiceFlowTaskList = React.memo(() => {
                     "name"
                   )}
                 </div>
-                <div data-title="Task assignee" className="col-6 pr-0 text-right">
-                  {task.assignee}
+                <div data-title="Task assignee" className="col-6 text-right" style={{fontSize: "0.7rem"}}>
+                  {task.assignee ? 'Being edited by ' : ''} {task.assignee}
                 </div>
               </Row>
               <Row className="task-row-3" style={{marginBottom:"-8px"}}>
@@ -100,16 +100,12 @@ const ServiceFlowTaskList = React.memo(() => {
                   sm={4}
                   md={4}
                   xl={4}
-                  className="pr-0 text-right tooltips"
+                  className="text-right tooltips"
                   dat-title="priority"
                 >
-                  {task.priority}
+                  {/* {task.priority} */}
                 </Col>
               </Row>
-              {
-                task._embedded?.variable &&  <TaskVariable variables={task._embedded?.variable||[]}/>
-              }
-
             </div>
           ))}
           <div className="pagination-wrapper">
