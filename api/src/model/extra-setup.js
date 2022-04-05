@@ -12,6 +12,7 @@ function applyExtraSetup(sequelize) {
 		intakeStatus,
 		intakeType,
 		intake,
+		issueCategory,
 		issueRegulatoryBody,
 		issueStatus,
 		issue,
@@ -57,12 +58,13 @@ function applyExtraSetup(sequelize) {
 	user.belongsTo(role);
 
 	// issue relationships
-	category.hasMany(issue);
-	issue.belongsTo(category);
+	issue.hasMany(issueCategory);
+	issueCategory.belongsTo(issue);
+	category.hasMany(issueCategory);
+	issueCategory.belongsTo(category);
 
 	issue.hasMany(issueRegulatoryBody);
 	issueRegulatoryBody.belongsTo(issue);
-
 	regulatoryBody.hasMany(issueRegulatoryBody);
 	issueRegulatoryBody.belongsTo(regulatoryBody);
 
