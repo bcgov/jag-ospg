@@ -46,9 +46,8 @@ module.exports = (sequelize) => {
             type: DataTypes.DATE,
             field: 'date_received'
         },
-
         details: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(1000),
             field: 'details'
         },
         dueDate: {

@@ -29,336 +29,336 @@ async function reset() {
 
 		await sequelize.sync({ force: true });
 		
-		await sequelize.models.assignment.bulkCreate([
-			{ 
-				assignment: 'Staff',
-				isActive: true
-			},
-			{ 
-				assignment: 'Management',
-				isActive: true
-			},
-			{ 
-				assignment: 'Inactive',
-				isActive: false
-			}
-		]);
+		// await sequelize.models.assignment.bulkCreate([
+		// 	{ 
+		// 		assignment: 'Staff',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		assignment: 'Management',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		assignment: 'Inactive',
+		// 		isActive: false
+		// 	}
+		// ]);
 
-		await sequelize.models.intakeStatus.bulkCreate([
-			{ 
-				intakeStatus: 'New',
-				isActive: true
-			},
-			{ 
-				intakeStatus: 'In Progress',
-				isActive: true
-			},
-			{ 
-				intakeStatus: 'Closed',
-				isActive: true
-			},
-			{ 
-				intakeStatus: 'Inactive',
-				isActive: false
-			}
-		]);
+		// await sequelize.models.intakeStatus.bulkCreate([
+		// 	{ 
+		// 		intakeStatus: 'New',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		intakeStatus: 'In Progress',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		intakeStatus: 'Closed',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		intakeStatus: 'Inactive',
+		// 		isActive: false
+		// 	}
+		// ]);
 		
-		await sequelize.models.intakeType.bulkCreate([
-			{ 
-				intakeType: 'Phone',
-				isActive: true
-			},
-			{ 
-				intakeType: 'Email',
-				isActive: true
-			},
-			{ 
-				intakeType: 'Inactive',
-				isActive: false
-			}
-		]);
+		// await sequelize.models.intakeType.bulkCreate([
+		// 	{ 
+		// 		intakeType: 'Phone',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		intakeType: 'Email',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		intakeType: 'Inactive',
+		// 		isActive: false
+		// 	}
+		// ]);
 
-		await sequelize.models.category.bulkCreate([
-			{ 
-				categoryName: 'Reg Body Operations',
-				isActive: true
-			},
-			{ 
-				categoryName: 'Reg Body Designation',
-				isActive: true
-			},
-			{ 
-				categoryName: 'State of Profession',
-				isActive: true
-			},
-			{ 
-				categoryName: 'Engagement',
-				isActive: true
-			},
-			{ 
-				categoryName: 'Prof Gov Best Practices',
-				isActive: true
-			},
-			{ 
-				categoryName: 'Inactive',
-				isActive: false
-			}
-		]);
+		// await sequelize.models.category.bulkCreate([
+		// 	{ 
+		// 		categoryName: 'Reg Body Operations',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		categoryName: 'Reg Body Designation',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		categoryName: 'State of Profession',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		categoryName: 'Engagement',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		categoryName: 'Prof Gov Best Practices',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		categoryName: 'Inactive',
+		// 		isActive: false
+		// 	}
+		// ]);
 
-		await sequelize.models.topic.bulkCreate([
-			{ 
-				topicName: 'Transparency and Accountability',
-				isActive: true
-			},
-			{ 
-				topicName: 'Standards of Conduct and Competence',
-				isActive: true
-			},
-			{ 
-				topicName: 'Continuing competence and CEP',
-				isActive: true
-			},
-			{ 
-				topicName: 'Registration',
-				isActive: true
-			},
-			{ 
-				topicName: 'Audit and Practice Reviews',
-				isActive: true
-			},
-			{ 
-				topicName: 'Complaints and Discipline',
-				isActive: true
-			},
-			{ 
-				topicName: 'Duty to Report and Reprisals',
-				isActive: true
-			},
-			{ 
-				topicName: 'Firm Regulation',
-				isActive: true
-			},
-			{ 
-				topicName: 'Advocacy',
-				isActive: true
-			},
-			{ 
-				topicName: 'OSPG Audits and Investigations',
-				isActive: true
-			},
-			{ 
-				topicName: 'Register/Info Publicly Available',
-				isActive: true
-			},
-			{ 
-				topicName: 'Practice Rights',
-				isActive: true
-			},
-			{ 
-				topicName: 'Declarations',
-				isActive: true
-			},
-			{ 
-				topicName: 'Sewerage Systems',
-				isActive: true
-			},
-			{ 
-				topicName: 'Inactive',
-				isActive: false
-			}
-		]);
+		// await sequelize.models.topic.bulkCreate([
+		// 	{ 
+		// 		topicName: 'Transparency and Accountability',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'Standards of Conduct and Competence',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'Continuing competence and CEP',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'Registration',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'Audit and Practice Reviews',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'Complaints and Discipline',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'Duty to Report and Reprisals',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'Firm Regulation',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'Advocacy',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'OSPG Audits and Investigations',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'Register/Info Publicly Available',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'Practice Rights',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'Declarations',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'Sewerage Systems',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		topicName: 'Inactive',
+		// 		isActive: false
+		// 	}
+		// ]);
 
-		await sequelize.models.issueStatus.bulkCreate([
-			{ 
-				issueStatus: 'New',
-				isActive: true
-			},
-			{ 
-				issueStatus: 'In Progress',
-				isActive: true
-			},
-			{ 
-				issueStatus: 'Closed',
-				isActive: true
-			},
-			{ 
-				issueStatus: 'Inactive',
-				isActive: false
-			}
-		]);
+		// await sequelize.models.issueStatus.bulkCreate([
+		// 	{ 
+		// 		issueStatus: 'New',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		issueStatus: 'In Progress',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		issueStatus: 'Closed',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		issueStatus: 'Inactive',
+		// 		isActive: false
+		// 	}
+		// ]);
 
-		await sequelize.models.initialSource.bulkCreate([
-			{ 
-				initialSource: 'OSPG Inbox',
-				isActive: true
-			},
-			{ 
-				initialSource: 'OSPG Phone',
-				isActive: true
-			},
-			{ 
-				initialSource: 'Ministers Office - CCU',
-				isActive: true
-			},
-			{ 
-				initialSource: 'Superintendent Direct',
-				isActive: true
-			},
-			{ 
-				initialSource: 'Staff Direct',
-				isActive: true
-			},
-			{ 
-				initialSource: 'Inactive',
-				isActive: false
-			}
-		]);
+		// await sequelize.models.initialSource.bulkCreate([
+		// 	{ 
+		// 		initialSource: 'OSPG Inbox',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		initialSource: 'OSPG Phone',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		initialSource: 'Ministers Office - CCU',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		initialSource: 'Superintendent Direct',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		initialSource: 'Staff Direct',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		initialSource: 'Inactive',
+		// 		isActive: false
+		// 	}
+		// ]);
 		
-		await sequelize.models.contact.bulkCreate([
-			{ 
-				firstName: 'Mickey',
-				middleName: '',
-				lastName: 'Mouse',
-				phone: '778 123 4567',
-				email: 'mmouse@disney.com',
-				address: '123 Disney St.',
-				city: 'Orlando',
-				province: 'Florida',
-				postalCode: '123456',
-				isBusiness: false,
-				notes: 'Notes...',
-				isActive: true
-			},
-			{ 
-				firstName: 'Minnie',
-				middleName: '',
-				lastName: 'Mouse',
-				phone: '778 123 4568',
-				email: 'minnie.mouse@disney.com',
-				address: '123 Disney St.',
-				city: 'Orlando',
-				province: 'Florida',
-				postalCode: '123456',
-				isBusiness: false,
-				notes: 'Notes...',
-				isActive: true
-			},
-			{ 
-				firstName: 'Inactive',
-				middleName: '',
-				lastName: 'Inactive',
-				phone: '778 123 4568',
-				email: 'Inactive@Inactive.com',
-				address: '123 Disney St.',
-				city: 'Inactive',
-				province: 'Inactive',
-				postalCode: '123456',
-				isBusiness: false,
-				notes: 'Notes...Inactive',
-				isActive: false
-			},
-		]);
+		// await sequelize.models.contact.bulkCreate([
+		// 	{ 
+		// 		firstName: 'Mickey',
+		// 		middleName: '',
+		// 		lastName: 'Mouse',
+		// 		phone: '778 123 4567',
+		// 		email: 'mmouse@disney.com',
+		// 		address: '123 Disney St.',
+		// 		city: 'Orlando',
+		// 		province: 'Florida',
+		// 		postalCode: '123456',
+		// 		isBusiness: false,
+		// 		notes: 'Notes...',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		firstName: 'Minnie',
+		// 		middleName: '',
+		// 		lastName: 'Mouse',
+		// 		phone: '778 123 4568',
+		// 		email: 'minnie.mouse@disney.com',
+		// 		address: '123 Disney St.',
+		// 		city: 'Orlando',
+		// 		province: 'Florida',
+		// 		postalCode: '123456',
+		// 		isBusiness: false,
+		// 		notes: 'Notes...',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		firstName: 'Inactive',
+		// 		middleName: '',
+		// 		lastName: 'Inactive',
+		// 		phone: '778 123 4568',
+		// 		email: 'Inactive@Inactive.com',
+		// 		address: '123 Disney St.',
+		// 		city: 'Inactive',
+		// 		province: 'Inactive',
+		// 		postalCode: '123456',
+		// 		isBusiness: false,
+		// 		notes: 'Notes...Inactive',
+		// 		isActive: false
+		// 	},
+		// ]);
 		
-		await sequelize.models.dispositionStatus.bulkCreate([
-			{ 
-				dispositionStatus: 'Refer to another body',
-				isActive: true
-			},
-			{ 
-				dispositionStatus: 'Refer to OSPG Audit',
-				isActive: true
-			},
-			{ 
-				dispositionStatus: 'Information Response',
-				isActive: true
-			},
-			{ 
-				dispositionStatus: 'Early Resolution Response',
-				isActive: true
-			},
-			{ 
-				dispositionStatus: 'Refer to OSPG Investigation',
-				isActive: true
-			},
-			{ 
-				dispositionStatus: 'Inactive',
-				isActive: false
-			}
-		]);
+		// await sequelize.models.dispositionStatus.bulkCreate([
+		// 	{ 
+		// 		dispositionStatus: 'Refer to another body',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		dispositionStatus: 'Refer to OSPG Audit',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		dispositionStatus: 'Information Response',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		dispositionStatus: 'Early Resolution Response',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		dispositionStatus: 'Refer to OSPG Investigation',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		dispositionStatus: 'Inactive',
+		// 		isActive: false
+		// 	}
+		// ]);
 
-		await sequelize.models.regulatoryBody.bulkCreate([
-			{ 
-				regulatoryBodyName: 'ABCFP',
-				isActive: true
-			},
-			{ 
-				regulatoryBodyName: 'AIBC',
-				isActive: true
-			},
-			{ 
-				regulatoryBodyName: 'ASTTBC',
-				isActive: true
-			},
-			{ 
-				regulatoryBodyName: 'BCIA',
-				isActive: true
-			},{ 
-				regulatoryBodyName: 'CAB',
-				isActive: true
-			},
-			{ 
-				regulatoryBodyName: 'EGBC',
-				isActive: true
-			},
-			{ 
-				regulatoryBodyName: 'Inactive',
-				isActive: false
-			}
-		]);
+		// await sequelize.models.regulatoryBody.bulkCreate([
+		// 	{ 
+		// 		regulatoryBodyName: 'ABCFP',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		regulatoryBodyName: 'AIBC',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		regulatoryBodyName: 'ASTTBC',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		regulatoryBodyName: 'BCIA',
+		// 		isActive: true
+		// 	},{ 
+		// 		regulatoryBodyName: 'CAB',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		regulatoryBodyName: 'EGBC',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		regulatoryBodyName: 'Inactive',
+		// 		isActive: false
+		// 	}
+		// ]);
 
-		await sequelize.models.responseType.bulkCreate([
-			{ 
-				responseType: 'Phone',
-				isActive: true
-			},
-			{ 
-				responseType: 'Email',
-				isActive: true
-			},
-			{ 
-				responseType: 'Inactive',
-				isActive: false
-			}
-		]);
+		// await sequelize.models.responseType.bulkCreate([
+		// 	{ 
+		// 		responseType: 'Phone',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		responseType: 'Email',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		responseType: 'Inactive',
+		// 		isActive: false
+		// 	}
+		// ]);
 		
-		await sequelize.models.role.bulkCreate([
-			{ 
-				roleName: 'Manager'
-			}
-		]);
+		// await sequelize.models.role.bulkCreate([
+		// 	{ 
+		// 		roleName: 'Manager'
+		// 	}
+		// ]);
 
-		await sequelize.models.user.bulkCreate([
-			{ 
-				idir: 'jack-sparrow',
-				dateAdded: new Date(),
-				roleId: 1
-			},
-			{ 
-				idir: 'white-beard',
-				dateAdded: new Date(),
-				roleId: 1
-			},
-			{ 
-				idir: 'black-beard',
-				dateAdded: new Date(),
-				roleId: 1
-			},
-			{ 
-				idir: 'brown-beard',
-				dateAdded: new Date(),
-				roleId: 1
-			},
-		]);
+		// await sequelize.models.user.bulkCreate([
+		// 	{ 
+		// 		idir: 'jack-sparrow',
+		// 		dateAdded: new Date(),
+		// 		roleId: 1
+		// 	},
+		// 	{ 
+		// 		idir: 'white-beard',
+		// 		dateAdded: new Date(),
+		// 		roleId: 1
+		// 	},
+		// 	{ 
+		// 		idir: 'black-beard',
+		// 		dateAdded: new Date(),
+		// 		roleId: 1
+		// 	},
+		// 	{ 
+		// 		idir: 'brown-beard',
+		// 		dateAdded: new Date(),
+		// 		roleId: 1
+		// 	},
+		// ]);
 
 		// await sequelize.models.issue.bulkCreate([
 		// 	{ 

@@ -47,7 +47,7 @@ module.exports = (sequelize) => {
             field: 'date_opened'
         },
         issueDetails: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(1000),
             field: 'issue_details'
         },
         closureDate: {
