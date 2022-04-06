@@ -1,11 +1,10 @@
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 import { ListGroup, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchServiceTaskList } from "../../../apiManager/services/bpmTaskServices";
 import {
   setBPMTaskListActivePage,
-  setBPMTaskLoader,
-  setSelectedFilterAction
+  setBPMTaskLoader
 } from "../../../actions/bpmTaskActions";
 import Loading from "../../../containers/Loading";
 import moment from "moment";
@@ -15,10 +14,9 @@ import Pagination from "react-js-pagination";
 import {push} from "connected-react-router";
 import {MAX_RESULTS} from "../constants/taskConstants";
 import {getFirstResultIndex} from "../../../apiManager/services/taskSearchParamsFormatterService";
-import TaskVariable from "./TaskVariable";
+
 const ServiceFlowTaskList = React.memo(() => {
   const taskList = useSelector((state) => state.bpmTasks.tasksList);
-  const taskVariable = useSelector((state)=>state.bpmTasks.selectedFilter?.properties?.variables ||[])
   const tasksCount = useSelector(state=> state.bpmTasks.tasksCount);
   const bpmTaskId = useSelector(state => state.bpmTasks.taskId);
   const isTaskListLoading = useSelector(
@@ -30,15 +28,6 @@ const ServiceFlowTaskList = React.memo(() => {
   const selectedFilter = useSelector((state) => state.bpmTasks.selectedFilter);
   const activePage = useSelector(state=>state.bpmTasks.activePage);
   const tasksPerPage = MAX_RESULTS;
-
-useEffect(()=>{
-  const taskVariableObject = {}
-  taskVariable.forEach(item => {
-      taskVariableObject[item.name]=item.label
-  });
-
-  dispatch(setSelectedFilterAction(taskVariableObject))
-},[dispatch,taskVariable])
 
   useEffect(() => {
     if (selectedFilter) {
@@ -77,18 +66,6 @@ useEffect(()=>{
                 <div className="col-12">
                   <h5 className="font-weight-bold">{task.name}</h5>
                 </div>
-                {/* <Col
-                  lg={4}
-                  xs={4}
-                  sm={4}
-                  md={4}
-                  xl={4}
-                  className="col-6 text-left tooltips mb-2"
-                  dat-title="priority"
-                  id="priority-level"
-                >
-                  Priority level {task.priority}
-                </Col> */}
               </Row>
               <Row className="task-row-2">
                 <div className="col-6 pr-0">
@@ -98,8 +75,8 @@ useEffect(()=>{
                     "name"
                   )}
                 </div>
-                <div data-title="Task assignee" id="assigned-to" className="col-6  mb-2 pr-3 text-left">
-                  {task.assignee ? (<>Assigned to <br/>{task.assignee}</>) : ''}
+                <div data-title="Task assignee" className="col-6 text-right" style={{fontSize: "0.7rem"}}>
+                  {task.assignee ? 'Being edited by ' : ''} {task.assignee}
                 </div>
               </Row>
               <Row className="task-row-3" style={{marginBottom:"-8px"}}>
@@ -117,11 +94,18 @@ useEffect(()=>{
                     : ""} </span>
                  <span className="tooltiptext" data-title={task.created?getFormattedDateAndTime(task.created):''}>  Created {moment(task.created).fromNow()}</span>
                 </Col>
+                <Col
+                  lg={4}
+                  xs={4}
+                  sm={4}
+                  md={4}
+                  xl={4}
+                  className="text-right tooltips"
+                  dat-title="priority"
+                >
+                  {/* {task.priority} */}
+                </Col>
               </Row>
-              {
-                task._embedded?.variable&&<TaskVariable variables={task._embedded?.variable||[]}/>
-              } 
-                       
             </div>
           ))}
           <div className="pagination-wrapper">
@@ -151,7 +135,6 @@ useEffect(()=>{
     <>
       <ListGroup as="ul" className="service-task-list">
         <TaskFilterComponent totalTasks={isTaskListLoading?0:tasksCount} />
-        <p className="results-count">{ tasksCount } { tasksCount > 0 ? 'results' :'result'}</p>
         {isTaskListLoading ? <Loading /> : renderTaskList()}
       </ListGroup>
     </>

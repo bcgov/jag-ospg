@@ -17,9 +17,6 @@ ENV FORMFLOW_SOURCE_REPO_URL ${FORMFLOW_SOURCE_REPO_URL}
 RUN git clone --branch ${FORMFLOW_SOURCE_REPO_BRANCH} ${FORMFLOW_SOURCE_REPO_URL} /tmp/forms-flow-ai/
 RUN cp -r /tmp/forms-flow-ai/forms-flow-bpm/. /bpm/
 
-# Customizations-add these files they have custom changes in the jag-sbcs/forms-flow-bpm/src directory
-COPY src/main/resources/template/ /bpm/src/main/resources/templates/ 
-
 COPY pom-docker.xml /tmp/pom.xml
 COPY settings-docker.xml /usr/share/maven/ref/
 

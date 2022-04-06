@@ -38,7 +38,7 @@ async function getByQuery(req, res) {
 };
 
 function clearEmptyStringsForIds(req) {
-	if (!req.body.categoryId) req.body.categoryId = null;
+	if (!req.body.issueCategoryId) req.body.issueCategoryId = null;
 	if (!req.body.issueRegulatoryBodyId) req.body.issueRegulatoryBodyId = null;
 	if (!req.body.dispositionStatusId) req.body.dispositionStatusId = null;
 	if (!req.body.topicId) req.body.topicId = null;
@@ -69,6 +69,9 @@ async function create(req, res) {
 				const issueRegulatoryBodies = getIssueRegulatoryBodies(req.body.issueRegulatoryBodyIds, persistedObj.id);
 				await models.issueRegulatoryBody.bulkCreate(issueRegulatoryBodies, {transaction: t});
 
+				const issueCategories = getIssueCategories(req.body.issueCategoryIds, persistedObj.id);
+				await models.issueCategory.bulkCreate(issueCategories, {transaction: t});
+
 				const issue = await models.issue.findByPk(persistedObj.id, 
 					{ 
 						include: { all: true }, 
@@ -87,6 +90,19 @@ async function create(req, res) {
         };
 	}
 };
+
+function getIssueCategories(ids, issueId) {
+	const issueCategories = [];
+	if (ids && ids.length) {
+		ids.forEach(categoryId => {
+			issueCategories.push({
+				issueId: issueId,
+				categoryId: categoryId
+			})
+		});
+	}
+	return issueCategories;
+}
 
 function getIssueRegulatoryBodies(ids, issueId) {
 	const issueRegulatoryBodies = [];
@@ -115,6 +131,12 @@ async function update(req, res) {
 	} else if (req.body.issueRegulatoryBodyIds) {
 		req.body.issueRegulatoryBodies = getIssueRegulatoryBodies(req.body.issueRegulatoryBodyIds, id)
 	}
+	if (req.body.issueCategoryIds && req.body.issueCategories) {
+		res.status(400).send(`Bad request: cannot send 'issueCategoryIds' and 'issueCategories' in the same request.`);
+		return;
+	} else if (req.body.issueCategoryIds) {
+		req.body.issueCategories = getIssueCategories(req.body.issueCategoryIds, id)
+	}
 	clearEmptyStringsForIds(req);
 	try {
 		
@@ -129,6 +151,7 @@ async function update(req, res) {
 				});
 				if (updatedRows[0] > 0) {
 					await updateIssueRegulatoryBodies(req, t);
+					await updateIssueCategories(req, t);
 					const updatedObj = await models.issue.findOne({ 
 						where: { 
 							id: id
@@ -183,6 +206,7 @@ async function updateByApplicationId(req, res) {
 				});
 				if (updatedRows[0] > 0) {
 					await updateIssueRegulatoryBodies(req, t);
+					await updateIssueCategories(req, t);
 					const updatedObj = await models.issue.findOne(
 						{ 
 							where: { applicationId: req.query.applicationId },
@@ -245,6 +269,45 @@ async function updateIssueRegulatoryBodies(req, t) {
 		if (addedIssueRegulatoryBodies.includes(n.regulatoryBodyId)) {
 			n.issueId = issueId;
 			await models.issueRegulatoryBody.create(n, {transaction: t});
+		}
+	});
+}
+
+async function updateIssueCategories(req, t) {
+	let newIssueCategories = []
+	if (req.body.issueCategoryIds) {
+		newIssueCategories = getIssueCategories(req.body.issueCategoryIds, req.body.id) || [];
+	} else {
+		newIssueCategories = req.body.issueCategories || [];
+	}
+
+	const issueId = req.body.id;
+	const newIssueCategoriesIds = newIssueCategories.map(issueCategory => issueCategory.categoryId);
+	const oldIssueCategories = await models.issueCategory.findAll({
+		where: {
+			issueId: issueId 
+		},
+		transaction: t,
+	});
+	const oldIssueCategoriesIds = oldIssueCategories.map(issueCategory => issueCategory.categoryId)
+	const deletedIssueCategories = oldIssueCategoriesIds.filter(x => !newIssueCategoriesIds.includes(x));
+	const addedIssueCategories = newIssueCategoriesIds.filter(x => !oldIssueCategoriesIds.includes(x));
+	
+	oldIssueCategories.forEach(async n => {
+		if (deletedIssueCategories.includes(n.categoryId)) {
+			await models.issueCategory.destroy({
+				where: {
+					categoryId: n.categoryId,
+					issueId: issueId 
+				},
+				transaction: t,
+			});
+		}
+	});
+	newIssueCategories.forEach(async n => {
+		if (addedIssueCategories.includes(n.categoryId)) {
+			n.issueId = issueId;
+			await models.issueCategory.create(n, {transaction: t});
 		}
 	});
 }

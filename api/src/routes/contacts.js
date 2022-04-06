@@ -9,7 +9,7 @@ async function getAll(req, res) {
 			const contacts = await models.contact.findAll({
 				where: 
 				{ 
-					isActive: req.query.active === 'true' ? 1 : 0
+					isActive: req.query.active === 'true' ? true : false
 				}
 			});
 			res.status(200).json(contacts);
@@ -39,7 +39,7 @@ async function getByQuery(req, res) {
 		res.status(400).send(`Bad request: request query active param should be true or false.`)
 		return
 	} else if (req.query.active) {
-		where.isActive = req.query.active === 'true' ? 1 : 0
+		where.isActive = req.query.active === 'true' ? true : false
 	}
 
 	if (req.query.name) {
