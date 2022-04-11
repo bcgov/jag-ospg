@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../model');
 const { models } = require('../model');
 const { getIdParam } = require('../helpers');
+const { Op } = require('sequelize');
 
 async function getAll(req, res) {
 	const intakes = await models.intake.findAll();
@@ -27,20 +28,43 @@ async function getByQuery(req, res) {
 			res.status(404).send('404 - Not found');
 		}
 	} else if (req.query.issueId) {
-		const intakes = await models.intake.findAll({ where: { issueId: req.query.issueId } , include: { all: true }});
+		let excludeStatus = req.query.excludeStatus;
+		if (excludeStatus && !Array.isArray(excludeStatus)) {
+			excludeStatus = [excludeStatus];
+		}
+		const where = { 
+			issueId: req.query.issueId 
+		}
+		if (excludeStatus && excludeStatus.length) {
+			where['$intakeStatus.intake_status$'] = { [Op.notIn]: excludeStatus };
+		}
+		const intakes = await models.intake.findAll({ 
+			where, 
+			include: { 
+				all: true,
+				nested: true
+			}
+		});
 		if (intakes.length) {
 			res.status(200).json(intakes);
 		} else {
 			res.status(404).send('404 - Not found');
 		}
 	} else if (req.query.issueNumber) {
+		let excludeStatus = req.query.excludeStatus;
+		if (excludeStatus && !Array.isArray(excludeStatus)) {
+			excludeStatus = [excludeStatus];
+		}
+		const where = { 
+			'$issue.issue_number$': req.query.issueNumber 
+		}
+		if (excludeStatus && excludeStatus.length) {
+			where['$intakeStatus.intake_status$'] = { [Op.notIn]: excludeStatus };
+		}
 		const intakes = await models.intake.findAll({ 
-			where: 
-				{ 
-					'$issue.issue_number$': req.query.issueNumber 
-				}, 
-				include: { all: true, nested: true }
-			});
+			where, 
+			include: { all: true, nested: true }
+		});
 		if (intakes.length) {
 			res.status(200).json(intakes);
 		} else {
