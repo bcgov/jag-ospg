@@ -178,10 +178,12 @@
 			<!--version>9.4-1205-jdbc41</version-->
 			<version>42.2.5</version>
 		</dependency>
-
+		<!-- Updated h2 version to latest to address CVE-2021-2346 vulnerabilities -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+			<version>2.1.210</version>
+			 
 		</dependency>
 
 		<dependency>
