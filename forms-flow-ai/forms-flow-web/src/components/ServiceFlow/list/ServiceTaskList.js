@@ -75,7 +75,7 @@ const ServiceFlowTaskList = React.memo(() => {
                     "name"
                   )}
                 </div>
-                <div data-title="Task assignee" className="col-6 text-right" style={{fontSize: "0.7rem"}}>
+                <div data-title="Task assignee" className="col-6 text-left" style={{fontSize: "0.7rem"}}>
                   {task.assignee ? 'Being edited by ' : ''} {task.assignee}
                 </div>
               </Row>
