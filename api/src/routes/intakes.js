@@ -48,7 +48,7 @@ async function getByQuery(req, res) {
 		if (intakes.length) {
 			res.status(200).json(intakes);
 		} else {
-			res.status(404).send('404 - Not found');
+			res.status(204).json([]);
 		}
 	} else if (req.query.issueNumber) {
 		let excludeStatus = req.query.excludeStatus;
@@ -68,7 +68,7 @@ async function getByQuery(req, res) {
 		if (intakes.length) {
 			res.status(200).json(intakes);
 		} else {
-			res.status(404).send('404 - Not found');
+			res.status(204).json([]);
 		}
 	} else if (req.query.intakeNumber) {
 		const intake = await models.intake.findOne({ where: { intakeNumber: req.query.intakeNumber } , include: { all: true }});
