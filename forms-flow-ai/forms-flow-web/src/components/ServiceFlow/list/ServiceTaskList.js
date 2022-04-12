@@ -14,7 +14,7 @@ import Pagination from "react-js-pagination";
 import {push} from "connected-react-router";
 import {MAX_RESULTS} from "../constants/taskConstants";
 import {getFirstResultIndex} from "../../../apiManager/services/taskSearchParamsFormatterService";
-
+import TaskVariable from "./TaskVariable";
 const ServiceFlowTaskList = React.memo(() => {
   const taskList = useSelector((state) => state.bpmTasks.tasksList);
   const tasksCount = useSelector(state=> state.bpmTasks.tasksCount);
@@ -106,6 +106,10 @@ const ServiceFlowTaskList = React.memo(() => {
                   {/* {task.priority} */}
                 </Col>
               </Row>
+              {
+                task._embedded?.variable &&  <TaskVariable variables={task._embedded?.variable||[]}/>
+              }
+
             </div>
           ))}
           <div className="pagination-wrapper">
