@@ -289,12 +289,12 @@
 			<version>5.3.4</version>
 		</dependency>
 		
-		 <!-- Adding Redis Config for web sockets 
+		<!-- Adding Redis Config for web sockets -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis-reactive</artifactId>
-  		</dependency>  -->
-
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-messaging</artifactId>
