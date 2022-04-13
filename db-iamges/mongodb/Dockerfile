@@ -1,5 +1,5 @@
 #Getting base image from CentOS 7
-FROM registry.connect.redhat.com/mongodb/enterprise-database:latest
+FROM registry.access.redhat.com/rhscl/mongodb-36-rhel7
 
 MAINTAINER Victor Ameh <victor.ameh@aot-technologies.com>
 
