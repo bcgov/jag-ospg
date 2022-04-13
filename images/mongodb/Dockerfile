@@ -8,5 +8,3 @@ LABEL Remarks="Dockerfile to update packages to address vulnerability CVE-2021-4
 #Update Software Repository
 
 RUN yum -y update
-© 2022 GitHub, Inc.
-Terms
