@@ -1,4 +1,4 @@
-FROM image-registry.openshift-image-registry.svc:5000/openshift/postgresql:10
+FROM image-registry.openshift-image-registry.svc:5000/openshift/postgresql
 
 MAINTAINER Victor Ameh <victor.ameh@aot-technologies.com>
 
