@@ -9,4 +9,6 @@ USER root
 
 RUN apk update 
 
+RUN apk upgrade --available && sync
+
 USER default
