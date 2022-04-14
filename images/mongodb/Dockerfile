@@ -1,6 +1,4 @@
-#FROM registry.access.redhat.com/rhscl/mongodb-36-rhel7
-
-FROM centos:centos7
+FROM registry.access.redhat.com/rhscl/mongodb-36-rhel7
 
 MAINTAINER Victor Ameh <victor.ameh@aot-technologies.com>
 
