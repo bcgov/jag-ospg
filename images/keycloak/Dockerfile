@@ -7,7 +7,9 @@ LABEL Remarks="Adding Dockerfile to update packages to address vulnerability RHS
 #Update Software Repository
 USER root
 
-RUN yum -y update
+RUN apk update 
+
+RUN apk upgrade --available && sync
 
 USER default
 
