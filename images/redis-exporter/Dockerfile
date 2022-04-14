@@ -1,4 +1,4 @@
-FROM oliver006/redis_exporter:latest
+FROM oliver006/redis_exporter:alpine
 
 MAINTAINER Victor Ameh <victor.ameh@aot-technologies.com>
 
