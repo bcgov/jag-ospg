@@ -8,10 +8,10 @@ module.exports = (sequelize) => {
             primaryKey: true
         },
         subject: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING(100)
         },
         body: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING(4000)
         },
         from: {
             type: DataTypes.STRING,
