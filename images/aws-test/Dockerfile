@@ -1,5 +1,5 @@
 # base image
-FROM centos:latest
+FROM alpine
 
 # set working directory
 WORKDIR /aws
