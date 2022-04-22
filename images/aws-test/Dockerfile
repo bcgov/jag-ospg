@@ -4,11 +4,6 @@ FROM alpine
 # set working directory
 WORKDIR /aws
 
-# add `/api/node_modules/.bin` to $PATH
-#ENV PATH /api/node_modules/.bin:$PATH
-
-#COPY . /api/
-
 RUN apk update 
 
 #Install curl
@@ -28,8 +23,5 @@ RUN apk add --update --no-cache curl ca-certificates \
 
 
 
+ENTRYPOINT ["/bin/echo", "Hi, Alphine Pod with AWS CLI Installed!"]
 
-
-
-#EXPOSE 3003:3003
-#CMD ["npm", "run", "start"]
