@@ -21,8 +21,5 @@ RUN apk add --update --no-cache curl ca-certificates \
     && rm -Rf aws/ awscliv2.zip glibc-2.28-r0.apk glibc-bin-2.28-r0.apk \
     && aws --version
 
-
-
-#ENTRYPOINT ["while true; do sleep 1; done", "Hi, Alphine Pod with AWS CLI Installed!"]
 CMD tail -f /dev/null
 
