@@ -23,5 +23,6 @@ RUN apk add --update --no-cache curl ca-certificates \
 
 
 
-ENTRYPOINT ["/bin/echo", "Hi, Alphine Pod with AWS CLI Installed!"]
+#ENTRYPOINT ["while true; do sleep 1; done", "Hi, Alphine Pod with AWS CLI Installed!"]
+CMD tail -f /dev/null
 
