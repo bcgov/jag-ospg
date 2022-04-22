@@ -2,10 +2,10 @@
 FROM node:14.17.0-alpine as build-stage
 
 # set working directory
-WORKDIR /api
+WORKDIR /aws
 
 # add `/api/node_modules/.bin` to $PATH
-ENV PATH /api/node_modules/.bin:$PATH
+#ENV PATH /api/node_modules/.bin:$PATH
 
 #COPY . /api/
 
