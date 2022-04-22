@@ -1,5 +1,5 @@
 # base image
-FROM node:14.17.0-alpine as build-stage
+FROM centos:latest
 
 # set working directory
 WORKDIR /aws
@@ -9,7 +9,7 @@ WORKDIR /aws
 
 #COPY . /api/
 
-RUN apk update && apk add busybox-extras
+RUN apk update 
 
 #Install curl
 RUN apk add curl
@@ -26,10 +26,10 @@ RUN apk add --update --no-cache curl ca-certificates \
     && rm -Rf aws/ awscliv2.zip glibc-2.28-r0.apk glibc-bin-2.28-r0.apk \
     && aws --version
 
-RUN apk add unixodbc-dev
-
-RUN npm install
 
 
-EXPOSE 3003:3003
-CMD ["npm", "run", "start"]
+
+
+
+#EXPOSE 3003:3003
+#CMD ["npm", "run", "start"]
