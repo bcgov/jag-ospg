@@ -163,16 +163,7 @@ async function updateByApplicationId(req, res) {
 						await updateNotes(req, t);
 						await updateCommunicationLogs(req, t);
 						await updateAttachments(req, t);
-						const updatedObj = await models.intake.findOne({ 
-							where: { 
-								applicationId: req.query.applicationId 
-							}, 
-							include: { all: true },
-							transaction: t,
-						});
-						if (updatedObj) {
-							res.status(200).json(updatedObj);
-						} 
+						
 					} else {
 						res.status(404).send('404 - Not found');
 					}
@@ -189,6 +180,19 @@ async function updateByApplicationId(req, res) {
 				}
 			}
 		});
+
+		const updatedObj = await models.intake.findOne({ 
+			where: { 
+				applicationId: req.query.applicationId 
+			}, 
+			include: { all: true }
+		});
+		if (updatedObj) {
+			res.status(200).json(updatedObj);
+		} else {
+			res.status(404).send('404 - Not found');
+		}
+		
 	} else {
 		res.status(400).send(`Bad request: applicationId query required.`);
 	}
@@ -211,23 +215,26 @@ async function update(req, res) {
 					await updateNotes(req, t);
 					await updateCommunicationLogs(req, t);
 					await updateAttachments(req, t);
-					const updatedObj = await models.intake.findOne({ 
-						where: { 
-							id: id
-						}, 
-						include: { all: true },
-						transaction: t,
-					});
-					if (updatedObj) {
-						res.status(200).json(updatedObj);
-					} 
+					
 				} else {
 					res.status(404).send('404 - Not found');
 				}
 			} else {
 				res.status(400).send(`Bad request: param ID (${id}) does not match body ID (${req.body.id}).`);
 			}
+		})
+		const updatedObj = await models.intake.findOne({ 
+			where: { 
+				id: id
+			}, 
+			include: { all: true }
 		});
+		if (updatedObj) {
+			res.status(200).json(updatedObj);
+		} else {
+			res.status(404).send('404 - Not found');
+		}
+		
 	} catch (e) {
 		if (e instanceof Sequelize.ValidationError) {
 			return res.status(422).send(e.errors);
@@ -266,7 +273,7 @@ async function updateNotes(req, t) {
 	const addedNotes = newNotesIds.filter(x => !oldNotesIds.includes(x));
 	const updatedNotes = newNotesIds.filter(x => oldNotesIds.includes(x));
 	
-	oldNotes.forEach(async n => {
+	for(const n of oldNotes) {
 		if (deletedNotes.includes(n.id)) {
 			await models.note.destroy({
 				where: {
@@ -275,14 +282,12 @@ async function updateNotes(req, t) {
 				transaction: t,
 			});
 		}
-	});
-	newNotes.forEach(async n => {
+	}
+	for(const n of newNotes) {
 		if (addedNotes.includes(n.id)) {
 			n.intakeId = id;
 			await models.note.create(n, {transaction: t});
 		}
-	});
-	newNotes.forEach(async n => {
 		if (updatedNotes.includes(n.id)) {
 			n.intakeId = id;
 			await models.note.update(n, {
@@ -292,7 +297,7 @@ async function updateNotes(req, t) {
 				transaction: t,
 			});
 		}
-	});
+	}
 }
 
 async function updateAttachments(req, t) {
@@ -312,7 +317,7 @@ async function updateAttachments(req, t) {
 	const addedAttachments = newAttachmentsIds.filter(x => !oldAttachmentsIds.includes(x));
 	const updatedAttachments = newAttachmentsIds.filter(x => oldAttachmentsIds.includes(x));
 	
-	oldAttachments.forEach(async n => {
+	for(const n of oldAttachments) {
 		if (deletedAttachments.includes(n.id)) {
 			await models.attachment.destroy({
 				where: {
@@ -321,14 +326,13 @@ async function updateAttachments(req, t) {
 				transaction: t,
 			});
 		}
-	});
-	newAttachments.forEach(async n => {
+	}
+	for(const n of newAttachments) {
 		if (addedAttachments.includes(n.id)) {
 			n.intakeId = id;
 			await models.attachment.create(n, {transaction: t});
 		}
-	});
-	newAttachments.forEach(async n => {
+		
 		if (updatedAttachments.includes(n.id)) {
 			n.intakeId = id;
 			await models.attachment.update(n, {
@@ -338,7 +342,7 @@ async function updateAttachments(req, t) {
 				transaction: t,
 			});
 		}
-	});
+	}
 }
 
 async function updateCommunicationLogs(req, t) {
@@ -358,7 +362,7 @@ async function updateCommunicationLogs(req, t) {
 	const addedCommunicationLogs = newCommunicationLogsIds.filter(x => !oldCommunicationLogsIds.includes(x));
 	const updatedCommunicationLogs = newCommunicationLogsIds.filter(x => oldCommunicationLogsIds.includes(x));
 	
-	oldCommunicationLogs.forEach(async n => {
+	for(const n of oldCommunicationLogs) {
 		if (deletedCommunicationLogs.includes(n.id)) {
 			await models.communicationLog.destroy({
 				where: {
@@ -367,14 +371,14 @@ async function updateCommunicationLogs(req, t) {
 				transaction: t,
 			});
 		}
-	});
-	newCommunicationLogs.forEach(async n => {
+	}
+
+	for(const n of newCommunicationLogs) {
 		if (addedCommunicationLogs.includes(n.id)) {
 			n.intakeId = id;
 			await models.communicationLog.create(n, {transaction: t});
 		}
-	});
-	newCommunicationLogs.forEach(async n => {
+	
 		if (updatedCommunicationLogs.includes(n.id)) {
 			n.intakeId = id;
 			await models.communicationLog.update(n, {
@@ -384,7 +388,7 @@ async function updateCommunicationLogs(req, t) {
 				transaction: t,
 			});
 		}
-	});
+	}
 }
 
 module.exports = {
@@ -395,4 +399,4 @@ module.exports = {
 	update,
 	updateByApplicationId,
 	remove,
-};
+}

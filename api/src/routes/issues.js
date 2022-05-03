@@ -122,7 +122,7 @@ function getUpdatableFields(fullObj) {
 	return Object.keys(fullObj).filter( s => !fieldsToExclude.includes(s))
 }
 
-async function update(req, res) {
+async function update (req, res) {
 	const id = getIdParam(req);
 	
 	if (req.body.issueRegulatoryBodyIds && req.body.issueRegulatoryBodies) {
@@ -138,8 +138,8 @@ async function update(req, res) {
 		req.body.issueCategories = getIssueCategories(req.body.issueCategoryIds, id)
 	}
 	clearEmptyStringsForIds(req);
+	
 	try {
-		
 		await sequelize.transaction(async (t) => {
 			// We only accept an UPDATE request if the `:id` param matches the body `id`
 			if (req.body.id === id) {
@@ -152,16 +152,7 @@ async function update(req, res) {
 				if (updatedRows[0] > 0) {
 					await updateIssueRegulatoryBodies(req, t);
 					await updateIssueCategories(req, t);
-					const updatedObj = await models.issue.findOne({ 
-						where: { 
-							id: id
-						}, 
-						include: { all: true },
-						transaction: t,
-					});
-					if (updatedObj) {
-						res.status(200).json(updatedObj);
-					} 
+					
 				} else {
 					res.status(404).send('404 - Not found');
 				}
@@ -169,6 +160,15 @@ async function update(req, res) {
 				res.status(400).send(`Bad request: param ID (${id}) does not match body ID (${req.body.id}).`);
 			}
 		});
+		const updatedObj = await models.issue.findOne({ 
+			where: { 
+				id: id
+			}, 
+			include: { all: true }
+		});
+		if (updatedObj) {
+			res.status(200).json(updatedObj);
+		} 
 	} catch (e) {
 		if (e instanceof Sequelize.ValidationError) {
 			return res.status(422).send(e.errors);
@@ -207,15 +207,7 @@ async function updateByApplicationId(req, res) {
 				if (updatedRows[0] > 0) {
 					await updateIssueRegulatoryBodies(req, t);
 					await updateIssueCategories(req, t);
-					const updatedObj = await models.issue.findOne(
-						{ 
-							where: { applicationId: req.query.applicationId },
-							include: { all: true },
-							transaction: t,
-						});
-					if (updatedObj) {
-						res.status(200).json(updatedObj);
-					} 
+					
 				} else {
 					res.status(404).send('404 - Not found');
 				}
@@ -229,6 +221,15 @@ async function updateByApplicationId(req, res) {
 				}
 			}
 		});
+		const updatedObj = await models.issue.findOne(
+			{ 
+				where: { applicationId: req.query.applicationId },
+				include: { all: true },
+				transaction: t,
+			});
+		if (updatedObj) {
+			res.status(200).json(updatedObj);
+		} 
 	} else {
 		res.status(400).send(`Bad request: applicationId query required.`);
 	}
@@ -254,7 +255,7 @@ async function updateIssueRegulatoryBodies(req, t) {
 	const deletedIssueRegulatoryBodies = oldIssueRegulatoryBodiesIds.filter(x => !newIssueRegulatoryBodiesIds.includes(x));
 	const addedIssueRegulatoryBodies = newIssueRegulatoryBodiesIds.filter(x => !oldIssueRegulatoryBodiesIds.includes(x));
 	
-	oldIssueRegulatoryBodies.forEach(async n => {
+	for(const n of oldIssueRegulatoryBodies) {
 		if (deletedIssueRegulatoryBodies.includes(n.regulatoryBodyId)) {
 			await models.issueRegulatoryBody.destroy({
 				where: {
@@ -264,13 +265,13 @@ async function updateIssueRegulatoryBodies(req, t) {
 				transaction: t,
 			});
 		}
-	});
-	newIssueRegulatoryBodies.forEach(async n => {
+	}
+	for(const n of newIssueRegulatoryBodies) {
 		if (addedIssueRegulatoryBodies.includes(n.regulatoryBodyId)) {
 			n.issueId = issueId;
 			await models.issueRegulatoryBody.create(n, {transaction: t});
 		}
-	});
+	}
 }
 
 async function updateIssueCategories(req, t) {
@@ -293,7 +294,7 @@ async function updateIssueCategories(req, t) {
 	const deletedIssueCategories = oldIssueCategoriesIds.filter(x => !newIssueCategoriesIds.includes(x));
 	const addedIssueCategories = newIssueCategoriesIds.filter(x => !oldIssueCategoriesIds.includes(x));
 	
-	oldIssueCategories.forEach(async n => {
+	for(const n of oldIssueCategories) {	
 		if (deletedIssueCategories.includes(n.categoryId)) {
 			await models.issueCategory.destroy({
 				where: {
@@ -303,13 +304,14 @@ async function updateIssueCategories(req, t) {
 				transaction: t,
 			});
 		}
-	});
-	newIssueCategories.forEach(async n => {
+	}
+	for(const n of newIssueCategories) {
 		if (addedIssueCategories.includes(n.categoryId)) {
 			n.issueId = issueId;
 			await models.issueCategory.create(n, {transaction: t});
 		}
-	});
+	}
+		
 }
 
 async function remove(req, res) {
