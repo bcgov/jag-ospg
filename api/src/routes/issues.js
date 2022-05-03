@@ -224,8 +224,7 @@ async function updateByApplicationId(req, res) {
 		const updatedObj = await models.issue.findOne(
 			{ 
 				where: { applicationId: req.query.applicationId },
-				include: { all: true },
-				transaction: t,
+				include: { all: true }
 			});
 		if (updatedObj) {
 			res.status(200).json(updatedObj);
