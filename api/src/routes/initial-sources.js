@@ -8,14 +8,15 @@ async function getAll(req, res) {
 				where: 
 				{ 
 					isActive: req.query.active === 'true' ? true : false
-				}
+				},
+				order: ['initialSource']
 			});
 			res.status(200).json(initialSources);
 		} else {
 			res.status(400).send(`Bad request: request query active param should be true or false.`)
 		}
 	} else {
-		const initialSources = await models.initialSource.findAll();
+		const initialSources = await models.initialSource.findAll({order: ['initialSource']});
 		res.status(200).json(initialSources);
 	}
 };

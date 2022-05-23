@@ -8,14 +8,15 @@ async function getAll(req, res) {
 				where: 
 				{ 
 					isActive: req.query.active === 'true' ? true : false
-				}
+				},
+				order: ['intakeType']
 			});
 			res.status(200).json(intakeTypes);
 		} else {
 			res.status(400).send(`Bad request: request query active param should be true or false.`)
 		}
 	} else {
-		const intakeTypes = await models.intakeType.findAll();
+		const intakeTypes = await models.intakeType.findAll({order: ['intakeType']});
 		res.status(200).json(intakeTypes);
 	}
 };

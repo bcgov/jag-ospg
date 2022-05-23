@@ -8,14 +8,15 @@ async function getAll(req, res) {
 				where: 
 				{ 
 					isActive: req.query.active === 'true' ? true : false
-				}
+				},
+				order: ['responseType']
 			});
 			res.status(200).json(responseTypes);
 		} else {
 			res.status(400).send(`Bad request: request query active param should be true or false.`)
 		}
 	} else {
-		const responseTypes = await models.responseType.findAll();
+		const responseTypes = await models.responseType.findAll({order: ['responseType']});
 		res.status(200).json(responseTypes);
 	}
 };

@@ -331,35 +331,37 @@ async function reset() {
 			}
 		]);
 		
-		await sequelize.models.role.bulkCreate([
-			{ 
-				roleName: 'Manager'
-			}
-		]);
+		// await sequelize.models.role.bulkCreate([
+		// 	{ 
+		// 		roleName: 'Manager'
+		// 	}
+		// ]);
 
-		await sequelize.models.user.bulkCreate([
-			{ 
-				idir: 'jack-sparrow',
-				dateAdded: new Date(),
-				roleId: 1
-			},
-			{ 
-				idir: 'white-beard',
-				dateAdded: new Date(),
-				roleId: 1
-			},
-			{ 
-				idir: 'black-beard',
-				dateAdded: new Date(),
-				roleId: 1
-			},
-			{ 
-				idir: 'brown-beard',
-				dateAdded: new Date(),
-				roleId: 1
-			},
-		]);
+		// await sequelize.models.user.bulkCreate([
+		// 	{ 
+		// 		idir: 'jack-sparrow',
+		// 		dateAdded: new Date(),
+		// 		roleId: 1
+		// 	},
+		// 	{ 
+		// 		idir: 'white-beard',
+		// 		dateAdded: new Date(),
+		// 		roleId: 1
+		// 	},
+		// 	{ 
+		// 		idir: 'black-beard',
+		// 		dateAdded: new Date(),
+		// 		roleId: 1
+		// 	},
+		// 	{ 
+		// 		idir: 'brown-beard',
+		// 		dateAdded: new Date(),
+		// 		roleId: 1
+		// 	},
+		// ]);
 
+
+		// ------------------
 		// await sequelize.models.issue.bulkCreate([
 		// 	{ 
 		// 		issueNumber: "ISSUE-1",
@@ -451,7 +453,7 @@ async function reset() {
 		// 		mgmtAssignedTo: "Mary Manager"
 		// 	},
 		// 	{ 
-		// 		issueId: 2,
+		// 		issueId: 1,
 		// 		intakeNumber: "INTAKE-3",
 		// 		applicationId: 200,
 		// 		applicationStatus: "Received",
@@ -462,7 +464,7 @@ async function reset() {
 		// 		responseTypeId: 1,
 		// 		dueDate: 1,
 		// 		resolution: 'Test resolution',
-		// 		intakeStatusId: 1,
+		// 		intakeStatusId: 3,
 		// 		responseCompleteDate: new Date(),
 		// 		staffAssignedTo: "John Doe",
 		// 		mgmtAssignedTo: "Mary Manager"

@@ -8,14 +8,15 @@ async function getAll(req, res) {
 				where: 
 				{ 
 					isActive: req.query.active === 'true' ? true : false
-				}
+				},
+				order: ['categoryName']
 			});
 			res.status(200).json(categories);
 		} else {
 			res.status(400).send(`Bad request: request query active param should be true or false.`)
 		}
 	} else {
-		const categories = await models.category.findAll();
+		const categories = await models.category.findAll({order: ['categoryName']});
 		res.status(200).json(categories);
 	}
 };
