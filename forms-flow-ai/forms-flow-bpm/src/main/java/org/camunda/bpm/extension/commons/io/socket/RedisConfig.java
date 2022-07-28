@@ -24,14 +24,19 @@ import java.util.Properties;
 @Configuration
 public class RedisConfig implements ITaskEvent {
 
-    @Autowired
-    private Properties messageBrokerProperties;
+    @Value("${websocket.messageBroker.host}")
+    private String messageBrokerHost;
+
+    @Value("${websocket.messageBroker.port}")
+    private String messageBrokerPort;
+
+    @Value("${websocket.messageBroker.passcode}")
+    private String messageBrokerPasscode;
 
     @Bean
     RedisConnectionFactory redisConnectionFactory() {
-        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(messageBrokerProperties.getProperty("messageBroker.host"),
-                Integer.valueOf(messageBrokerProperties.getProperty("messageBroker.port")));
-        redisStandaloneConfiguration.setPassword(messageBrokerProperties.getProperty("messageBroker.passcode"));
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(messageBrokerHost,Integer.valueOf(messageBrokerPort));
+        redisStandaloneConfiguration.setPassword(messageBrokerPasscode);
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
     }
 
