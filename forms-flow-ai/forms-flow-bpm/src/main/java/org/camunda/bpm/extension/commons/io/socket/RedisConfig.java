@@ -4,6 +4,7 @@ import org.camunda.bpm.extension.commons.io.ITaskEvent;
 import org.camunda.bpm.extension.commons.io.event.TaskEventTopicListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -24,16 +25,21 @@ import java.util.Properties;
 @Configuration
 public class RedisConfig implements ITaskEvent {
 
-    @Autowired
-    private Properties messageBrokerProperties;
+        @Value("${websocket.messageBroker.host}")
+        private String messageBrokerHost;
 
-    @Bean
-    RedisConnectionFactory redisConnectionFactory() {
-        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(messageBrokerProperties.getProperty("messageBroker.host"),
-                Integer.valueOf(messageBrokerProperties.getProperty("messageBroker.port")));
-        redisStandaloneConfiguration.setPassword(messageBrokerProperties.getProperty("messageBroker.passcode"));
-        return new LettuceConnectionFactory(redisStandaloneConfiguration);
-    }
+        @Value("${websocket.messageBroker.port}")
+        private String messageBrokerPort;
+
+        @Value("${websocket.messageBroker.passcode}")
+        private String messageBrokerPasscode;
+
+        @Bean
+        RedisConnectionFactory redisConnectionFactory() {
+            RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(messageBrokerHost,Integer.valueOf(messageBrokerPort));
+            redisStandaloneConfiguration.setPassword(messageBrokerPasscode);
+            return new LettuceConnectionFactory(redisStandaloneConfiguration);
+        }
 
     @Bean
     RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory,
