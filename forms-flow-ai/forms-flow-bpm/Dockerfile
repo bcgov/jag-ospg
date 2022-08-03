@@ -22,7 +22,7 @@ RUN cp -r /bpm/forms-flow-bpm/src/ /tmp/src/
 ARG CUSTOM_SRC_DIR=src/
 
 # Override these files they have custom changes in the jag-ospg repository
-COPY ./${CUSTOM_SRC_DIR}/  /tmp/${CUSTOM_SRC_DIR}/
+#COPY ./${CUSTOM_SRC_DIR}/  /tmp/${CUSTOM_SRC_DIR}/
 RUN mvn -s /usr/share/maven/ref/settings-docker.xml package
 
 
