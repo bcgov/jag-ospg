@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0g2siwq" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.8.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="ospgSaveDropdown" name="OSPG Save Dropdown" isExecutable="true" camunda:versionTag="0.1">
+    <bpmn:startEvent id="StartSaveStartEvent" name="start save">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="javascript">//execution.setVariable('environment','LOCAL');
+
+
+
+</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1pso5om</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="InvokeCreateApiTask" name="Invoke api">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="payload">${payload}</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="accept">application/json</camunda:entry>
+                <camunda:entry key="Access-Control-Allow-Origin">*</camunda:entry>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+                <camunda:entry key="Authorization">Bearer ${token}</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="method">${method}</camunda:inputParameter>
+            <camunda:inputParameter name="url">
+              <camunda:script scriptFormat="javascript">var myUrl = java.lang.System.getenv("OSPG_API_URL");
+myUrl=myUrl.concat(uri);
+myUrl; </camunda:script>
+            </camunda:inputParameter>
+            <camunda:outputParameter name="result">${response}</camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1f77gjz</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rm95ue</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndSaveEndEvent" name="end save">
+      <bpmn:incoming>Flow_0rm95ue</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:scriptTask id="setApiMethod" name="Set Payload issueCategory" scriptFormat="javascript">
+      <bpmn:incoming>issueCategory</bpmn:incoming>
+      <bpmn:outgoing>Flow_1scv9st</bpmn:outgoing>
+      <bpmn:script>var payload = execution.getVariable('container');
+var payloadObj = JSON.parse(payload);
+var uri = "/api/v1/categories";
+var issueCategoryContainer = payloadObj.issueCategoryContainer;
+if (Object.keys(issueCategoryContainer).length &gt; 0){
+  if (issueCategoryContainer.id){
+    execution.setVariable("method", "PUT");
+    uri = uri.concat('/',issueCategoryContainer.id)
+  } else {
+    execution.setVariable("method", "POST");
+    delete issueCategoryContainer.id;
+  }
+  var payloadStr = JSON.stringify(issueCategoryContainer)
+  execution.setVariable("payload", payloadStr);
+  execution.setVariable("uri", uri);
+}
+
+var system = java.lang.System;
+system.out.println(" payload-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; issueCategoryContainer: - " + payloadStr);
+
+var system = java.lang.System;
+system.out.println(" method------------------------------------------------------------ - " + execution.getVariable('method'));
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:exclusiveGateway id="Gateway_1mwpzru" name="Check Dropdpwn value">
+      <bpmn:incoming>Flow_1sfv3ec</bpmn:incoming>
+      <bpmn:outgoing>issueCategory</bpmn:outgoing>
+      <bpmn:outgoing>issueTopic</bpmn:outgoing>
+      <bpmn:outgoing>issueStatus</bpmn:outgoing>
+      <bpmn:outgoing>disposition</bpmn:outgoing>
+      <bpmn:outgoing>issueInitialSource</bpmn:outgoing>
+      <bpmn:outgoing>regulatoryBody</bpmn:outgoing>
+      <bpmn:outgoing>intakeResponseType</bpmn:outgoing>
+      <bpmn:outgoing>intakeType</bpmn:outgoing>
+      <bpmn:outgoing>intakeStatus</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_08ut4a0">
+      <bpmn:incoming>Flow_1scv9st</bpmn:incoming>
+      <bpmn:incoming>Flow_0fp59or</bpmn:incoming>
+      <bpmn:incoming>Flow_1ybp8lw</bpmn:incoming>
+      <bpmn:incoming>Flow_056da3e</bpmn:incoming>
+      <bpmn:incoming>Flow_1on1sta</bpmn:incoming>
+      <bpmn:incoming>Flow_0t1ph7w</bpmn:incoming>
+      <bpmn:incoming>Flow_19720vn</bpmn:incoming>
+      <bpmn:incoming>Flow_0kmlp4b</bpmn:incoming>
+      <bpmn:incoming>Flow_1jbzsn5</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lnje6t</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1scv9st" sourceRef="setApiMethod" targetRef="Gateway_08ut4a0" />
+    <bpmn:sequenceFlow id="issueCategory" name="Issue Category" sourceRef="Gateway_1mwpzru" targetRef="setApiMethod">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${dropdownType == "issueCategory"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1pso5om" sourceRef="StartSaveStartEvent" targetRef="Activity_1lkco5k" />
+    <bpmn:sequenceFlow id="Flow_1sfv3ec" sourceRef="Activity_1lkco5k" targetRef="Gateway_1mwpzru" />
+    <bpmn:scriptTask id="Activity_1lkco5k" name="get the dropdown type to be created or update" scriptFormat="javascript">
+      <bpmn:incoming>Flow_1pso5om</bpmn:incoming>
+      <bpmn:outgoing>Flow_1sfv3ec</bpmn:outgoing>
+      <bpmn:script>var container = execution.getVariable("container");
+var containerObj = JSON.parse(container);
+var dropdownType = containerObj.searchedValue
+execution.setVariable("dropdownType", dropdownType);
+
+var system = java.lang.System;
+system.out.println("dropdownType =========================&gt;&gt;&gt;" + dropdownType);
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="issueTopic" name="Issue Topic" sourceRef="Gateway_1mwpzru" targetRef="Activity_1xkwhff">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${dropdownType == "issueTopic"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="issueStatus" name="Issue Status" sourceRef="Gateway_1mwpzru" targetRef="Activity_0ztg5lc">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${dropdownType == "issueStatus"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="disposition" name="Disposition" sourceRef="Gateway_1mwpzru" targetRef="Activity_07cv84g">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${dropdownType == "disposition"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="issueInitialSource" name="Issue Initial Source" sourceRef="Gateway_1mwpzru" targetRef="Activity_1mx485h">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${dropdownType == "issueInitialSource"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="regulatoryBody" name="RegulatoryBody" sourceRef="Gateway_1mwpzru" targetRef="Activity_16s7kga">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${dropdownType == "regulatoryBody"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="intakeResponseType" name="Intake Response Type" sourceRef="Gateway_1mwpzru" targetRef="Activity_1auaotj">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${dropdownType == "intakeResponseType"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="intakeType" name="Intake Type" sourceRef="Gateway_1mwpzru" targetRef="Activity_1mbzf45">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${dropdownType == "intakeType"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="intakeStatus" name="Intake Status" sourceRef="Gateway_1mwpzru" targetRef="Activity_09g8nty">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${dropdownType == "intakeStatus"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0rm95ue" sourceRef="InvokeCreateApiTask" targetRef="EndSaveEndEvent" />
+    <bpmn:sequenceFlow id="Flow_0fp59or" sourceRef="Activity_1xkwhff" targetRef="Gateway_08ut4a0" />
+    <bpmn:sequenceFlow id="Flow_1ybp8lw" sourceRef="Activity_0ztg5lc" targetRef="Gateway_08ut4a0" />
+    <bpmn:sequenceFlow id="Flow_056da3e" sourceRef="Activity_1mx485h" targetRef="Gateway_08ut4a0" />
+    <bpmn:sequenceFlow id="Flow_1on1sta" sourceRef="Activity_07cv84g" targetRef="Gateway_08ut4a0" />
+    <bpmn:sequenceFlow id="Flow_0t1ph7w" sourceRef="Activity_16s7kga" targetRef="Gateway_08ut4a0" />
+    <bpmn:sequenceFlow id="Flow_19720vn" sourceRef="Activity_1auaotj" targetRef="Gateway_08ut4a0" />
+    <bpmn:sequenceFlow id="Flow_0kmlp4b" sourceRef="Activity_1mbzf45" targetRef="Gateway_08ut4a0" />
+    <bpmn:sequenceFlow id="Flow_1jbzsn5" sourceRef="Activity_09g8nty" targetRef="Gateway_08ut4a0" />
+    <bpmn:scriptTask id="Activity_1xkwhff" name="Set Payload issueTopic" scriptFormat="javascript">
+      <bpmn:incoming>issueTopic</bpmn:incoming>
+      <bpmn:outgoing>Flow_0fp59or</bpmn:outgoing>
+      <bpmn:script>var payload = execution.getVariable('container');
+var payloadObj = JSON.parse(payload);
+var uri = "/api/v1/topics";
+var topicNameContainer = payloadObj.topicNameContainer;
+if (Object.keys(topicNameContainer).length &gt; 0){
+  if (topicNameContainer.id){
+    execution.setVariable("method", "PUT");
+    uri = uri.concat('/',topicNameContainer.id)
+  } else {
+    execution.setVariable("method", "POST");
+    delete topicNameContainer.id;
+  }
+  var payloadStr = JSON.stringify(topicNameContainer)
+  execution.setVariable("payload", payloadStr);
+  execution.setVariable("uri", uri);
+}
+
+var system = java.lang.System;
+system.out.println(" payload-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; topicNameContainer: - " + payloadStr);
+
+var system = java.lang.System;
+system.out.println(" method------------------------------------------------------------ - " + execution.getVariable('method'));</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_0ztg5lc" name="Set Payload issueStatus" scriptFormat="javascript">
+      <bpmn:incoming>issueStatus</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ybp8lw</bpmn:outgoing>
+      <bpmn:script>var payload = execution.getVariable('container');
+var payloadObj = JSON.parse(payload);
+var uri = "/api/v1/issueStatuses";
+var issueStatusContainer = payloadObj.issueStatusContainer;
+if (Object.keys(issueStatusContainer).length &gt; 0){
+  if (issueStatusContainer.id){
+    execution.setVariable("method", "PUT");
+    uri = uri.concat('/',issueStatusContainer.id);
+  } else {
+    execution.setVariable("method", "POST");
+    delete issueStatusContainer.id;
+  }
+  var payloadStr = JSON.stringify(issueStatusContainer)
+  execution.setVariable("payload", payloadStr);
+  execution.setVariable("uri", uri);
+}
+
+var system = java.lang.System;
+system.out.println(" payload-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; issueStatusContainer: - " + payloadStr);
+
+var system = java.lang.System;
+system.out.println(" method------------------------------------------------------------ - " + execution.getVariable('method'));
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_1mx485h" name="Set Payload issueInitialSource" scriptFormat="javascript">
+      <bpmn:incoming>issueInitialSource</bpmn:incoming>
+      <bpmn:outgoing>Flow_056da3e</bpmn:outgoing>
+      <bpmn:script>var payload = execution.getVariable('container');
+var payloadObj = JSON.parse(payload);
+var uri = "/api/v1/initialSources";
+var initialSourceContainer = payloadObj.initialSourceContainer;
+if (Object.keys(initialSourceContainer).length &gt; 0){
+  if (initialSourceContainer.id){
+    execution.setVariable("method", "PUT");
+    uri = uri.concat('/',initialSourceContainer.id);
+  } else {
+    execution.setVariable("method", "POST");
+    delete initialSourceContainer.id;
+  }
+  var payloadStr = JSON.stringify(initialSourceContainer)
+  execution.setVariable("payload", payloadStr);
+  execution.setVariable("uri", uri);
+}
+
+var system = java.lang.System;
+system.out.println(" payload-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; initialSourceContainer: - " + payloadStr);
+
+var system = java.lang.System;
+system.out.println(" method------------------------------------------------------------ - " + execution.getVariable('method'));
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_07cv84g" name="Set Payload disposition" scriptFormat="javascript">
+      <bpmn:incoming>disposition</bpmn:incoming>
+      <bpmn:outgoing>Flow_1on1sta</bpmn:outgoing>
+      <bpmn:script>var payload = execution.getVariable('container');
+var payloadObj = JSON.parse(payload);
+var uri = "/api/v1/dispositionStatuses";
+var dispositionStatusContainer = payloadObj.dispositionStatusContainer;
+if (Object.keys(dispositionStatusContainer).length &gt; 0){
+  if (dispositionStatusContainer.id){
+    execution.setVariable("method", "PUT");
+    uri = uri.concat('/',dispositionStatusContainer.id);
+  } else {
+    execution.setVariable("method", "POST");
+    delete dispositionStatusContainer.id;
+  }
+  var payloadStr = JSON.stringify(dispositionStatusContainer)
+  execution.setVariable("payload", payloadStr);
+  execution.setVariable("uri", uri);
+}
+
+var system = java.lang.System;
+system.out.println(" payload-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; dispositionStatusContainer: - " + payloadStr);
+
+var system = java.lang.System;
+system.out.println(" method------------------------------------------------------------ - " + execution.getVariable('method'));
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_16s7kga" name="Set Payload regulatoryBody" scriptFormat="javascript">
+      <bpmn:incoming>regulatoryBody</bpmn:incoming>
+      <bpmn:outgoing>Flow_0t1ph7w</bpmn:outgoing>
+      <bpmn:script>var payload = execution.getVariable('container');
+var payloadObj = JSON.parse(payload);
+var uri = "/api/v1/regulatoryBodies";
+var regulatoryBodyNameContainer = payloadObj.regulatoryBodyNameContainer;
+if (Object.keys(regulatoryBodyNameContainer).length &gt; 0){
+  if (regulatoryBodyNameContainer.id){
+    execution.setVariable("method", "PUT");
+    uri = uri.concat('/',regulatoryBodyNameContainer.id);
+  } else {
+    execution.setVariable("method", "POST");
+    delete regulatoryBodyNameContainer.id;
+  }
+  var payloadStr = JSON.stringify(regulatoryBodyNameContainer)
+  execution.setVariable("payload", payloadStr);
+  execution.setVariable("uri", uri);
+}
+
+var system = java.lang.System;
+system.out.println(" payload-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; regulatoryBodyNameContainer: - " + payloadStr);
+
+var system = java.lang.System;
+system.out.println(" method------------------------------------------------------------ - " + execution.getVariable('method'));
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_1auaotj" name="Set Payload intakeResponseType" scriptFormat="javascript">
+      <bpmn:incoming>intakeResponseType</bpmn:incoming>
+      <bpmn:outgoing>Flow_19720vn</bpmn:outgoing>
+      <bpmn:script>var payload = execution.getVariable('container');
+var payloadObj = JSON.parse(payload);
+var uri = "/api/v1/responseTypes";
+var responseTypeContainer = payloadObj.responseTypeContainer;
+if (Object.keys(responseTypeContainer).length &gt; 0){
+  if (responseTypeContainer.id){
+    execution.setVariable("method", "PUT");
+    uri = uri.concat('/',responseTypeContainer.id);
+  } else {
+    execution.setVariable("method", "POST");
+    delete responseTypeContainer.id;
+  }
+  var payloadStr = JSON.stringify(responseTypeContainer)
+  execution.setVariable("payload", payloadStr);
+  execution.setVariable("uri", uri);
+}
+
+var system = java.lang.System;
+system.out.println(" payload-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; responseTypeContainer: - " + payloadStr);
+
+var system = java.lang.System;
+system.out.println(" method------------------------------------------------------------ - " + execution.getVariable('method'));
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_1mbzf45" name="Set Payload intakeType" scriptFormat="javascript">
+      <bpmn:incoming>intakeType</bpmn:incoming>
+      <bpmn:outgoing>Flow_0kmlp4b</bpmn:outgoing>
+      <bpmn:script>var payload = execution.getVariable('container');
+var payloadObj = JSON.parse(payload);
+var uri = "/api/v1/intakeTypes";
+var intakeTypeContainer = payloadObj.intakeTypeContainer;
+if (Object.keys(intakeTypeContainer).length &gt; 0){
+  if (intakeTypeContainer.id){
+    execution.setVariable("method", "PUT");
+    uri = uri.concat('/',intakeTypeContainer.id);
+  } else {
+    execution.setVariable("method", "POST");
+    delete intakeTypeContainer.id;
+  }
+  var payloadStr = JSON.stringify(intakeTypeContainer)
+  execution.setVariable("payload", payloadStr);
+  execution.setVariable("uri", uri);
+}
+
+var system = java.lang.System;
+system.out.println(" payload-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; intakeTypeContainer: - " + payloadStr);
+
+var system = java.lang.System;
+system.out.println(" method------------------------------------------------------------ - " + execution.getVariable('method'));
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_09g8nty" name="Set Payload intakeStatus" scriptFormat="javascript">
+      <bpmn:incoming>intakeStatus</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jbzsn5</bpmn:outgoing>
+      <bpmn:script>var payload = execution.getVariable('container');
+var payloadObj = JSON.parse(payload);
+var uri = "/api/v1/intakeStatuses";
+var intakeStatusContainer = payloadObj.intakeStatusContainer;
+if (Object.keys(intakeStatusContainer).length &gt; 0){
+  if (intakeStatusContainer.id){
+    execution.setVariable("method", "PUT");
+    uri = uri.concat('/',intakeStatusContainer.id);
+  } else {
+    execution.setVariable("method", "POST");
+    delete intakeStatusContainer.id;
+  }
+  var payloadStr = JSON.stringify(intakeStatusContainer)
+  execution.setVariable("payload", payloadStr);
+  execution.setVariable("uri", uri);
+}
+
+var system = java.lang.System;
+system.out.println(" payload-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; intakeStatusContainer: - " + payloadStr);
+
+var system = java.lang.System;
+system.out.println(" method------------------------------------------------------------ - " + execution.getVariable('method'));
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_0lnje6t" sourceRef="Gateway_08ut4a0" targetRef="GetOAuthTokenTask" />
+    <bpmn:sequenceFlow id="Flow_1f77gjz" sourceRef="GetOAuthTokenTask" targetRef="InvokeCreateApiTask" />
+    <bpmn:serviceTask id="GetOAuthTokenTask" name="Get OAuth Token">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">
+              <camunda:script scriptFormat="javascript">var system = java.lang.System;
+var urlKC = system.getenv("KEYCLOAK_URL");
+urlKC = urlKC.concat(
+  "/auth/realms/forms-flow-ai/protocol/openid-connect/token"
+);
+urlKC;
+</camunda:script>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/x-www-form-urlencoded</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="javascript">var system = java.lang.System;
+var clientSecret = system.getenv("KEYCLOAK_CLIENTSECRET");
+var clientId = system.getenv("KEYCLOAK_CLIENTID");
+var mypayload = "";
+mypayload = mypayload.concat(
+  "grant_type=client_credentials&amp;client_id=",
+  clientId,
+  "&amp;client_secret=",
+  clientSecret
+);
+mypayload;
+</camunda:script>
+            </camunda:inputParameter>
+            <camunda:outputParameter name="token">${S(response).prop("access_token").value()}</camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0lnje6t</bpmn:incoming>
+      <bpmn:outgoing>Flow_1f77gjz</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ospgSaveDropdown">
+      <bpmndi:BPMNEdge id="Flow_1f77gjz_di" bpmnElement="Flow_1f77gjz">
+        <di:waypoint x="1660" y="640" />
+        <di:waypoint x="1790" y="640" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lnje6t_di" bpmnElement="Flow_0lnje6t">
+        <di:waypoint x="1455" y="640" />
+        <di:waypoint x="1560" y="640" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jbzsn5_di" bpmnElement="Flow_1jbzsn5">
+        <di:waypoint x="1140" y="1190" />
+        <di:waypoint x="1430" y="1190" />
+        <di:waypoint x="1430" y="665" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0kmlp4b_di" bpmnElement="Flow_0kmlp4b">
+        <di:waypoint x="1140" y="1060" />
+        <di:waypoint x="1430" y="1060" />
+        <di:waypoint x="1430" y="665" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19720vn_di" bpmnElement="Flow_19720vn">
+        <di:waypoint x="1140" y="920" />
+        <di:waypoint x="1430" y="920" />
+        <di:waypoint x="1430" y="665" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0t1ph7w_di" bpmnElement="Flow_0t1ph7w">
+        <di:waypoint x="1140" y="800" />
+        <di:waypoint x="1430" y="800" />
+        <di:waypoint x="1430" y="665" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1on1sta_di" bpmnElement="Flow_1on1sta">
+        <di:waypoint x="1140" y="640" />
+        <di:waypoint x="1405" y="640" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_056da3e_di" bpmnElement="Flow_056da3e">
+        <di:waypoint x="1140" y="510" />
+        <di:waypoint x="1430" y="510" />
+        <di:waypoint x="1430" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ybp8lw_di" bpmnElement="Flow_1ybp8lw">
+        <di:waypoint x="1140" y="390" />
+        <di:waypoint x="1430" y="390" />
+        <di:waypoint x="1430" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fp59or_di" bpmnElement="Flow_0fp59or">
+        <di:waypoint x="1140" y="240" />
+        <di:waypoint x="1430" y="240" />
+        <di:waypoint x="1430" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rm95ue_di" bpmnElement="Flow_0rm95ue">
+        <di:waypoint x="1890" y="640" />
+        <di:waypoint x="2182" y="640" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19eb6ht_di" bpmnElement="intakeStatus">
+        <di:waypoint x="700" y="665" />
+        <di:waypoint x="700" y="1190" />
+        <di:waypoint x="1040" y="1190" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="787" y="1163" width="65" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1c5meev_di" bpmnElement="intakeType">
+        <di:waypoint x="700" y="665" />
+        <di:waypoint x="700" y="1060" />
+        <di:waypoint x="1040" y="1060" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="791" y="1033" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cgq8ao_di" bpmnElement="intakeResponseType">
+        <di:waypoint x="700" y="665" />
+        <di:waypoint x="700" y="920" />
+        <di:waypoint x="1040" y="920" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="778" y="886" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00uf5og_di" bpmnElement="regulatoryBody">
+        <di:waypoint x="700" y="665" />
+        <di:waypoint x="700" y="800" />
+        <di:waypoint x="1040" y="800" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="780" y="773" width="79" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qme33o_di" bpmnElement="issueInitialSource">
+        <di:waypoint x="700" y="615" />
+        <di:waypoint x="700" y="510" />
+        <di:waypoint x="1040" y="510" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="792" y="516" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0kffmv3_di" bpmnElement="disposition">
+        <di:waypoint x="725" y="640" />
+        <di:waypoint x="1040" y="640" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="793" y="618" width="54" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gv5ny2_di" bpmnElement="issueStatus">
+        <di:waypoint x="700" y="615" />
+        <di:waypoint x="700" y="390" />
+        <di:waypoint x="1040" y="390" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="789" y="393" width="62" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1es7enx_di" bpmnElement="issueTopic">
+        <di:waypoint x="700" y="615" />
+        <di:waypoint x="700" y="240" />
+        <di:waypoint x="1040" y="240" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="792" y="253" width="56" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1sfv3ec_di" bpmnElement="Flow_1sfv3ec">
+        <di:waypoint x="410" y="640" />
+        <di:waypoint x="675" y="640" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1pso5om_di" bpmnElement="Flow_1pso5om">
+        <di:waypoint x="198" y="640" />
+        <di:waypoint x="310" y="640" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kbv3u0_di" bpmnElement="issueCategory">
+        <di:waypoint x="700" y="615" />
+        <di:waypoint x="700" y="90" />
+        <di:waypoint x="1040" y="90" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="782" y="113" width="75" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1scv9st_di" bpmnElement="Flow_1scv9st">
+        <di:waypoint x="1140" y="90" />
+        <di:waypoint x="1430" y="90" />
+        <di:waypoint x="1430" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartSaveStartEvent">
+        <dc:Bounds x="162" y="622" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="157" y="665" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0kbq5j8_di" bpmnElement="InvokeCreateApiTask">
+        <dc:Bounds x="1790" y="600" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0dcosv7_di" bpmnElement="EndSaveEndEvent">
+        <dc:Bounds x="2182" y="622" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2177" y="668" width="45" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1gfedd3_di" bpmnElement="setApiMethod">
+        <dc:Bounds x="1040" y="50" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1mwpzru_di" bpmnElement="Gateway_1mwpzru" isMarkerVisible="true">
+        <dc:Bounds x="675" y="615" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="658" y="672" width="85" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_08ut4a0_di" bpmnElement="Gateway_08ut4a0" isMarkerVisible="true">
+        <dc:Bounds x="1405" y="615" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0g843oy_di" bpmnElement="Activity_1lkco5k">
+        <dc:Bounds x="310" y="600" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0tnez5u_di" bpmnElement="Activity_1xkwhff">
+        <dc:Bounds x="1040" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0cuftbf_di" bpmnElement="Activity_0ztg5lc">
+        <dc:Bounds x="1040" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1a8cg97_di" bpmnElement="Activity_1mx485h">
+        <dc:Bounds x="1040" y="470" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_173iilz_di" bpmnElement="Activity_07cv84g">
+        <dc:Bounds x="1040" y="600" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qx6uda_di" bpmnElement="Activity_16s7kga">
+        <dc:Bounds x="1040" y="760" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0u03f44_di" bpmnElement="Activity_1auaotj">
+        <dc:Bounds x="1040" y="880" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1svs6kt_di" bpmnElement="Activity_1mbzf45">
+        <dc:Bounds x="1040" y="1020" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0fvbz17_di" bpmnElement="Activity_09g8nty">
+        <dc:Bounds x="1040" y="1150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0x3a3im_di" bpmnElement="GetOAuthTokenTask">
+        <dc:Bounds x="1560" y="600" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
