@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_19mue86" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.8.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="ospgIntake" name="OSPG Intake" isExecutable="true">
+    <bpmn:startEvent id="ReceiveDocumentsStartEvent" name="Receive documents">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="javascript">var system=java.lang.System;
+system.out.println(new Date() + " *********************************************************************************************************************");
+
+system.out.println(new Date() + "**** formUrl:: " +execution.getVariable('formUrl'));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1teuejl</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1teuejl" sourceRef="ReceiveDocumentsStartEvent" targetRef="SyncDataBetweenFormAndBpmTask1" />
+    <bpmn:userTask id="DocumentDocumentStatusTask" name="(${intakeStatus}) ${intakeTitle}" camunda:candidateGroups="/formsflow/formsflow-reviewer/staff">
+      <bpmn:documentation>User task
+(1) Create a new form instance to store updates (Listener)
+(2) When submitted it set the applicationStatus to the action and deleteReason to completd (Listener)</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="action" label="Action" type="string" />
+        </camunda:formData>
+        <camunda:taskListener event="complete">
+          <camunda:script scriptFormat="javascript">task.execution.setVariable('applicationStatus', task.execution.getVariable('action'));
+task.execution.setVariable('deleteReason', "completed");
+
+
+var system=java.lang.System;
+system.out.println(new Date() + " taskid::::::::::::::::::::" + task.getId());
+task.execution.setVariable('a', task.getId());
+</camunda:script>
+        </camunda:taskListener>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="javascript">var payload = execution.getVariable('container');
+var payloadObj = JSON.parse(payload);
+var payloadStr = JSON.stringify(payloadObj);
+var system = java.lang.System;
+system.out.println(" New Request before Document Review Task: - " + payloadStr);
+
+</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0cu1ux4</bpmn:incoming>
+      <bpmn:incoming>Flow_0me5fs4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0yclemw</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="IsCompleteGateway" name="Is complete?">
+      <bpmn:documentation>Check whether form submission (task update) is the complete the form or to update the form.</bpmn:documentation>
+      <bpmn:incoming>Flow_06t4qph</bpmn:incoming>
+      <bpmn:outgoing>YesSequenceFlow</bpmn:outgoing>
+      <bpmn:outgoing>NoSequenceFlow</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="DocumentCompletedEndEvent" name="Document completed">
+      <bpmn:incoming>Flow_01og2hy</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="YesSequenceFlow" name="Yes" sourceRef="IsCompleteGateway" targetRef="SaveRequestDataCompletedCallActivity">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${action == "Completed"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="NoSequenceFlow" name="No" sourceRef="IsCompleteGateway" targetRef="SaveRequestDataSaveCallActivity">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${action == "Saved"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:callActivity id="SaveRequestDataInitialCreateCallActivity" name="Save request data (Initial create)" calledElement="ospgSaveIntake">
+      <bpmn:documentation>(1) Call Subprocess to create document submission in central db
+(2) set the http method to be used for API call (Listener)</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="javascript">execution.setVariable('method','POST');
+
+
+var system=java.lang.System;
+system.out.println(new Date() + " Container :" + container);
+</camunda:script>
+        </camunda:executionListener>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_2ekja8n" />
+          <camunda:inputParameter name="container">
+            <camunda:script scriptFormat="javascript">var payload = execution.getVariable('container');
+var payloadObj = JSON.parse(payload);
+
+var payloadStr = JSON.stringify(payloadObj);
+var system = java.lang.System;
+system.out.println("******** Updated Request with dateSubmitted: - " + payloadStr);
+payloadStr; </camunda:script>
+          </camunda:inputParameter>
+        </camunda:inputOutput>
+        <camunda:executionListener class="org.camunda.bpm.extension.hooks.listeners.BPMFormDataPipelineListener" event="end">
+          <camunda:field name="fields">
+            <camunda:string>["intake_number"]</camunda:string>
+          </camunda:field>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0rx3bkv</bpmn:incoming>
+      <bpmn:outgoing>Flow_0me5fs4</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:callActivity id="SaveRequestDataSaveCallActivity" name="Save request data (save)" calledElement="ospgSaveIntake">
+      <bpmn:documentation>(1) Call Subprocess to update document submission in central db
+(2) set the http method to be used for API call (Listener)</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="javascript">execution.setVariable('method','PUT');</camunda:script>
+        </camunda:executionListener>
+        <camunda:executionListener class="org.camunda.bpm.extension.hooks.listeners.FormSubmissionListener" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>NoSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_0cu1ux4</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:scriptTask id="SyncDataBetweenFormAndBpmTask" name="Sync data between form and bpm" scriptFormat="javascript">
+      <bpmn:documentation>This script is used to 
+
+(1) Sync applicaionId and applicationStatus to form (Listener Tab)
+(3) Create an audit history entry (Listener Tab)
+(4) Sync form data to bpm (Listener Tab)
+
+
+</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:executionListener class="org.camunda.bpm.extension.hooks.listeners.BPMFormDataPipelineListener" event="start">
+          <camunda:field name="fields">
+            <camunda:expression>["applicationId","applicationStatus"]</camunda:expression>
+          </camunda:field>
+        </camunda:executionListener>
+        <camunda:executionListener class="org.camunda.bpm.extension.hooks.listeners.ApplicationStateListener" event="start" />
+        <camunda:executionListener class="org.camunda.bpm.extension.hooks.listeners.FormBPMDataPipelineListener" event="start" />
+        <camunda:executionListener event="end">
+          <camunda:script scriptFormat="javascript">//Required for setting Task variable to show in LHS.
+var payload = execution.getVariable("container");
+var payloadObj = JSON.parse(payload);
+java.lang.System.out.println(payload);
+
+var intakeTitle = "";
+var intakeStatus = "";
+var staffToAssign= "";
+var mgmtToAssign= "";
+
+if (payloadObj.intakeTitle) {
+  intakeTitle = payloadObj.intakeTitle;
+}
+if (JSON.stringify(payloadObj.assignToStaff) !== '{}') {
+  staffToAssign= payloadObj.assignToStaff.firstName.concat(" ",payloadObj.assignToStaff.lastName);
+}
+if (JSON.stringify(payloadObj.assignToManagement) !== '{}')  {
+  mgmtToAssign= payloadObj.assignToManagement.firstName.concat(" ",payloadObj.assignToManagement.lastName) ;
+}
+
+if (payloadObj.intakeStatus) {
+  intakeStatus = payloadObj.intakeStatus.intakeStatus;
+}
+
+execution.setVariable("intakeTitle", intakeTitle);
+execution.setVariable("staffToAssign", staffToAssign);
+execution.setVariable("mgmtToAssign", mgmtToAssign);
+execution.setVariable("intakeStatus", intakeStatus);
+execution.setVariable("submittedDate", submittedDate);
+</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0yclemw</bpmn:incoming>
+      <bpmn:outgoing>Flow_06t4qph</bpmn:outgoing>
+      <bpmn:script>//scripting is done using Listeners</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="SyncDataBetweenFormAndBpmTask1" name="Sync data between form and bpm" scriptFormat="javascript">
+      <bpmn:documentation>This script is used to 
+(1) Set application status to Received and set environment(General Tab)
+(2) Sync applicaionId and applicationStatus to form (Listener Tab)
+(3) Create an audit history entry (Listener Tab)
+(4) Sync form data to bpm (Listener Tab)
+
+
+</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:executionListener class="org.camunda.bpm.extension.hooks.listeners.BPMFormDataPipelineListener" event="end">
+          <camunda:field name="fields">
+            <camunda:expression>["applicationId","applicationStatus"]</camunda:expression>
+          </camunda:field>
+        </camunda:executionListener>
+        <camunda:executionListener class="org.camunda.bpm.extension.hooks.listeners.ApplicationStateListener" event="end" />
+        <camunda:executionListener class="org.camunda.bpm.extension.hooks.listeners.FormBPMDataPipelineListener" event="end" />
+        <camunda:executionListener event="end">
+          <camunda:script scriptFormat="javascript">//Required for setting Task variable to show in LHS.
+var payload = execution.getVariable("container");
+
+var payloadObj = JSON.parse(payload);
+var intakeTitle = "";
+var intakeStatus = "";
+var staffToAssign= "";
+var mgmtToAssign= "";
+
+var submittedDate = new Date().toLocaleString();
+
+if (payloadObj.intakeTitle) {
+  intakeTitle = payloadObj.intakeTitle;
+}
+
+if (payloadObj.intakeStatus) {
+  intakeStatus = payloadObj.intakeStatus.intakeStatus;
+}
+
+execution.setVariable("intakeTitle", intakeTitle);
+execution.setVariable("staffToAssign", staffToAssign);
+execution.setVariable("mgmtToAssign", mgmtToAssign);
+execution.setVariable("intakeStatus", intakeStatus);
+execution.setVariable("submittedDate", submittedDate);
+</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1teuejl</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rx3bkv</bpmn:outgoing>
+      <bpmn:script>execution.setVariable('applicationStatus','New');
+
+var system=java.lang.System;
+java.lang.System.out.println( " "+ new Date() + " : NEW SUBMISSION **************************************************************************************************");
+
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_0yclemw" sourceRef="DocumentDocumentStatusTask" targetRef="SyncDataBetweenFormAndBpmTask">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="take">
+          <camunda:script scriptFormat="javascript">var system=java.lang.System;
+system.out.println(new Date() + "**** After Task Completion formUrl:: " +execution.getVariable('formUrl'));
+
+system.out.println(new Date() + "**** After Task Completion container:: " +execution.getVariable('container'));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:callActivity id="SaveRequestDataCompletedCallActivity" name="Save request data (completed)" calledElement="ospgSaveIntake">
+      <bpmn:documentation>(1) Call Subprocess to update document submission in central db
+(2) set the http method to be used for API call (Listener)</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="javascript">execution.setVariable('method','PUT');
+
+</camunda:script>
+        </camunda:executionListener>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="container">
+            <camunda:script scriptFormat="javascript">var payload = execution.getVariable('container');
+var payloadObj = JSON.parse(payload);
+payloadObj.closedDate= new Date().toISOString();
+
+execution.setVariable('closedDate',payloadObj.closedDate)
+
+var payloadStr = JSON.stringify(payloadObj);
+var system = java.lang.System;
+system.out.println("******** Updated Request with Closed Date: - " + payloadStr);
+payloadStr; </camunda:script>
+          </camunda:inputParameter>
+        </camunda:inputOutput>
+        <camunda:executionListener class="org.camunda.bpm.extension.hooks.listeners.BPMFormDataPipelineListener" event="end" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>YesSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_01og2hy</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:sequenceFlow id="Flow_01og2hy" sourceRef="SaveRequestDataCompletedCallActivity" targetRef="DocumentCompletedEndEvent" />
+    <bpmn:sequenceFlow id="Flow_0cu1ux4" sourceRef="SaveRequestDataSaveCallActivity" targetRef="DocumentDocumentStatusTask" />
+    <bpmn:sequenceFlow id="Flow_06t4qph" sourceRef="SyncDataBetweenFormAndBpmTask" targetRef="IsCompleteGateway" />
+    <bpmn:sequenceFlow id="Flow_0me5fs4" sourceRef="SaveRequestDataInitialCreateCallActivity" targetRef="DocumentDocumentStatusTask" />
+    <bpmn:sequenceFlow id="Flow_0rx3bkv" sourceRef="SyncDataBetweenFormAndBpmTask1" targetRef="SaveRequestDataInitialCreateCallActivity" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ospgIntake">
+      <bpmndi:BPMNEdge id="Flow_0rx3bkv_di" bpmnElement="Flow_0rx3bkv">
+        <di:waypoint x="350" y="188" />
+        <di:waypoint x="420" y="189" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0me5fs4_di" bpmnElement="Flow_0me5fs4">
+        <di:waypoint x="520" y="187" />
+        <di:waypoint x="570" y="187" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06t4qph_di" bpmnElement="Flow_06t4qph">
+        <di:waypoint x="810" y="340" />
+        <di:waypoint x="910" y="340" />
+        <di:waypoint x="910" y="212" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cu1ux4_di" bpmnElement="Flow_0cu1ux4">
+        <di:waypoint x="780" y="80" />
+        <di:waypoint x="610" y="80" />
+        <di:waypoint x="610" y="147" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_01og2hy_di" bpmnElement="Flow_01og2hy">
+        <di:waypoint x="1160" y="187" />
+        <di:waypoint x="1242" y="187" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0yclemw_di" bpmnElement="Flow_0yclemw">
+        <di:waypoint x="620" y="227" />
+        <di:waypoint x="620" y="340" />
+        <di:waypoint x="710" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0thd66u_di" bpmnElement="NoSequenceFlow">
+        <di:waypoint x="910" y="162" />
+        <di:waypoint x="910" y="80" />
+        <di:waypoint x="880" y="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="912" y="123" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wl01e6_di" bpmnElement="YesSequenceFlow">
+        <di:waypoint x="935" y="187" />
+        <di:waypoint x="1060" y="187" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="824" y="362" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1teuejl_di" bpmnElement="Flow_1teuejl">
+        <di:waypoint x="198" y="187" />
+        <di:waypoint x="250" y="187" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="149" y="109" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="ReceiveDocumentsStartEvent">
+        <dc:Bounds x="162" y="169" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="154" y="212" width="55" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vbalmj_di" bpmnElement="DocumentDocumentStatusTask">
+        <dc:Bounds x="570" y="147" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1kvc3fb_di" bpmnElement="IsCompleteGateway" isMarkerVisible="true">
+        <dc:Bounds x="885" y="162" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="812" y="180" width="63" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_12frhix_di" bpmnElement="DocumentCompletedEndEvent">
+        <dc:Bounds x="1242" y="169" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1273" y="413" width="52" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0axm38a_di" bpmnElement="SaveRequestDataInitialCreateCallActivity">
+        <dc:Bounds x="420" y="147" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1d9thxd_di" bpmnElement="SaveRequestDataSaveCallActivity">
+        <dc:Bounds x="780" y="40" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0l9ag1f_di" bpmnElement="SyncDataBetweenFormAndBpmTask">
+        <dc:Bounds x="710" y="300" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1j4ov5x_di" bpmnElement="SyncDataBetweenFormAndBpmTask1">
+        <dc:Bounds x="250" y="147" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15wcxhj_di" bpmnElement="SaveRequestDataCompletedCallActivity">
+        <dc:Bounds x="1060" y="147" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
