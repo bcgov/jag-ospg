@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0g2siwq" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.8.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="ospgSaveContact" name="OSPG Save Contact" isExecutable="true" camunda:versionTag="0.1">
+    <bpmn:startEvent id="StartSaveStartEvent" name="start save">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="javascript">var payload = execution.getVariable('container');
+var payloadObj = JSON.parse(payload);
+
+var payloadStr = JSON.stringify(payloadObj);
+var system = java.lang.System;
+system.out.println("********  Request b4 api call: - " + payloadStr);
+
+var action = payloadObj.contactManagementOptions;
+execution.setVariable('action',action);
+
+java.lang.System.out.println ("******** action" + action);</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_00z4wpn</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="InvokeCreateApiTask" name="Invoke api (create)">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="javascript">var payload = execution.getVariable("container");
+var payloadObj = JSON.parse(payload);
+
+payloadObj.applicationId = applicationId;
+payloadObj.applicationStatus = applicationStatus;
+
+var payloadStr = JSON.stringify(payloadObj);
+payloadStr= payloadStr.replace(/1\":/g,'\":');
+
+payloadStr;
+
+
+</camunda:script>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="accept">application/json</camunda:entry>
+                <camunda:entry key="Access-Control-Allow-Origin">*</camunda:entry>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+                <camunda:entry key="Authorization">Bearer ${token}</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="url">
+              <camunda:script scriptFormat="javascript">var system = java.lang.System;
+var servedocumentFullUrl = system.getenv("OSPG_API_URL");
+servedocumentFullUrl = servedocumentFullUrl.concat("/api/v1/contacts");
+
+var system = java.lang.System;
+system.out.println("servedocumentFullUrl : " + servedocumentFullUrl);
+servedocumentFullUrl;
+</camunda:script>
+            </camunda:inputParameter>
+            <camunda:outputParameter name="result">${response}</camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1mws15c</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ipl4zb</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndSaveEndEvent" name="end save">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="javascript">var system = java.lang.System;
+system.out.println("********  Contact API Response: - " + result);
+</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ipl4zb</bpmn:incoming>
+      <bpmn:incoming>Flow_0snpm60</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="InvokeUpdateApiTask" name="Invoke api(update and disable)">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="javascript">var payload = execution.getVariable("container");
+var payloadObj = JSON.parse(payload);
+payloadObj.id = payloadObj.searchName1.id;
+delete payloadObj.searchName1;
+delete payloadObj.contactManagementOptions;
+
+var payloadStr = JSON.stringify(payloadObj);
+
+payloadStr = "[".concat(payloadStr,"]");
+
+var system = java.lang.System;
+system.out.println("********  Request during Contact update api call: - " + payloadStr);
+
+
+payloadStr;
+</camunda:script>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="accept">application/json</camunda:entry>
+                <camunda:entry key="Access-Control-Allow-Origin">*</camunda:entry>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+                <camunda:entry key="Authorization">Bearer ${token}</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="method">PUT</camunda:inputParameter>
+            <camunda:inputParameter name="url">
+              <camunda:script scriptFormat="javascript">var system = java.lang.System;
+var servedocumentFullUrl = system.getenv("OSPG_API_URL");
+servedocumentFullUrl = servedocumentFullUrl.concat("/api/v1/contacts");
+
+var system = java.lang.System;
+system.out.println ("servedocumentFullUrl : "+servedocumentFullUrl);
+servedocumentFullUrl;</camunda:script>
+            </camunda:inputParameter>
+            <camunda:outputParameter name="result">${response}</camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0b23bsc</bpmn:incoming>
+      <bpmn:outgoing>Flow_0snpm60</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1mws15c" name="Create" sourceRef="Gateway_0jfow82" targetRef="InvokeCreateApiTask">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${execution.getVariable('action') == 'create' }</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0b23bsc" name="Update" sourceRef="Gateway_0jfow82" targetRef="InvokeUpdateApiTask">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${execution.getVariable('action') == 'edit' }</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0ipl4zb" sourceRef="InvokeCreateApiTask" targetRef="EndSaveEndEvent" />
+    <bpmn:sequenceFlow id="Flow_0snpm60" sourceRef="InvokeUpdateApiTask" targetRef="EndSaveEndEvent" />
+    <bpmn:sequenceFlow id="Flow_00z4wpn" sourceRef="StartSaveStartEvent" targetRef="GetOAuthTokenTask" />
+    <bpmn:sequenceFlow id="Flow_1rhsdvt" sourceRef="GetOAuthTokenTask" targetRef="Gateway_0jfow82" />
+    <bpmn:serviceTask id="GetOAuthTokenTask" name="Get OAuth Token">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="javascript">var system = java.lang.System;
+var clientSecret = system.getenv("KEYCLOAK_CLIENTSECRET");
+var clientId = system.getenv("KEYCLOAK_CLIENTID");
+var mypayload = "";
+mypayload = mypayload.concat(
+  "grant_type=client_credentials&amp;client_id=",
+  clientId,
+  "&amp;client_secret=",
+  clientSecret
+);
+mypayload;
+</camunda:script>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/x-www-form-urlencoded</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="url">
+              <camunda:script scriptFormat="javascript">var system = java.lang.System;
+var urlKC = system.getenv("KEYCLOAK_URL");
+urlKC = urlKC.concat(
+  "/auth/realms/forms-flow-ai/protocol/openid-connect/token"
+);
+urlKC;
+</camunda:script>
+            </camunda:inputParameter>
+            <camunda:outputParameter name="token">${S(response).prop("access_token").value()}</camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_00z4wpn</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rhsdvt</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_0jfow82" name="Create Or Update">
+      <bpmn:incoming>Flow_1rhsdvt</bpmn:incoming>
+      <bpmn:outgoing>Flow_1mws15c</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0b23bsc</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ospgSaveContact">
+      <bpmndi:BPMNEdge id="Flow_1rhsdvt_di" bpmnElement="Flow_1rhsdvt">
+        <di:waypoint x="380" y="220" />
+        <di:waypoint x="465" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00z4wpn_di" bpmnElement="Flow_00z4wpn">
+        <di:waypoint x="198" y="220" />
+        <di:waypoint x="280" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0snpm60_di" bpmnElement="Flow_0snpm60">
+        <di:waypoint x="730" y="310" />
+        <di:waypoint x="856" y="310" />
+        <di:waypoint x="856" y="220" />
+        <di:waypoint x="982" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ipl4zb_di" bpmnElement="Flow_0ipl4zb">
+        <di:waypoint x="730" y="120" />
+        <di:waypoint x="856" y="120" />
+        <di:waypoint x="856" y="220" />
+        <di:waypoint x="982" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0b23bsc_di" bpmnElement="Flow_0b23bsc">
+        <di:waypoint x="490" y="245" />
+        <di:waypoint x="490" y="310" />
+        <di:waypoint x="630" y="310" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="502" y="275" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mws15c_di" bpmnElement="Flow_1mws15c">
+        <di:waypoint x="490" y="195" />
+        <di:waypoint x="490" y="120" />
+        <di:waypoint x="630" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="503" y="155" width="34" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartSaveStartEvent">
+        <dc:Bounds x="162" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="157" y="245" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0kbq5j8_di" bpmnElement="InvokeCreateApiTask">
+        <dc:Bounds x="630" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0dcosv7_di" bpmnElement="EndSaveEndEvent">
+        <dc:Bounds x="982" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="978" y="245" width="45" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1t74fgo_di" bpmnElement="InvokeUpdateApiTask">
+        <dc:Bounds x="630" y="270" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0jl5j5m_di" bpmnElement="GetOAuthTokenTask">
+        <dc:Bounds x="280" y="180" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1yfeody_di" bpmnElement="Gateway_0jfow82" isMarkerVisible="true">
+        <dc:Bounds x="465" y="195" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="526" y="210" width="88" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
