@@ -23,7 +23,7 @@ const {
 
 
 async function reset() {
-	console.log('Will rewrite the example database, adding some dummy data.');
+	console.log('Will rewrite the example database, adding default data.');
 	
 	try{ 
 
@@ -214,50 +214,50 @@ async function reset() {
 			}
 		]);
 		
-		await sequelize.models.contact.bulkCreate([
-			{ 
-				firstName: 'Mickey',
-				middleName: '',
-				lastName: 'Mouse',
-				phone: '778 123 4567',
-				email: 'mmouse@disney.com',
-				address: '123 Disney St.',
-				city: 'Orlando',
-				province: 'Florida',
-				postalCode: '123456',
-				isBusiness: false,
-				notes: 'Notes...',
-				isActive: true
-			},
-			{ 
-				firstName: 'Minnie',
-				middleName: '',
-				lastName: 'Mouse',
-				phone: '778 123 4568',
-				email: 'minnie.mouse@disney.com',
-				address: '123 Disney St.',
-				city: 'Orlando',
-				province: 'Florida',
-				postalCode: '123456',
-				isBusiness: false,
-				notes: 'Notes...',
-				isActive: true
-			},
-			{ 
-				firstName: 'Inactive',
-				middleName: '',
-				lastName: 'Inactive',
-				phone: '778 123 4568',
-				email: 'Inactive@Inactive.com',
-				address: '123 Disney St.',
-				city: 'Inactive',
-				province: 'Inactive',
-				postalCode: '123456',
-				isBusiness: false,
-				notes: 'Notes...Inactive',
-				isActive: false
-			},
-		]);
+		// await sequelize.models.contact.bulkCreate([
+		// 	{ 
+		// 		firstName: 'Mickey',
+		// 		middleName: '',
+		// 		lastName: 'Mouse',
+		// 		phone: '778 123 4567',
+		// 		email: 'mmouse@disney.com',
+		// 		address: '123 Disney St.',
+		// 		city: 'Orlando',
+		// 		province: 'Florida',
+		// 		postalCode: '123456',
+		// 		isBusiness: false,
+		// 		notes: 'Notes...',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		firstName: 'Minnie',
+		// 		middleName: '',
+		// 		lastName: 'Mouse',
+		// 		phone: '778 123 4568',
+		// 		email: 'minnie.mouse@disney.com',
+		// 		address: '123 Disney St.',
+		// 		city: 'Orlando',
+		// 		province: 'Florida',
+		// 		postalCode: '123456',
+		// 		isBusiness: false,
+		// 		notes: 'Notes...',
+		// 		isActive: true
+		// 	},
+		// 	{ 
+		// 		firstName: 'Inactive',
+		// 		middleName: '',
+		// 		lastName: 'Inactive',
+		// 		phone: '778 123 4568',
+		// 		email: 'Inactive@Inactive.com',
+		// 		address: '123 Disney St.',
+		// 		city: 'Inactive',
+		// 		province: 'Inactive',
+		// 		postalCode: '123456',
+		// 		isBusiness: false,
+		// 		notes: 'Notes...Inactive',
+		// 		isActive: false
+		// 	},
+		// ]);
 		
 		await sequelize.models.dispositionStatus.bulkCreate([
 			{ 
