@@ -1,5 +1,5 @@
 # base image
-#FROM docker-remote.artifacts.developer.gov.bc.ca/node:12.4.0-alpine as build-stage
+#FROM artifacts.developer.gov.bc.ca/docker-remote/node:12.4.0-alpine as build-stage
 FROM node:14.17.0-alpine as build-stage
 
 
@@ -71,6 +71,7 @@ ENV REACT_APP_FORMIO_JWT_SECRET ${REACT_APP_FORMIO_JWT_SECRET}
 
 # Clone code
 RUN git clone -b ${FORMFLOW_SOURCE_REPO_BRANCH} ${FORMFLOW_SOURCE_REPO_URL} /tmp/forms-flow-ai/
+
 RUN cp -r /tmp/forms-flow-ai/forms-flow-web/. /web/
 
 # Customizations
@@ -86,8 +87,9 @@ RUN cp -R /tmp/${CUSTOM_PUBLIC_DIR}/* /web/ && rm -Rf /tmp/${CUSTOM_PUBLIC_DIR}/
 RUN npm install
 RUN npm run build
 
-#FROM docker-remote.artifacts.developer.gov.bc.ca/nginx:1.17 as production-stage
-FROM nginx:1.17 as production-stage
+#FROM artifacts.developer.gov.bc.ca/docker-remote/nginx:1.17 as production-stage
+FROM nginx:1.22.1 as production-stage
+
 RUN mkdir /nginx
 COPY --from=build-stage /web/build /usr/share/nginx/html
 COPY --from=build-stage /web/nginx.conf /etc/nginx/nginx.conf

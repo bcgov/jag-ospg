@@ -1,6 +1,6 @@
 # base image
 #FROM docker-remote.artifacts.developer.gov.bc.ca/node:12.4.0-alpine as build-stage
-FROM node:14.17.0-alpine as build-stage
+FROM node:18.10-alpine as build-stage
 
 # set working directory
 WORKDIR /api

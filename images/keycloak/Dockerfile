@@ -7,6 +7,9 @@ LABEL Remarks="Dockerfile to update packages to address vulnerability CVE-2021-4
 #Update Software Repository
 USER root
 
-RUN yum -y update
+# Update Vulnerable Packages
+RUN microdnf update -y && microdnf install -y systemd-libs libksba
+
+# RUN yum -y update
 
 USER default
