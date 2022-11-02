@@ -10,6 +10,8 @@ ENV PATH /api/node_modules/.bin:$PATH
 
 COPY . /api/
 
+RUN sudo chown -R 1011100000:0 "/.npm"
+
 RUN apk update && apk add busybox-extras
 
 RUN wget https://download.microsoft.com/download/e/4/e/e4e67866-dffd-428c-aac7-8d28ddafb39b/msodbcsql17_17.9.1.1-1_amd64.apk
