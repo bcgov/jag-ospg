@@ -22,9 +22,10 @@ RUN apk add curl
 
 RUN apk add unixodbc-dev
 
+RUN npm cache clean --force 
+
 RUN npm install
 
-RUN npm cache clean --force 
 
 # RUN node src/sqlite-example-database/setup.js
 
