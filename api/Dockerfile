@@ -24,10 +24,10 @@ RUN apk add unixodbc-dev
 
 RUN npm cache clean --force 
 
-RUN mkdir -p /tmp_cache
-RUN export npm_config_cache=/tmp_cache
+RUN mkdir /.npm
+RUN chown -R 1011100000:0 "/.npm"
 
-RUN npm install --force
+RUN npm install
 
 # RUN node src/sqlite-example-database/setup.js
 
