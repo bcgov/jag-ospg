@@ -22,8 +22,7 @@ RUN apk add curl
 
 RUN apk add unixodbc-dev
 
-RUN npm cache clean --force 
-
+# Fix required when upgrading from node:14.17.0-alpine to node:18.10-alpine
 RUN mkdir /.npm
 RUN chown -R 1011100000:0 "/.npm"
 
