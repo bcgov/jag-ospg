@@ -27,7 +27,7 @@ RUN npm cache clean --force
 RUN mkdir -p /tmp_cache
 RUN export npm_config_cache=/tmp_cache
 
-RUN npm install
+RUN npm install --force
 
 # RUN node src/sqlite-example-database/setup.js
 
