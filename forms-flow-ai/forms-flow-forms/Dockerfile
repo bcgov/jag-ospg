@@ -35,6 +35,19 @@ RUN git config --global url."https://github.com/".insteadOf "ssh://git@github.co
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /forms-flow-forms/app/node_modules/.bin:$PATH
 
+# expect a build-time variable
+ARG FORMFLOW_SOURCE_REPO_BRANCH
+# use the value to set the ENV var default
+ENV FORMFLOW_SOURCE_REPO_BRANCH ${FORMFLOW_SOURCE_REPO_BRANCH}
+# expect a build-time variable
+ARG FORMFLOW_SOURCE_REPO_URL
+# use the value to set the ENV var default
+ENV FORMFLOW_SOURCE_REPO_URL ${FORMFLOW_SOURCE_REPO_URL}
+
+# Clone code
+RUN git clone -b ${FORMFLOW_SOURCE_REPO_BRANCH} ${FORMFLOW_SOURCE_REPO_URL} /tmp/forms-flow-ai/
+RUN cp -r /tmp/forms-flow-ai/forms-flow-forms/. /forms-flow-forms/app/
+
 ## Include details of the required dependencies
 # COPY ./package.json $NPM_PACKAGES/
 # COPY ./package-lock.json $NPM_PACKAGES/
@@ -47,18 +60,12 @@ ENV PATH /forms-flow-forms/app/node_modules/.bin:$PATH
 ##          See docker-compose.yml for instructions
 #RUN ln -sf $NPM_PACKAGES/node_modules node_modules
 
-## Include details of the required dependencies
-COPY package-lock.json /forms-flow-forms/app/package-lock.json
-COPY package.json /forms-flow-forms/app/package.json
-
 RUN npm install
 
 # Set this to inspect more from the application. Examples:
 #   DEBUG=formio:db (see index.js for more)
 #   DEBUG=formio:*
 ENV DEBUG=""
-
-COPY . /forms-flow-forms/app/
 
 
 # This will initialize the application based on

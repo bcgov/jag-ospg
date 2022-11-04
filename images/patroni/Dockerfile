@@ -40,7 +40,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && rm -rf /var/lib/apt/lists/* /root/.cache
     
 
-COPY contrib/root /
+#COPY contrib/root /
 
 VOLUME /home/postgres/pgdata
 USER postgres
