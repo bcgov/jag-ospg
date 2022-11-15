@@ -10,6 +10,7 @@ import NavBar from "../containers/NavBar";
 import Footer from "../components/Footer";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import FooterPublic from "./Footer/FooterPublic";
 
 const BaseRouting = React.memo(({store}) => {
   const isAuth = useSelector((state) => state.user.isAuthenticated);
@@ -27,7 +28,7 @@ const BaseRouting = React.memo(({store}) => {
                 <PrivateRoute store={store} />
               </Route>
             </Switch>
-            {isAuth?<Footer />:null}
+            {isAuth?<Footer />:<FooterPublic/>}
           </div>
       </div>
     </>

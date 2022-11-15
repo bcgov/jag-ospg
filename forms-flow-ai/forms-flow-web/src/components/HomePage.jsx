@@ -3,6 +3,7 @@ import UserService from '../services/UserService'
 import NavBar from "../containers/NavBar";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
+import FooterPublic from './Footer/FooterPublic';
 
 const publicFormURL = `/public/form/${(window._env_ && window._env_.REACT_APP_PUBLIC_FORM_ID) || process.env.REACT_APP_PUBLIC_FORM_ID}`;
 const HomePage =({store})=>{
@@ -30,6 +31,7 @@ const HomePage =({store})=>{
                         </Card>
                     </div>
                 </section>
+                <FooterPublic/>
           </div>
        )
 }
