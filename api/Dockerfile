@@ -24,7 +24,9 @@ RUN apk add unixodbc-dev
 
 # Fix required when upgrading from node:14.17.0-alpine to node:18.10-alpine
 RUN mkdir /.npm
-RUN chown -R 1011100000:0 "/.npm"
+# Deploying to test use 1011110000:0
+# Deploying to dev use 1011100000:0
+RUN chown -R 1011110000:0 "/.npm"
 
 RUN npm install
 
