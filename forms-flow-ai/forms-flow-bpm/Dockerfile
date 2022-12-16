@@ -8,8 +8,6 @@ RUN apt-get update \
     
 RUN git clone --branch ${FORMFLOW_SOURCE_REPO_BRANCH} ${FORMFLOW_SOURCE_REPO_URL} /bpm/
 
-
-
 COPY pom-docker.xml /tmp/pom.xml
 COPY settings-docker.xml /usr/share/maven/ref/
 
@@ -25,10 +23,11 @@ ARG CUSTOM_SRC_DIR=src/
 COPY ./${CUSTOM_SRC_DIR}/  /tmp/${CUSTOM_SRC_DIR}/
 RUN mvn -s /usr/share/maven/ref/settings-docker.xml package
 
-
-
 # final custom slim java image (for apk command see jdk-11.0.3_7-alpine-slim)
 FROM artifacts.developer.gov.bc.ca/docker-remote/adoptopenjdk/openjdk11:jdk-11.0.3_7-alpine
+
+# Update all packages
+RUN apk update && apk upgrade
 
 ENV JAVA_VERSION jdk-11.0.3+7
 ENV JAVA_HOME=/opt/java/openjdk \
