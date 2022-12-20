@@ -33,7 +33,6 @@ RUN chown -R 1011100000:0 "/.npm"
 FROM build-stage as build-stage-test
 RUN chown -R 1011110000:0 "/.npm"
 
-ARG DEPLOYMENT-ENVIRONMENT
 FROM build-stage-${DEPLOYMENT-ENVIRONMENT} as build-stage-final
 RUN npm install
 
