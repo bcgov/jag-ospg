@@ -2,6 +2,8 @@
 #FROM docker-remote.artifacts.developer.gov.bc.ca/node:12.4.0-alpine as build-stage
 FROM artifacts.developer.gov.bc.ca/docker-remote/node:18.10-alpine as build-stage
 
+ARG DEPLOYMENT-ENVIRONMENT
+
 # set working directory
 WORKDIR /api
 
@@ -26,8 +28,14 @@ RUN apk add unixodbc-dev
 RUN mkdir /.npm
 # Deploying to test use 1011110000:0
 # Deploying to dev use 1011100000:0
+
+FROM build-stage as build-stage-dev
+RUN chown -R 1011100000:0 "/.npm"
+
+FROM build-stage as build-stage-test
 RUN chown -R 1011110000:0 "/.npm"
 
+FROM build-stage-${DEPLOYMENT-ENVIRONMENT} as build-stage-final
 RUN npm install
 
 # RUN node src/sqlite-example-database/setup.js
