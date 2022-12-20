@@ -22,20 +22,8 @@ RUN apk add curl
 
 RUN apk add unixodbc-dev
 
-# Fix required when upgrading from node:14.17.0-alpine to node:18.10-alpine
-RUN mkdir /.npm
-# Deploying to test use 1011110000:0
-# Deploying to dev use 1011100000:0
-
-FROM build-stage as build-stage-dev
-RUN chown -R 1011100000:0 "/.npm"
-
-FROM build-stage as build-stage-test
-RUN chown -R 1011110000:0 "/.npm"
-
-FROM build-stage-${DEPLOYMENT-ENVIRONMENT} as build-stage-final
 RUN npm install
-
+USER node
 # RUN node src/sqlite-example-database/setup.js
 
 EXPOSE 3003:3003
