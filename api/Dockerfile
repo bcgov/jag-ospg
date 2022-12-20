@@ -3,6 +3,7 @@
 FROM artifacts.developer.gov.bc.ca/docker-remote/node:18.10-alpine as build-stage
 
 ARG DEPLOYMENT-ENVIRONMENT
+ARG DEPLOYMENT-ENVIRONMENT ${DEPLOYMENT-ENVIRONMENT}
 
 # set working directory
 WORKDIR /api
