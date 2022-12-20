@@ -30,7 +30,6 @@ RUN chown -R 1011110000:0 "/.npm"
 
 RUN npm install
 
-
 # RUN node src/sqlite-example-database/setup.js
 
 EXPOSE 3003:3003
