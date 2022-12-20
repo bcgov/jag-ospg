@@ -1,4 +1,3 @@
-ARG DEPLOYMENT-ENVIRONMENT
 # base image
 #FROM docker-remote.artifacts.developer.gov.bc.ca/node:12.4.0-alpine as build-stage
 FROM artifacts.developer.gov.bc.ca/docker-remote/node:18.10-alpine as build-stage
