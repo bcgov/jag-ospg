@@ -1,6 +1,6 @@
 # base image
 #FROM artifacts.developer.gov.bc.ca/docker-remote/node:12.4.0-alpine as build-stage
-FROM node:14.17.0-alpine as build-stage
+FROM artifacts.developer.gov.bc.ca/docker-remote/node:14.17.0-alpine as build-stage
 
 
 # set working directory
@@ -88,7 +88,7 @@ RUN npm install
 RUN npm run build
 
 #FROM artifacts.developer.gov.bc.ca/docker-remote/nginx:1.17 as production-stage
-FROM nginx:1.22.1 as production-stage
+FROM artifacts.developer.gov.bc.ca/docker-remote/nginx:1.22.1 as production-stage
 
 RUN mkdir /nginx
 COPY --from=build-stage /web/build /usr/share/nginx/html
