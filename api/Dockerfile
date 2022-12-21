@@ -23,10 +23,12 @@ RUN apk add curl
 RUN apk add unixodbc-dev
 
 FROM build-stage
-USER node
 RUN npm install
 # RUN node src/sqlite-example-database/setup.js
 EXPOSE 3003:3003
-
+RUN deluser --remove-home node \
+  && addgroup -S node -g 999 \
+  && adduser -S -G node -u 999 node
+USER node
 #CMD ["npm", "run", "start"]
 CMD ["node", "index.js"]
