@@ -1,5 +1,5 @@
 {
-  "name": "serve-bc-api",
+  "name": "ospg-lob-api",
   "version": "1.0.0",
   "description": "Api to provide additional functionality on top of formsflow.ai",
   "main": "index.js",
