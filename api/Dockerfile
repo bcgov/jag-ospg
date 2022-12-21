@@ -27,8 +27,8 @@ RUN npm install
 # RUN node src/sqlite-example-database/setup.js
 EXPOSE 3003:3003
 #RUN deluser --remove-home node \
-  && addgroup -S node -g 9999 \
-  && adduser -S -G node -u 9999 node
+#  && addgroup -S node -g 9999 \
+#  && adduser -S -G node -u 9999 node
 USER node
 #CMD ["npm", "run", "start"]
 CMD ["node", "src/index.js"]
