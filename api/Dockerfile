@@ -31,4 +31,4 @@ RUN deluser --remove-home node \
   && adduser -S -G node -u 9999 node
 USER node
 #CMD ["npm", "run", "start"]
-CMD ["node", "index.js"]
+CMD ["node", "src/index.js"]
