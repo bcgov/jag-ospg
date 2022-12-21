@@ -4,7 +4,7 @@
 
 # Use Node image, maintained by Docker:
 # hub.docker.com/r/_/node/
-FROM node:14.20.1-alpine
+FROM artifacts.developer.gov.bc.ca/docker-remote/node:lts-alpine3.17
 
 # set working directory
 WORKDIR /forms-flow-forms/app

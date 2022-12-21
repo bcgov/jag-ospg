@@ -1,6 +1,4 @@
-# base image
-#FROM docker-remote.artifacts.developer.gov.bc.ca/node:12.4.0-alpine as build-stage
-FROM node:18.10-alpine as build-stage
+FROM artifacts.developer.gov.bc.ca/docker-remote/node:18.10-alpine as build-stage
 
 # set working directory
 WORKDIR /api
@@ -22,15 +20,8 @@ RUN apk add curl
 
 RUN apk add unixodbc-dev
 
-# Fix required when upgrading from node:14.17.0-alpine to node:18.10-alpine
-RUN mkdir /.npm
-# Deploying to test use 1011110000:0
-# Deploying to dev use 1011100000:0
-RUN chown -R 1011110000:0 "/.npm"
-
 RUN npm install
-
 # RUN node src/sqlite-example-database/setup.js
-
 EXPOSE 3003:3003
-CMD ["npm", "run", "start"]
+USER node
+CMD ["node", "src/index.js"]
