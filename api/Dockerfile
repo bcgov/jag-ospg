@@ -24,4 +24,4 @@ RUN npm install
 # RUN node src/sqlite-example-database/setup.js
 EXPOSE 3003:3003
 USER node
-CMD ["node", "script/index.js"]
+CMD ["node", "src/index.js"]
