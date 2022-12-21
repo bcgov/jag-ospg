@@ -21,11 +21,7 @@ RUN apk add curl
 RUN apk add unixodbc-dev
 
 RUN npm install
-#change the uid/gid by deleting the previous user:
-RUN deluser --remove-home node \
-  && addgroup -S node -g 9999 \
-  && adduser -S -G node -u 9999 node
 # RUN node src/sqlite-example-database/setup.js
 EXPOSE 3003:3003
 USER node
-CMD ["npm", "run", "start"]
+CMD ["node", "script/index.js"]
