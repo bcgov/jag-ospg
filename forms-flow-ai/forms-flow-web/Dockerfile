@@ -84,6 +84,7 @@ COPY ./  /tmp/${CUSTOM_PUBLIC_DIR}/
 RUN cp -R /tmp/${CUSTOM_PUBLIC_DIR}/* /web/ && rm -Rf /tmp/${CUSTOM_PUBLIC_DIR}/
 
 # Build app
+RUN npm cache clean --force
 RUN npm install
 RUN npm run build
 
