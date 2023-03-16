@@ -83,6 +83,8 @@ ARG CUSTOM_PUBLIC_DIR=public
 COPY ./  /tmp/${CUSTOM_PUBLIC_DIR}/
 RUN cp -R /tmp/${CUSTOM_PUBLIC_DIR}/* /web/ && rm -Rf /tmp/${CUSTOM_PUBLIC_DIR}/
 
+COPY ./package.json  /web/.
+
 # Build app
 RUN npm cache clean --force
 RUN npm install
