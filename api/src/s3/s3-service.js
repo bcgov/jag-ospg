@@ -24,12 +24,14 @@ const s3UploadFile = async (fileS3Name,
                             fileMimetype) => {
     const s3Signature = signRequest('PUT', fileS3Name);
     console.log('Received Request to upload file ',fileS3Name);
+     console.log('s3Signature ',s3Signature);
     const headers = {
         'X-Amz-Date': s3Signature.headers['X-Amz-Date'],
         'Authorization': s3Signature.headers.Authorization,
         'Content-Length': fileSize,
         'Content-Type': fileMimetype,
     }
+         console.log('headers ',headers);
 
     try {
        console.log('s3-srvice.js calling axios');
