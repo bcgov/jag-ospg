@@ -22,7 +22,7 @@ const s3UploadFile = async (fileS3Name,
                             fileSize, 
                             fileMimetype) => {
     const s3Signature = signRequest('PUT', fileS3Name);
-
+    console.log('Received Request to upload file ',fileS3Name);
     const headers = {
         'X-Amz-Date': s3Signature.headers['X-Amz-Date'],
         'Authorization': s3Signature.headers.Authorization,
@@ -37,9 +37,11 @@ const s3UploadFile = async (fileS3Name,
             headers,
             data: fileData
         });
+     console.log('File uploaded - ',fileS3Name);
         return resp;
     } catch (error) {
         console.log(error.response.data)
+        console.log(error.response)
         throw error
     }
 }
