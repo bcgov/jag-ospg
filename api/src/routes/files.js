@@ -29,16 +29,16 @@ uploadFile = async (req, res) => {
                                     fileData, 
                                     fileSize, 
                                     fileMimetype);
-    console.log('file.js upload file before completion');
-    } catch (error) {
-         console.log('file.js upload catch block');        
-        res.status(500).send("Error while uploading file.");
-    }
     console.log('file.js upload file completed');
     res.status(201).json({
         "status": "Ok",
         "url": `https://${req.headers.host}/api/v1/files/${fileS3Name}?originalName=${fileOriginalName}`
     });
+    } catch (error) {
+         console.log('file.js upload catch block');        
+         console.log('file.js upload catch block',error);        
+        res.status(500).send("Error while uploading file.");
+    }
 };
 module.exports = {
     uploadFile,
