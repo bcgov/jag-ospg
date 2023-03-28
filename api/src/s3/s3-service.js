@@ -42,7 +42,8 @@ const s3UploadFile = async (fileS3Name,
      console.log('File uploaded  and response is - ',resp);
         return resp;
     } catch (error) {
-        console.log('s3-service.js axios call failed',error.toJSON());
+        console.log('s3-service.js axios call failed');
+        console.log('s3-service.js axios call failed error toJSON()',error.toJSON());
         if (error.response) {
               // The request was made and the server responded with a status code
               // that falls out of the range of 2xx
@@ -58,6 +59,7 @@ const s3UploadFile = async (fileS3Name,
               // Something happened in setting up the request that triggered an Error
               console.log('Error', error.message);
             }
+         console.log('s3-service.js axios call failure end');
         throw error;
     }
 }
