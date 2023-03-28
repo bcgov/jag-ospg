@@ -13,6 +13,7 @@ function signRequest(method, s3FileName) {
         path: `/${BUCKETNAME}/${s3FileName}`,
         method // <<<---- VERY IMPORTANT TO BE IN CAPITALS!!!
     };
+    console.log('Received Request to sign upload request - ',fileS3Name);
     aws4.sign(opts, { accessKeyId: ACCESS_KEY_ID, secretAccessKey: SECRET_ACCESS_KEY });
     return opts;
 }
@@ -21,7 +22,14 @@ const s3UploadFile = async (fileS3Name,
                             fileData, 
                             fileSize, 
                             fileMimetype) => {
+    try
+    {
     const s3Signature = signRequest('PUT', fileS3Name);
+     } catch (error) {
+        console.log(error.response.data)
+        console.log(error.response)
+        throw error
+    }
     console.log('Received Request to upload file ',fileS3Name);
     const headers = {
         'X-Amz-Date': s3Signature.headers['X-Amz-Date'],
