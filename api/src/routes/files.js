@@ -22,7 +22,7 @@ uploadFile = async (req, res) => {
     const fileMimetype = req.files.file.mimetype;
     const fileS3Name = req.body.name; // to be sent to s3
     
-    console.log('file.js Received Request to upload a file' - fileS3Name);
+    console.log('file.js Received Request to upload a file -',  fileS3Name);
 
     try {
         const s3Resp = await s3UploadFile(fileS3Name, 
