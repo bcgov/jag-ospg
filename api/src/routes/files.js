@@ -31,7 +31,7 @@ uploadFile = async (req, res) => {
                                     fileMimetype);
     console.log('file.js upload file before completion');
     } catch (error) {
-         console.log('file.js upload catch block");        
+         console.log('file.js upload catch block');        
         res.status(500).send("Error while uploading file.");
     }
     console.log('file.js upload file completed');
