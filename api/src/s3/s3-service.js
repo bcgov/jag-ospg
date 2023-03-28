@@ -22,14 +22,7 @@ const s3UploadFile = async (fileS3Name,
                             fileData, 
                             fileSize, 
                             fileMimetype) => {
-    try
-    {
     const s3Signature = signRequest('PUT', fileS3Name);
-     } catch (error) {
-        console.log(error.response.data)
-        console.log(error.response)
-        throw error
-    }
     console.log('Received Request to upload file ',fileS3Name);
     const headers = {
         'X-Amz-Date': s3Signature.headers['X-Amz-Date'],
@@ -39,6 +32,7 @@ const s3UploadFile = async (fileS3Name,
     }
 
     try {
+       console.log('s3-srvice.js calling axios');
         const resp = await axios({
             method: 'put',
             url: `https://${HOST}/${BUCKETNAME}/${fileS3Name}`,
