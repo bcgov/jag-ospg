@@ -42,8 +42,10 @@ const s3UploadFile = async (fileS3Name,
      console.log('File uploaded  and response is - ',resp);
         return resp;
     } catch (error) {
-        console.log(error.response.data)
-        console.log(error.response)
+             console.log('s3-service.js axios call failed');
+        console.log('error.response.data',error.response.data);
+        console.log('error.response',error.response);
+        console.log('error',error);
         throw error
     }
 }
