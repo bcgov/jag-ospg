@@ -39,7 +39,7 @@ const s3UploadFile = async (fileS3Name,
             headers,
             data: fileData
         });
-     console.log('File uploaded - ',fileS3Name);
+     console.log('File uploaded  and response is - ',resp);
         return resp;
     } catch (error) {
         console.log(error.response.data)
