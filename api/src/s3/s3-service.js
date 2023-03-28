@@ -13,7 +13,7 @@ function signRequest(method, s3FileName) {
         path: `/${BUCKETNAME}/${s3FileName}`,
         method // <<<---- VERY IMPORTANT TO BE IN CAPITALS!!!
     };
-    console.log('Received Request to sign upload request - ',fileS3Name);
+    console.log('Received Request to sign upload request - ',s3FileName);
     aws4.sign(opts, { accessKeyId: ACCESS_KEY_ID, secretAccessKey: SECRET_ACCESS_KEY });
     return opts;
 }
