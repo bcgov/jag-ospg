@@ -27,13 +27,13 @@ uploadFile = async (req, res) => {
                                     fileData, 
                                     fileSize, 
                                     fileMimetype);
+		res.status(201).json({
+			"status": "Ok",
+			"url": `https://${req.headers.host}/api/v1/files/${fileS3Name}?originalName=${fileOriginalName}`
+		});
     } catch (error) {
         res.status(500).send("Error while uploading file.");
     }
-    res.status(201).json({
-        "status": "Ok",
-        "url": `https://${req.headers.host}/api/v1/files/${fileS3Name}?originalName=${fileOriginalName}`
-    });
 };
 module.exports = {
     uploadFile,
