@@ -47,6 +47,7 @@ ENV FORMFLOW_SOURCE_REPO_URL ${FORMFLOW_SOURCE_REPO_URL}
 # Clone code
 RUN git clone -b ${FORMFLOW_SOURCE_REPO_BRANCH} ${FORMFLOW_SOURCE_REPO_URL} /tmp/forms-flow-ai/
 RUN cp -r /tmp/forms-flow-ai/forms-flow-forms/. /forms-flow-forms/app/
+COPY ./package.json /forms-flow-forms/app/
 
 ## Include details of the required dependencies
 # COPY ./package.json $NPM_PACKAGES/
