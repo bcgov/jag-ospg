@@ -1,4 +1,4 @@
-FROM  FROM artifacts.developer.gov.bc.ca/openshift/postgresql:12-el8
+FROM  artifacts.developer.gov.bc.ca/openshift/postgresql:12-el8
 
 #Update Software Repository
 USER root
