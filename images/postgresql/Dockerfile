@@ -1,4 +1,4 @@
-FROM  image-registry.openshift-image-registry.svc:5000/openshift/postgresql:12-el8
+FROM  FROM artifacts.developer.gov.bc.ca/openshift/postgresql:12-el8
 
 #Update Software Repository
 USER root
